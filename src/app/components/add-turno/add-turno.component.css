@@ -1,0 +1,28 @@
+mat-card {
+    max-width: 600px;
+    margin-top: 15px;
+    border-top: 5px solid #3f51b5;
+}
+
+mat-card:hover{
+    cursor: pointer;
+}
+
+.medico-img{
+    margin-top: 7px;
+}
+
+.instituto-message{
+    padding-top: 15px;
+}
+
+.instituto-img {
+    margin-bottom: 20px;
+    scale: 1.1;
+}
+
+.next-btn {
+    width: 100%;
+    margin-top: 15px;
+    margin-left: 10px;
+}

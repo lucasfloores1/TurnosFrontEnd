@@ -1,4 +1,4 @@
-export interface TurnoDTO {
+export interface NuevoTurnoDTO {
 
     id : number;
     fecha : Date;
