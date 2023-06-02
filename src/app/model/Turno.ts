@@ -8,7 +8,7 @@ import { Plan } from "./Plan";
 export interface Turno {
 
     id : number;
-    fecha : Date;
+    fecha : string;
     confirmado : boolean;
     cargado : boolean;
     paciente : Paciente;

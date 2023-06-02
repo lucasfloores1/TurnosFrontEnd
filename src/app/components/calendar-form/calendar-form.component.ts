@@ -1,7 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
-import * as moment from 'moment'
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Turno } from 'src/app/model/Turno';
 import { HorarioDTO } from 'src/app/model/dto/HorarioDTO';
+import { addMinutes, addWeeks, endOfWeek, format, getISOWeek, getYear, isBefore, parse, parseJSON, setDate, setISODay, startOfWeek, subWeeks } from 'date-fns'
 
 @Component({
   selector: 'app-calendar-form',
@@ -12,24 +12,24 @@ export class CalendarFormComponent implements OnInit{
 
   @Input() horarios! : HorarioDTO[]
   @Input() turnos! : Turno[]
+
+  @Output() fecha : EventEmitter<String> = new EventEmitter;
   
   tableColumns! : string;
 
   weekDays : string[] = []
 
   weekSelect! : any[];
-  currentWeek : any = moment().isoWeek();
-  firstDayOfWeek : any = moment().year(2023).week(this.currentWeek).startOf('isoWeek')
-  lastDayOfWeek : any = moment().year(2023).week(this.currentWeek).endOf('isoWeek')
+  currentWeek : Date = new Date();
+  firstDayOfWeek! : Date;
+  lastDayOfWeek! : Date;
 
   constructor(){}
   
-  ngOnInit(): void {
-
-    console.log(this.turnos);    
+  ngOnInit(): void {  
+    
     this.tableColumns = `repeat(${this.horarios.length}, 1fr)`
     this.horarios.sort((a, b) => {
-      // Compara los atributos "dia" de los objetos "a" y "b"
       return a.dia - b.dia;
     });
     this.setWeekDays(this.horarios);
@@ -38,51 +38,80 @@ export class CalendarFormComponent implements OnInit{
   }
 
   getDaysFromDate(año?: number, semana?: number) {
-    const year = año ? año : moment().isoWeekYear();
-    const week = semana ? semana : moment().isoWeek();
+    const year = año ? año : getYear(this.currentWeek);
+    const week = semana ? semana : getISOWeek(this.currentWeek);   
 
     const allDaysPassed = this.horarios.every((horario: HorarioDTO) => {
-      const dayOfWeek = horario.dia;
-      return moment().year(year).isoWeek(week).isoWeekday(dayOfWeek).isBefore(moment(), 'day');
+      const dayOfWeek = setISODay(this.currentWeek, horario.dia);      
+      return isBefore(dayOfWeek, new Date());
     });
-  
+ 
     if (allDaysPassed) {
-      this.currentWeek++;
-      this.firstDayOfWeek = moment().year(2023).week(this.currentWeek).startOf('isoWeek')
-      this.lastDayOfWeek = moment().year(2023).week(this.currentWeek).endOf('isoWeek')
-      this.getDaysFromDate(2023, this.currentWeek)
+      this.nextWeek()
     } else {
 
       this.weekSelect = this.horarios.map((horario: HorarioDTO) => {
-        const dayOfWeek = horario.dia;
-    
-        const dayObject = moment().year(year).isoWeek(week).isoWeekday(dayOfWeek);
-        const inicio = moment(horario.inicio, 'HH:mm');
-        const fin = moment(horario.fin, 'HH:mm');
-        const elementosHora = [];
-    
-        while (inicio <= fin) {
-          const horarioNuevo = inicio.clone().year(year).isoWeek(week).date(dayObject.date());
-          elementosHora.push(horarioNuevo);
-          inicio.add(30, 'minutes');
-        }
-    
-        const ocupado = moment().year(year).isoWeek(week).isoWeekday(dayOfWeek).isSameOrAfter(moment(), 'day')    
+            
+        const day = setISODay( this.currentWeek ,horario.dia );
+        const inicioParts = horario.inicio.split(':');
+        const inicioHours = parseInt(inicioParts[0], 10);
+        const inicioMinutes = parseInt(inicioParts[1], 10);
+        const inicio = new Date();
+        inicio.setHours(inicioHours);
+        inicio.setMinutes(inicioMinutes);
+
+
+        const finParts = horario.fin.split(':');
+        const finHours = parseInt(finParts[0], 10);
+        const finMinutes = parseInt(finParts[1], 10);
+        const fin = new Date();
+        fin.setHours(finHours);
+        fin.setMinutes(finMinutes);              
+                
+        const turnos = [];
+        
+        let currentTime = inicio;
+        
+        while (currentTime <= fin) {
+          const horarioNuevo = this.setDate( day, currentTime );
+          const isPast =  isBefore(horarioNuevo, new Date());
+
+          const isGiven = this.turnos.some((turno: Turno) => {   
+            return parse(turno.fecha, 'yyyy-MM-dd HH:mm:ss', new Date()).getTime() == horarioNuevo.getTime();
+          });
+
+          turnos.push({
+            horario : horarioNuevo,
+            pasado : isPast,
+            dado : isGiven
+          });
+          
+          currentTime = addMinutes( currentTime, horario.intervalo );
+
+        }  
     
         return {
-          name: dayObject.format('DD-MM'),
-          horarios: elementosHora,
-          ocupado: ocupado
-        };
-      });
+          name: format(day, 'dd-MM'),
+          horarios: turnos,
+        };        
+      });      
     }
+    this.firstDayOfWeek = startOfWeek(this.currentWeek);
+    this.lastDayOfWeek = endOfWeek(this.currentWeek);
   }
 
   nextWeek(){
-    this.currentWeek++
-    this.firstDayOfWeek = moment().year(2023).week(this.currentWeek).startOf('isoWeek')
-    this.lastDayOfWeek = moment().year(2023).week(this.currentWeek).endOf('isoWeek')
-    this.getDaysFromDate(2023,this.currentWeek);
+    this.currentWeek = addWeeks(this.currentWeek, 1)
+    this.firstDayOfWeek = startOfWeek( this.currentWeek )
+    this.lastDayOfWeek = endOfWeek( this.currentWeek )
+    this.getDaysFromDate(getYear(this.currentWeek), getISOWeek(this.currentWeek))
+  }
+
+  previousWeek(){
+    this.currentWeek = subWeeks(this.currentWeek, 1)
+    this.firstDayOfWeek = startOfWeek( subWeeks(this.currentWeek, 1) )
+    this.lastDayOfWeek = endOfWeek( subWeeks(this.currentWeek, 1) )
+    this.getDaysFromDate(getYear(this.currentWeek), getISOWeek(this.currentWeek))
   }
 
   setWeekDays( horariosDTO : HorarioDTO[] ){
@@ -115,6 +144,11 @@ export class CalendarFormComponent implements OnInit{
   }
 
   loadToHorarioDTO( horario : any){
-    console.log( horario.format('DD-MM-YYYY HH:mm') );    
+    this.fecha.emit( format(horario, 'yyyy-MM-dd HH:mm:ss') );    
   }
+
+  private setDate(date: Date, time: Date) {
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate(), time.getHours(), time.getMinutes());
+  }
+
 }

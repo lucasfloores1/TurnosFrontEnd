@@ -19,11 +19,12 @@ import { HorarioDTO } from 'src/app/model/dto/HorarioDTO';
 })
 export class AddTurnoComponent implements OnInit{
 
-  linear : boolean = false;
+  linear : boolean = true;
 
   isMedicoSelected : boolean = false;
   isInstitutoSelected : boolean = false;
 
+  fecha! : string ;
   turnos! : Turno[];
   horarios! : HorarioDTO[];
   selectedMedico! : Medico;
@@ -43,6 +44,7 @@ export class AddTurnoComponent implements OnInit{
   ngOnInit(): void {
     this.pacienteService.getPacientes().subscribe( response => this.pacientes = response )
     this.medicoService.getMedicos().subscribe( response => this.medicos = response )
+    
   }
 
   loadMedicoToDTO(medico : Medico){    
@@ -65,6 +67,10 @@ export class AddTurnoComponent implements OnInit{
 
   toggleInstitutoSelected(){
     this.isInstitutoSelected = !this.isInstitutoSelected    
+  }
+
+  fechaSelected( fecha : any ){
+    this.fecha = fecha;
   }
 
 }
