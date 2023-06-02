@@ -1,5 +1,5 @@
-<mat-stepper orientation="vertical" [linear]="linear">
-    <mat-step label="Seleccioná el médico" state="phone">
+<mat-stepper orientation="vertical" [linear]="!linear">
+    <mat-step label="Seleccioná el médico">
         <div *ngIf="!isMedicoSelected">
             <mat-card *ngFor="let medico of medicos" (click)="loadMedicoToDTO(medico)">
                 <mat-card-header>
@@ -51,17 +51,91 @@
     </mat-step>
     <mat-step label="Seleccioná el horario del turno">
         <app-calendar-form *ngIf="horarios" [horarios] = "horarios" [turnos]="turnos" (fecha)="fechaSelected($event)"></app-calendar-form>
-        <h2 *ngIf="fecha">{{fecha}}</h2>
+        <div *ngIf="fecha" class="fecha">
+            <p >Seleccionaste la fecha y horario</p>
+            <p >{{fecha}}</p>
+            <button class="next-btn" mat-raised-button color="accent" matStepperNext>Siguiente Paso</button>
+        </div>
     </mat-step>
     <mat-step label="Seleccioná el paciente">
-
+        <div *ngIf="!isPacienteSelected">
+            <mat-card *ngFor="let paciente of pacientes" (click)="loadPacienteToDTO(paciente)">
+                <mat-card-header>
+                    <mat-card-title-group>
+                        <h2 mat-card-title>{{paciente.nombre}}</h2>
+                        <img class="medico-img" mat-card-sm-image src="https://i.imgur.com/a8bFB40.png" alt="pacient">
+                        <p mat-card-subtitle>DNI : {{paciente.dni}}</p>
+                        <p mat-card-subtitle>Mail : {{paciente.mail}}</p>
+                    </mat-card-title-group>
+                </mat-card-header>
+            </mat-card>
+        </div>
+        <mat-card *ngIf="isPacienteSelected">
+            <mat-card-header>
+                <mat-card-title-group>
+                    <h2 mat-card-title>{{selectedPaciente.nombre}}</h2>
+                    <img class="medico-img" mat-card-sm-image src="https://i.imgur.com/a8bFB40.png" alt="pacient">
+                    <p mat-card-subtitle>DNI : {{selectedPaciente.dni}}</p>
+                    <p mat-card-subtitle>Mail : {{selectedPaciente.mail}}</p>
+                 </mat-card-title-group>
+            </mat-card-header>
+        </mat-card>
+        <button *ngIf = "isPacienteSelected" class="next-btn" mat-raised-button color="primary" (click)="togglePacienteSelected()">Elegir otro paciente</button>
+        <button *ngIf = "isPacienteSelected" class="next-btn" mat-raised-button color="accent" (click)="getPacienteDTO()" matStepperNext>Siguiente Paso</button>
     </mat-step>
-    <mat-step label="Seleccioná la Obra Social">
-
+    <mat-step label="Seleccioná la obra social">
+        <div *ngIf="selectedPacienteDTO">
+            <div *ngIf="!isObraSocialSelected">
+                <mat-card *ngFor="let obraSocial of selectedPacienteDTO.obrasSociales" (click)="loadObraSocialToDTO(obraSocial)">
+                    <mat-card-header>
+                        <mat-card-title-group>
+                            <h2 mat-card-title>{{obraSocial.nombre}}</h2>
+                            <img class="medico-img" mat-card-sm-image src="https://i.imgur.com/a8bFB40.png" alt="pacient">
+                            <p mat-card-subtitle>{{obraSocial.direccion}}</p>
+                            <p mat-card-subtitle>Plan : {{obraSocial.plan.nombre}}</p>
+                        </mat-card-title-group>
+                    </mat-card-header>
+                </mat-card>
+            </div>
+            <mat-card *ngIf="isObraSocialSelected">
+                <mat-card-header>
+                    <mat-card-title-group>
+                        <h2 mat-card-title>{{selectedObraSocial.nombre}}</h2>
+                        <img class="medico-img" mat-card-sm-image src="https://i.imgur.com/a8bFB40.png" alt="pacient">
+                        <p mat-card-subtitle>{{selectedObraSocial.direccion}}</p>
+                        <p mat-card-subtitle>Plan : {{selectedObraSocial.plan.nombre}}</p>
+                    </mat-card-title-group>
+                </mat-card-header>
+            </mat-card>
+            <button *ngIf = "isObraSocialSelected" class="next-btn" mat-raised-button color="primary" (click)="toggleObraSocialSelected()">Elegir otro paciente</button>
+            <button *ngIf = "isObraSocialSelected" class="next-btn" mat-raised-button color="accent" matStepperNext>Siguiente Paso</button>
+        </div>
     </mat-step>
     <mat-step label="Seleccioná el estudio">
+        <div *ngIf="!isEstudioSelected">
+            <mat-card *ngFor="let estudio of estudios" (click)="loadEstudioToDTO(estudio)">
+                <mat-card-header>
+                    <mat-card-title-group>
+                        <h2 mat-card-title>{{estudio.nombre}}</h2>
+                        <img class="medico-img" mat-card-sm-image src="https://i.imgur.com/5p6N1Rf.png" alt="pacient">
+                        <p mat-card-subtitle>Código : {{estudio.nomenclador}}</p>
+                    </mat-card-title-group>
+                </mat-card-header>
+            </mat-card>
+        </div>
+        <mat-card *ngIf="isEstudioSelected">
+            <mat-card-header>
+                <mat-card-title-group>
+                    <h2 mat-card-title>{{selectedEstudio.nombre}}</h2>
+                    <img class="medico-img" mat-card-sm-image src="https://i.imgur.com/5p6N1Rf.png" alt="pacient">
+                    <p mat-card-subtitle>Código : {{selectedEstudio.nomenclador}}</p>
+                 </mat-card-title-group>
+            </mat-card-header>
+        </mat-card>
+        <button *ngIf = "isEstudioSelected" class="next-btn" mat-raised-button color="primary" (click)="toggleEstudioSelected()">Elegir otro estudio</button>
+        <button *ngIf = "isEstudioSelected" class="next-btn" mat-raised-button color="accent" matStepperNext>Siguiente Paso</button>
+    </mat-step>
+    <mat-step label="Confirmá el turno">
 
     </mat-step>
 </mat-stepper>
-
-<!-- https://i.imgur.com/a8bFB40.png -->

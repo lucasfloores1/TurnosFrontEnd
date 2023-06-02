@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Turno } from 'src/app/model/Turno';
 import { HorarioDTO } from 'src/app/model/dto/HorarioDTO';
-import { addMinutes, addWeeks, endOfWeek, format, getISOWeek, getYear, isBefore, parse, parseJSON, setDate, setISODay, startOfWeek, subWeeks } from 'date-fns'
+import { addMinutes, addWeeks, endOfWeek, format, getISOWeek, getYear, isBefore, parse, setISODay, startOfWeek, subWeeks } from 'date-fns'
 
 @Component({
   selector: 'app-calendar-form',
