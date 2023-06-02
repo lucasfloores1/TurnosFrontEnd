@@ -1,0 +1,23 @@
+.table-container{
+    width: 100%;
+}
+table{
+    width: 100%;
+}
+
+tbody, thead {
+    display: grid;
+    grid-template-columns: var(--columns);
+    gap: 10px;
+}
+
+tr {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+button {
+    align-self: center;
+}

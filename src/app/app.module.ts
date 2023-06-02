@@ -9,13 +9,15 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { AddTurnoComponent } from './components/add-turno/add-turno.component';
 import { FeaturesComponent } from './components/features/features.component';
 import { HttpClientModule } from '@angular/common/http';
+import { CalendarFormComponent } from './components/calendar-form/calendar-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ToolbarComponent,
     AddTurnoComponent,
-    FeaturesComponent
+    FeaturesComponent,
+    CalendarFormComponent
   ],
   imports: [
     BrowserModule,

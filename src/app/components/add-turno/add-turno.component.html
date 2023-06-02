@@ -1,7 +1,7 @@
 <mat-stepper orientation="vertical" [linear]="linear">
     <mat-step label="Seleccioná un médico" state="phone">
         <div *ngIf="!isMedicoSelected">
-            <mat-card *ngFor="let medico of medicos" (click)="loadPacienteToDTO(medico)">
+            <mat-card *ngFor="let medico of medicos" (click)="loadMedicoToDTO(medico)">
                 <mat-card-header>
                     <mat-card-title-group>
                         <h2 mat-card-title>{{medico.nombre}}</h2>
@@ -50,12 +50,7 @@
         <button *ngIf = "isInstitutoSelected" class="next-btn" mat-raised-button color="accent" matStepperNext>Siguiente Paso</button>
     </mat-step>
     <mat-step label="Seleccioná el horario del turno">
-        <div *ngFor="let horario of horarios">
-            {{horario.dia}}
-            {{horario.inicio}}
-            {{horario.fin}}
-            {{horario.intervalo}}
-        </div>
+        <app-calendar-form *ngIf="horarios" [horarios] = "horarios" [turnos]="turnos"></app-calendar-form>
     </mat-step>
 </mat-stepper>
 
