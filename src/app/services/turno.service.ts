@@ -23,5 +23,9 @@ export class TurnoService {
     return this.http.get<Turno[]>( `${this.apiUrl}/load` )
   }
 
+  getTurnosByMedico( id : number ){
+    return this.http.get<Turno[]>( `${this.apiUrl}/medico/${id}` )
+  }
+
 
 }

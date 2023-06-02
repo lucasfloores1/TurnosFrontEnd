@@ -1,0 +1,27 @@
+<div class="week-nav">
+    <button mat-raised-button (click)="previousWeek()" color="accent"><<</button>
+    <div class="week-nav-text">
+        <p>Semana del</p>
+        <p>{{ firstDayOfWeek | date : "dd - MMM" }} al {{ lastDayOfWeek | date : "d - MMM" }}</p>
+    </div>
+    <button mat-raised-button (click)="nextWeek()" color="accent">>></button>
+</div>
+<div class="table-container">
+    <table >
+        <thead [style.grid-template-columns]="tableColumns">
+            <tr *ngFor="let day of weekDays, let i = index">
+                <th>
+                    <p>{{ day }}</p>
+                    <p>{{ weekSelect[i].name }}</p>
+                </th>
+            </tr>
+        </thead>
+        <tbody [style.grid-template-columns]="tableColumns">
+            <tr *ngFor="let day of weekSelect">
+                <td *ngFor="let turno of day.horarios">
+                    <button mat-raised-button color="primary" [disabled]="turno.pasado || turno.dado" (click)="loadToHorarioDTO(turno.horario)">{{ turno.horario | date : 'HH:mm' }}</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>  

@@ -19,11 +19,13 @@ import { HorarioDTO } from 'src/app/model/dto/HorarioDTO';
 })
 export class AddTurnoComponent implements OnInit{
 
-  linear : boolean = false;
+  linear : boolean = true;
 
   isMedicoSelected : boolean = false;
   isInstitutoSelected : boolean = false;
 
+  fecha! : string ;
+  turnos! : Turno[];
   horarios! : HorarioDTO[];
   selectedMedico! : Medico;
   selectedInstituto! : InstitutoDTO;
@@ -32,24 +34,32 @@ export class AddTurnoComponent implements OnInit{
   pacientes : Paciente[] = []
   medicos : Medico[] = []
 
-  constructor( private pacienteService : PacienteService, private medicoService : MedicoService, private institutoService : InstitutoService){}
+  constructor( 
+      private pacienteService : PacienteService,
+      private medicoService : MedicoService,
+      private institutoService : InstitutoService,
+      private turnoService :  TurnoService
+    ){}
 
   ngOnInit(): void {
     this.pacienteService.getPacientes().subscribe( response => this.pacientes = response )
     this.medicoService.getMedicos().subscribe( response => this.medicos = response )
+    
   }
 
-  loadPacienteToDTO(medico : Medico){
+  loadMedicoToDTO(medico : Medico){    
     this.selectedMedico = medico;
     this.isMedicoSelected = !this.isMedicoSelected;
     this.medicoService.getMedicoById(medico.id).subscribe( response => this.institutos = response.institutos )
+    this.turnoService.getTurnosByMedico(medico.id).subscribe( response => this.turnos = response )
   }
 
   toggleMedicoSelected(){
+    this.isInstitutoSelected = false;
     this.isMedicoSelected = !this.isMedicoSelected;
   }
 
-  loadInstitutoToDTO( instituto : InstitutoDTO ){
+  loadInstitutoToDTO( instituto : InstitutoDTO ){   
     this.selectedInstituto = instituto;
     this.horarios = instituto.horarios;
     this.isInstitutoSelected = !this.isInstitutoSelected
@@ -57,6 +67,10 @@ export class AddTurnoComponent implements OnInit{
 
   toggleInstitutoSelected(){
     this.isInstitutoSelected = !this.isInstitutoSelected    
+  }
+
+  fechaSelected( fecha : any ){
+    this.fecha = fecha;
   }
 
 }
