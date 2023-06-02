@@ -40,3 +40,18 @@ mat-card:hover{
     margin-bottom: 0px;
     padding-top: 10px;
 }
+
+.search {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.estudio-img {
+    margin-bottom: 20px;
+    margin-left : 5px;
+}
+
+.obraSocial-img{
+    margin-top: 10px;
+}

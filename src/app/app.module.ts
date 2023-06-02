@@ -10,6 +10,8 @@ import { AddTurnoComponent } from './components/add-turno/add-turno.component';
 import { FeaturesComponent } from './components/features/features.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CalendarFormComponent } from './components/calendar-form/calendar-form.component';
+import { SearchPipe } from './pipes/search.pipe';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,14 +19,16 @@ import { CalendarFormComponent } from './components/calendar-form/calendar-form.
     ToolbarComponent,
     AddTurnoComponent,
     FeaturesComponent,
-    CalendarFormComponent
+    CalendarFormComponent,
+    SearchPipe
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

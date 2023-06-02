@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { Turno } from 'src/app/model/Turno';
 import { HorarioDTO } from 'src/app/model/dto/HorarioDTO';
 import { addMinutes, addWeeks, endOfWeek, format, getISOWeek, getYear, isBefore, parse, setISODay, startOfWeek, subWeeks } from 'date-fns'
@@ -8,12 +8,13 @@ import { addMinutes, addWeeks, endOfWeek, format, getISOWeek, getYear, isBefore,
   templateUrl: './calendar-form.component.html',
   styleUrls: ['./calendar-form.component.css']
 })
-export class CalendarFormComponent implements OnInit{
+export class CalendarFormComponent implements OnInit, OnChanges{
 
   @Input() horarios! : HorarioDTO[]
   @Input() turnos! : Turno[]
 
   @Output() fecha : EventEmitter<String> = new EventEmitter;
+  @Output() reset : EventEmitter<any> = new EventEmitter;
   
   tableColumns! : string;
 
@@ -25,6 +26,14 @@ export class CalendarFormComponent implements OnInit{
   lastDayOfWeek! : Date;
 
   constructor(){}
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if ( changes['horarios'] && changes['horarios'].currentValue && changes['horarios'].previousValue ){
+
+      this.resetComponent()
+
+    }
+  }
   
   ngOnInit(): void {  
     
@@ -149,6 +158,15 @@ export class CalendarFormComponent implements OnInit{
 
   private setDate(date: Date, time: Date) {
     return new Date(date.getFullYear(), date.getMonth(), date.getDate(), time.getHours(), time.getMinutes());
+  }
+
+  resetComponent(){
+    this.tableColumns = ''
+    this.currentWeek = new Date()
+    this.weekSelect = []
+    this.weekDays = []
+    this.reset.emit()
+    this.ngOnInit()
   }
 
 }

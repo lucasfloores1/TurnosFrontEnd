@@ -9,7 +9,6 @@ import { InstitutoDTO } from 'src/app/model/dto/InstitutoDTO';
 import { HorarioDTO } from 'src/app/model/dto/HorarioDTO';
 import { GetPacienteDTO } from 'src/app/model/dto/GetPacienteDTO';
 import { ObraSocialDTO } from 'src/app/model/dto/ObraSocialDTO';
-import { planDTO } from 'src/app/model/dto/PlanDTO';
 import { Estudio } from 'src/app/model/Estudio';
 import { EstudioService } from 'src/app/services/estudio.service';
 
@@ -21,6 +20,11 @@ import { EstudioService } from 'src/app/services/estudio.service';
 export class AddTurnoComponent implements OnInit{
 
   linear : boolean = true;
+  searchMedico : string = ''
+  searchInstituto : string = ''
+  searchPaciente : string = ''
+  searchObraSocial : string = ''
+  searchEstudio : string = ''
 
   isMedicoSelected : boolean = false;
   isInstitutoSelected : boolean = false;
@@ -47,7 +51,7 @@ export class AddTurnoComponent implements OnInit{
       private pacienteService : PacienteService,
       private medicoService : MedicoService,
       private turnoService :  TurnoService,
-      private estudioService : EstudioService
+      private estudioService : EstudioService,
     ){}
 
   ngOnInit(): void {
@@ -56,9 +60,14 @@ export class AddTurnoComponent implements OnInit{
     this.estudioService.getEstudios().subscribe( response => this.estudios = response )
   }
 
-  loadMedicoToDTO(medico : Medico){    
+  selectMedico( medico : Medico){
     this.selectedMedico = medico;
-    this.isMedicoSelected = !this.isMedicoSelected;
+    this.toggleMedicoSelected()
+  }
+
+  loadMedicoToDTO(medico : Medico){    
+    //this.selectedMedico = medico;
+    //this.isMedicoSelected = !this.isMedicoSelected;
     this.medicoService.getMedicoById(medico.id).subscribe( response => this.institutos = response.institutos )
     this.turnoService.getTurnosByMedico(medico.id).subscribe( response => this.turnos = response )
   }
@@ -68,10 +77,15 @@ export class AddTurnoComponent implements OnInit{
     this.isMedicoSelected = !this.isMedicoSelected;
   }
 
+  selectInstituto(instituto : InstitutoDTO ){
+    this.selectedInstituto = instituto;
+    this.toggleInstitutoSelected()
+  }
+
   loadInstitutoToDTO( instituto : InstitutoDTO ){   
     this.selectedInstituto = instituto;
-    this.horarios = instituto.horarios;
-    this.isInstitutoSelected = !this.isInstitutoSelected
+    this.horarios = this.selectedInstituto.horarios;   
+    this.toggleInstitutoSelected()
   }
 
   toggleInstitutoSelected(){
@@ -80,6 +94,10 @@ export class AddTurnoComponent implements OnInit{
 
   fechaSelected( fecha : any ){
     this.fecha = fecha;
+  }
+
+  resetFecha(){
+    this.fecha = '';
   }
 
   togglePacienteSelected(){

@@ -1,5 +1,4 @@
-import { InstitutoDTO } from "./InstitutoDTO";
-import { planDTO } from "./PlanDTO";
+import { PlanDTO } from "./PlanDTO";
 
 export interface ObraSocialDTO {
 
@@ -7,7 +6,7 @@ export interface ObraSocialDTO {
     nombre : string;
     direccion : string;
 
-    plan : planDTO;
+    plan : PlanDTO;
     afiliado : string;
 
 }
