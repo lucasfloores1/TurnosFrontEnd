@@ -26,3 +26,32 @@ mat-card:hover{
     margin-top: 15px;
     margin-left: 10px;
 }
+
+.fecha {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.fecha p {
+    display: flex;
+    align-self: center;
+    font-size: 1rem;
+    margin-bottom: 0px;
+    padding-top: 10px;
+}
+
+.search {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.estudio-img {
+    margin-bottom: 20px;
+    margin-left : 5px;
+}
+
+.obraSocial-img{
+    margin-top: 10px;
+}

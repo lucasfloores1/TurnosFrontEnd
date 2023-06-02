@@ -1,11 +1,18 @@
-<mat-stepper orientation="vertical" [linear]="linear">
-    <mat-step label="Seleccioná el médico" state="phone">
+<mat-stepper orientation="vertical" linear #stepper>
+    <mat-step label="Seleccioná el médico">
         <div *ngIf="!isMedicoSelected">
-            <mat-card *ngFor="let medico of medicos" (click)="loadMedicoToDTO(medico)">
+            <div class="search">
+                <mat-form-field>
+                    <mat-label>Buscá un médico</mat-label>
+                    <input type="text" matInput placeholder="Nombre, DNI, Matricula, Mail, Dirección" [(ngModel)]="searchMedico">
+                    <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>
+            </div>
+            <mat-card *ngFor="let medico of medicos | search : searchMedico" (click)="selectMedico(medico)">
                 <mat-card-header>
                     <mat-card-title-group>
                         <h2 mat-card-title>{{medico.nombre}}</h2>
-                        <img class="medico-img" mat-card-sm-image src="https://i.imgur.com/5p6N1Rf.png" alt="pacient">
+                        <img class="medico-img" mat-card-sm-image src="https://i.imgur.com/5p6N1Rf.png" alt="doctor">
                         <p mat-card-subtitle>Matricula : {{medico.matricula}}</p>
                         <p mat-card-subtitle>Mail : {{medico.mail}}</p>
                     </mat-card-title-group>
@@ -16,22 +23,29 @@
             <mat-card-header>
                 <mat-card-title-group>
                     <h2 mat-card-title>{{selectedMedico.nombre}}</h2>
-                    <img class="medico-img" mat-card-sm-image src="https://i.imgur.com/5p6N1Rf.png" alt="pacient">
+                    <img class="medico-img" mat-card-sm-image src="https://i.imgur.com/5p6N1Rf.png" alt="doctor">
                     <p mat-card-subtitle>Matricula : {{selectedMedico.matricula}}</p>
                     <p mat-card-subtitle>Mail : {{selectedMedico.mail}}</p>
                  </mat-card-title-group>
             </mat-card-header>
         </mat-card>
         <button *ngIf = "isMedicoSelected" class="next-btn" mat-raised-button color="primary" (click)="toggleMedicoSelected()">Elegir otro médico</button>
-        <button *ngIf = "isMedicoSelected" class="next-btn" mat-raised-button color="accent" matStepperNext>Siguiente Paso</button>
+        <button *ngIf = "isMedicoSelected" class="next-btn" mat-raised-button color="accent" (click)="loadMedicoToDTO(selectedMedico)" matStepperNext>Siguiente Paso</button>
     </mat-step>
     <mat-step label="Seleccioná donde será el turno">
         <div *ngIf="!isInstitutoSelected">
-            <mat-card *ngFor="let instituto of institutos" (click)="loadInstitutoToDTO(instituto)">
+            <div class="search" *ngIf="institutos.length > 5">
+                <mat-form-field>
+                    <mat-label>Buscá un instituto</mat-label>
+                    <input type="text" matInput placeholder="Nombre , Dirección" [(ngModel)]="searchInstituto">
+                    <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>
+            </div>
+            <mat-card *ngFor="let instituto of institutos | search : searchInstituto" (click)="selectInstituto(instituto)">
                 <mat-card-header>
                     <mat-card-title-group>
                         <h2 mat-card-title>{{instituto.nombre}}</h2>
-                        <img class="instituto-img" mat-card-sm-image src="https://i.imgur.com/muAlawy.png" alt="pacient">
+                        <img class="instituto-img" mat-card-sm-image src="https://i.imgur.com/muAlawy.png" alt="institute">
                         <p mat-card-subtitle>{{instituto.direccion}}</p>
                     </mat-card-title-group>
                 </mat-card-header>
@@ -41,27 +55,139 @@
             <mat-card-header>
                 <mat-card-title-group>
                     <h2 mat-card-title>{{selectedInstituto.nombre}}</h2>
-                    <img class="instituto-img" mat-card-sm-image src="https://i.imgur.com/muAlawy.png" alt="pacient">
+                    <img class="instituto-img" mat-card-sm-image src="https://i.imgur.com/muAlawy.png" alt="institute">
                     <p mat-card-subtitle>{{selectedInstituto.direccion}}</p>
                 </mat-card-title-group>
             </mat-card-header>
         </mat-card>
         <button *ngIf = "isInstitutoSelected" class="next-btn" mat-raised-button color="primary" (click)="toggleInstitutoSelected()">Elegir otro instituto</button>
-        <button *ngIf = "isInstitutoSelected" class="next-btn" mat-raised-button color="accent" matStepperNext>Siguiente Paso</button>
+        <button *ngIf = "isInstitutoSelected" class="next-btn" mat-raised-button color="accent" (click)="loadInstitutoToDTO(selectedInstituto)" matStepperNext>Siguiente Paso</button>
     </mat-step>
     <mat-step label="Seleccioná el horario del turno">
-        <app-calendar-form *ngIf="horarios" [horarios] = "horarios" [turnos]="turnos" (fecha)="fechaSelected($event)"></app-calendar-form>
-        <h2 *ngIf="fecha">{{fecha}}</h2>
+        <app-calendar-form *ngIf="horarios" [horarios]="horarios" [turnos]="turnos" (reset)="resetFecha()" (fecha)="fechaSelected($event)"></app-calendar-form>
+        <div *ngIf="fecha" class="fecha">
+            <p >Seleccionaste la fecha y horario</p>
+            <p >{{fecha}}</p>
+            <button class="next-btn" mat-raised-button color="accent" matStepperNext>Siguiente Paso</button>
+        </div>
     </mat-step>
     <mat-step label="Seleccioná el paciente">
-
+        <div *ngIf="!isPacienteSelected">
+            <div class="search">
+                <mat-form-field>
+                    <mat-label>Buscá un paciente</mat-label>
+                    <input type="text" matInput placeholder="Nombre, Dirección, DNI, Mail" [(ngModel)]="searchPaciente">
+                    <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>
+            </div>
+            <mat-card *ngFor="let paciente of pacientes | search : searchPaciente" (click)="loadPacienteToDTO(paciente)">
+                <mat-card-header>
+                    <mat-card-title-group>
+                        <h2 mat-card-title>{{paciente.nombre}}</h2>
+                        <img class="paciente-img" mat-card-sm-image src="https://i.imgur.com/a8bFB40.png" alt="pacient">
+                        <p mat-card-subtitle>DNI : {{paciente.dni}}</p>
+                        <p mat-card-subtitle>Mail : {{paciente.mail}}</p>
+                    </mat-card-title-group>
+                </mat-card-header>
+            </mat-card>
+        </div>
+        <mat-card *ngIf="isPacienteSelected">
+            <mat-card-header>
+                <mat-card-title-group>
+                    <h2 mat-card-title>{{selectedPaciente.nombre}}</h2>
+                    <img class="paciente-img" mat-card-sm-image src="https://i.imgur.com/a8bFB40.png" alt="pacient">
+                    <p mat-card-subtitle>DNI : {{selectedPaciente.dni}}</p>
+                    <p mat-card-subtitle>Mail : {{selectedPaciente.mail}}</p>
+                 </mat-card-title-group>
+            </mat-card-header>
+        </mat-card>
+        <button *ngIf = "isPacienteSelected" class="next-btn" mat-raised-button color="primary" (click)="togglePacienteSelected()">Elegir otro paciente</button>
+        <button *ngIf = "isPacienteSelected" class="next-btn" mat-raised-button color="accent" (click)="getPacienteDTO()" matStepperNext>Siguiente Paso</button>
     </mat-step>
-    <mat-step label="Seleccioná la Obra Social">
-
+    <mat-step label="Seleccioná la obra social">
+        <div *ngIf="selectedPacienteDTO">
+            <div *ngIf="!isObraSocialSelected">
+                <div class="search" *ngIf="selectedPacienteDTO.obrasSociales.length > 5">
+                    <mat-form-field>
+                        <mat-label>Buscá una obra social</mat-label>
+                        <input type="text" matInput placeholder="Nombre , Dirección" [(ngModel)]="searchObraSocial">
+                        <mat-icon matSuffix>search</mat-icon>
+                    </mat-form-field>
+                </div>
+                <mat-card *ngFor="let obraSocial of selectedPacienteDTO.obrasSociales | search : searchObraSocial" (click)="loadObraSocialToDTO(obraSocial)">
+                    <mat-card-header>
+                        <mat-card-title-group>
+                            <h2 mat-card-title>{{obraSocial.nombre}}</h2>
+                            <img class="obraSocial-img" mat-card-sm-image src="https://i.imgur.com/aucIBwd.png" alt="health-plan">
+                            <p mat-card-subtitle>{{obraSocial.direccion}}</p>
+                            <p mat-card-subtitle>Plan : {{obraSocial.plan.nombre}}</p>
+                        </mat-card-title-group>
+                    </mat-card-header>
+                </mat-card>
+            </div>
+            <mat-card *ngIf="isObraSocialSelected">
+                <mat-card-header>
+                    <mat-card-title-group>
+                        <h2 mat-card-title>{{selectedObraSocial.nombre}}</h2>
+                        <img class="obraSocial-img" mat-card-sm-image src="https://i.imgur.com/aucIBwd.png" alt="health-plan">
+                        <p mat-card-subtitle>{{selectedObraSocial.direccion}}</p>
+                        <p mat-card-subtitle>Plan : {{selectedObraSocial.plan.nombre}}</p>
+                    </mat-card-title-group>
+                </mat-card-header>
+            </mat-card>
+            <button *ngIf = "isObraSocialSelected" class="next-btn" mat-raised-button color="primary" (click)="toggleObraSocialSelected()">Elegir otro paciente</button>
+            <button *ngIf = "isObraSocialSelected" class="next-btn" mat-raised-button color="accent" matStepperNext>Siguiente Paso</button>
+        </div>
     </mat-step>
     <mat-step label="Seleccioná el estudio">
-
+        <div *ngIf="!isEstudioSelected">
+            <div class="search">
+                <mat-form-field>
+                    <mat-label>Buscá un estudio</mat-label>
+                    <input type="text" matInput placeholder="Nombre , Codigo del nomenclador" [(ngModel)]="searchEstudio">
+                    <mat-icon matSuffix>search</mat-icon>
+                </mat-form-field>
+            </div>
+            <mat-card *ngFor="let estudio of estudios | search : searchEstudio" (click)="loadEstudioToDTO(estudio)">
+                <mat-card-header>
+                    <mat-card-title-group>
+                        <h2 mat-card-title>{{estudio.nombre}}</h2>
+                        <img class="estudio-img" mat-card-sm-image src="https://i.imgur.com/8eLLm6x.png" alt="exam">
+                        <p mat-card-subtitle>Código : {{estudio.nomenclador}}</p>
+                    </mat-card-title-group>
+                </mat-card-header>
+            </mat-card>
+        </div>
+        <mat-card *ngIf="isEstudioSelected">
+            <mat-card-header>
+                <mat-card-title-group>
+                    <h2 mat-card-title>{{selectedEstudio.nombre}}</h2>
+                    <img class="estudio-img" mat-card-sm-image src="https://i.imgur.com/8eLLm6x.png" alt="exam">
+                    <p mat-card-subtitle>Código : {{selectedEstudio.nomenclador}}</p>
+                 </mat-card-title-group>
+            </mat-card-header>
+        </mat-card>
+        <button *ngIf = "isEstudioSelected" class="next-btn" mat-raised-button color="primary" (click)="toggleEstudioSelected()">Elegir otro estudio</button>
+        <button *ngIf = "isEstudioSelected" class="next-btn" mat-raised-button color="accent" matStepperNext>Siguiente Paso</button>
+    </mat-step>
+    <mat-step label="Confirmá el turno">
+        <div *ngIf="isEstudioSelected">
+            <mat-card>
+                <mat-card-header>
+                    <mat-card-title-group>
+                        <h2 mat-card-title>Turno que seleccionaste</h2>
+                        <img class="turno-img" mat-card-sm-image src="https://i.imgur.com/j8y8arX.png" alt="appointment">
+                        <p mat-card-subtitle>Medico : {{selectedMedico.nombre}}</p>
+                        <p mat-card-subtitle>En : {{selectedInstituto.nombre}}</p>
+                        <p mat-card-subtitle>Fecha : {{fecha}}</p>
+                        <p mat-card-subtitle>Paciente : {{selectedPaciente.nombre}}</p>
+                        <p mat-card-subtitle>Obra Social : {{selectedObraSocial.nombre}}</p>
+                        <p mat-card-subtitle>Plan : {{selectedObraSocial.plan.nombre}}</p>
+                        <p mat-card-subtitle>Estudio : {{selectedEstudio.nombre}}</p>
+                    </mat-card-title-group>
+                </mat-card-header>
+            </mat-card>
+            <button class="next-btn" mat-raised-button color="accent" matStepperNext>Confirmar el Turno</button>
+        </div>
     </mat-step>
 </mat-stepper>
-
-<!-- https://i.imgur.com/a8bFB40.png -->

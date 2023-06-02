@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { Turno } from 'src/app/model/Turno';
 import { TurnoService } from 'src/app/services/turno.service';
-import { FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Paciente } from 'src/app/model/Paciente';
 import { PacienteService } from 'src/app/services/paciente.service';
 import { Medico } from 'src/app/model/Medico';
 import { MedicoService } from 'src/app/services/medico.service';
-import { MatStepper } from '@angular/material/stepper';
-import { InstitutoService } from 'src/app/services/instituto.service';
-import { Instituto } from 'src/app/model/Instituto';
 import { InstitutoDTO } from 'src/app/model/dto/InstitutoDTO';
 import { HorarioDTO } from 'src/app/model/dto/HorarioDTO';
+import { GetPacienteDTO } from 'src/app/model/dto/GetPacienteDTO';
+import { ObraSocialDTO } from 'src/app/model/dto/ObraSocialDTO';
+import { Estudio } from 'src/app/model/Estudio';
+import { EstudioService } from 'src/app/services/estudio.service';
 
 @Component({
   selector: 'app-add-turno',
@@ -20,16 +20,29 @@ import { HorarioDTO } from 'src/app/model/dto/HorarioDTO';
 export class AddTurnoComponent implements OnInit{
 
   linear : boolean = true;
+  searchMedico : string = ''
+  searchInstituto : string = ''
+  searchPaciente : string = ''
+  searchObraSocial : string = ''
+  searchEstudio : string = ''
 
   isMedicoSelected : boolean = false;
   isInstitutoSelected : boolean = false;
+  isPacienteSelected : boolean = false;
+  isObraSocialSelected : boolean = false;
+  isEstudioSelected : boolean = false;
 
   fecha! : string ;
   turnos! : Turno[];
   horarios! : HorarioDTO[];
   selectedMedico! : Medico;
   selectedInstituto! : InstitutoDTO;
+  selectedPaciente! : Paciente;
+  selectedPacienteDTO! : GetPacienteDTO;
+  selectedObraSocial! : ObraSocialDTO;
+  selectedEstudio! : Estudio;
 
+  estudios : Estudio[] = []
   institutos : InstitutoDTO[] = []  
   pacientes : Paciente[] = []
   medicos : Medico[] = []
@@ -37,19 +50,24 @@ export class AddTurnoComponent implements OnInit{
   constructor( 
       private pacienteService : PacienteService,
       private medicoService : MedicoService,
-      private institutoService : InstitutoService,
-      private turnoService :  TurnoService
+      private turnoService :  TurnoService,
+      private estudioService : EstudioService,
     ){}
 
   ngOnInit(): void {
     this.pacienteService.getPacientes().subscribe( response => this.pacientes = response )
     this.medicoService.getMedicos().subscribe( response => this.medicos = response )
-    
+    this.estudioService.getEstudios().subscribe( response => this.estudios = response )
+  }
+
+  selectMedico( medico : Medico){
+    this.selectedMedico = medico;
+    this.toggleMedicoSelected()
   }
 
   loadMedicoToDTO(medico : Medico){    
-    this.selectedMedico = medico;
-    this.isMedicoSelected = !this.isMedicoSelected;
+    //this.selectedMedico = medico;
+    //this.isMedicoSelected = !this.isMedicoSelected;
     this.medicoService.getMedicoById(medico.id).subscribe( response => this.institutos = response.institutos )
     this.turnoService.getTurnosByMedico(medico.id).subscribe( response => this.turnos = response )
   }
@@ -59,10 +77,15 @@ export class AddTurnoComponent implements OnInit{
     this.isMedicoSelected = !this.isMedicoSelected;
   }
 
+  selectInstituto(instituto : InstitutoDTO ){
+    this.selectedInstituto = instituto;
+    this.toggleInstitutoSelected()
+  }
+
   loadInstitutoToDTO( instituto : InstitutoDTO ){   
     this.selectedInstituto = instituto;
-    this.horarios = instituto.horarios;
-    this.isInstitutoSelected = !this.isInstitutoSelected
+    this.horarios = this.selectedInstituto.horarios;   
+    this.toggleInstitutoSelected()
   }
 
   toggleInstitutoSelected(){
@@ -71,6 +94,41 @@ export class AddTurnoComponent implements OnInit{
 
   fechaSelected( fecha : any ){
     this.fecha = fecha;
+  }
+
+  resetFecha(){
+    this.fecha = '';
+  }
+
+  togglePacienteSelected(){
+    this.isPacienteSelected = !this.isPacienteSelected    
+  }
+
+  loadPacienteToDTO(paciente : Paciente){    
+    this.selectedPaciente = paciente;
+    this.isPacienteSelected = !this.isPacienteSelected;    
+  }
+
+  getPacienteDTO(){
+    this.pacienteService.getPacienteById(this.selectedPaciente.id).subscribe( response => this.selectedPacienteDTO = response )
+  }
+
+  toggleObraSocialSelected(){
+    this.isObraSocialSelected = !this.isObraSocialSelected
+  }
+
+  loadObraSocialToDTO( obraSocial : ObraSocialDTO ){
+    this.selectedObraSocial = obraSocial;
+    this.toggleObraSocialSelected()
+  }
+
+  toggleEstudioSelected(){
+    this.isEstudioSelected = !this.isEstudioSelected
+  }
+
+  loadEstudioToDTO( estudio : Estudio ){
+    this.selectedEstudio = estudio;
+    this.toggleEstudioSelected()
   }
 
 }
