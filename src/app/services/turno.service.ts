@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Turno } from '../model/Turno';
+import { NuevoTurnoDTO } from '../model/dto/NuevoTurnoDTO';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -27,5 +28,8 @@ export class TurnoService {
     return this.http.get<Turno[]>( `${this.apiUrl}/medico/${id}` )
   }
 
+  createTurno( turno : NuevoTurnoDTO ){
+    return this.http.post<NuevoTurnoDTO>( `${this.apiUrl}/create`, turno, httpOptions )
+  }
 
 }

@@ -1,7 +1,7 @@
 export interface NuevoTurnoDTO {
 
     id : number;
-    fecha : Date;
+    fecha : string;
     confirmado : boolean;
     cargado : boolean;
     idPaciente : number;

@@ -18,4 +18,8 @@ export class FeaturesComponent implements OnInit{
     this.router.navigate(['/turno/create'])
   }
 
+  navigateToAddPaciente(){
+    this.router.navigate(['/paciente/create'])
+  }
+
 }
