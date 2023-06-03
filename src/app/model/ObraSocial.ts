@@ -9,6 +9,6 @@ export interface ObraSocial {
     direccion : string;
     pacienteObraSocial : Set<Paciente_ObraSocial>;
     turnos : Set<Turno>;
-    planes : Set<Plan>;
+    planes : Array<Plan>;
 
 }

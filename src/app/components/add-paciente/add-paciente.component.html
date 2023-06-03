@@ -1,0 +1,42 @@
+<form [formGroup]="pacienteForm">
+    <mat-form-field>
+        <mat-label>Nombre</mat-label>
+        <input type="text" matInput formControlName="nombre" placeholder="Nombre completo"/>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>DNI</mat-label>
+        <input type="text" matInput formControlName="dni" placeholder="DNI"/>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>E-mail</mat-label>
+        <input type="text" matInput formControlName="mail" placeholder="ejemplo@gmail.com"/>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Teléfono</mat-label>
+        <input type="text" matInput formControlName="tel" placeholder="Número"/>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Dirección</mat-label>
+        <input type="text" matInput formControlName="direccion" placeholder="Calle y número"/>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Obra Social</mat-label>
+        <mat-select formControlName = "idObraSocial" [(value)]="selectedObraSocial">
+            <mat-option *ngFor="let obraSocial of obrasSociales" [value]="obraSocial.id" (click)="setPlanes(obraSocial)">
+                {{obraSocial.nombre}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field *ngIf="selectedObraSocial">
+        <mat-label>Plan</mat-label>
+        <mat-select formControlName = "idObraSocial">
+            <mat-option *ngFor="let plan of planes" >
+                {{plan.nombre}}   
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Afiliado</mat-label>
+        <input type="text" matInput formControlName="afiliado" placeholder="Número afiliado"/>
+    </mat-form-field>
+</form>

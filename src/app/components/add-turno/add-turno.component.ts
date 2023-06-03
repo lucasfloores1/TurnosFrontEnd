@@ -11,6 +11,8 @@ import { GetPacienteDTO } from 'src/app/model/dto/GetPacienteDTO';
 import { ObraSocialDTO } from 'src/app/model/dto/ObraSocialDTO';
 import { Estudio } from 'src/app/model/Estudio';
 import { EstudioService } from 'src/app/services/estudio.service';
+import { NuevoTurnoDTO } from 'src/app/model/dto/NuevoTurnoDTO';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-turno',
@@ -48,6 +50,7 @@ export class AddTurnoComponent implements OnInit{
   medicos : Medico[] = []
 
   constructor( 
+      private router : Router,
       private pacienteService : PacienteService,
       private medicoService : MedicoService,
       private turnoService :  TurnoService,
@@ -66,8 +69,6 @@ export class AddTurnoComponent implements OnInit{
   }
 
   loadMedicoToDTO(medico : Medico){    
-    //this.selectedMedico = medico;
-    //this.isMedicoSelected = !this.isMedicoSelected;
     this.medicoService.getMedicoById(medico.id).subscribe( response => this.institutos = response.institutos )
     this.turnoService.getTurnosByMedico(medico.id).subscribe( response => this.turnos = response )
   }
@@ -84,8 +85,7 @@ export class AddTurnoComponent implements OnInit{
 
   loadInstitutoToDTO( instituto : InstitutoDTO ){   
     this.selectedInstituto = instituto;
-    this.horarios = this.selectedInstituto.horarios;   
-    this.toggleInstitutoSelected()
+    this.horarios = this.selectedInstituto.horarios;
   }
 
   toggleInstitutoSelected(){
@@ -113,6 +113,10 @@ export class AddTurnoComponent implements OnInit{
     this.pacienteService.getPacienteById(this.selectedPaciente.id).subscribe( response => this.selectedPacienteDTO = response )
   }
 
+  navigateToAddPaciente(){
+    this.router.navigate(['/paciente/create']) 
+  }
+
   toggleObraSocialSelected(){
     this.isObraSocialSelected = !this.isObraSocialSelected
   }
@@ -129,6 +133,31 @@ export class AddTurnoComponent implements OnInit{
   loadEstudioToDTO( estudio : Estudio ){
     this.selectedEstudio = estudio;
     this.toggleEstudioSelected()
+  }
+
+  isAllStepsCompleted(){
+    return this.isEstudioSelected && this.isInstitutoSelected && this.isObraSocialSelected && this.isPacienteSelected && this.isMedicoSelected;    
+  }
+
+  createTurno(){
+
+    const newTurno : NuevoTurnoDTO = {
+      id : 0, 
+      fecha : this.fecha,
+      cargado : false,
+      confirmado : false,
+      idMedico : this.selectedMedico.id,
+      idInstituto : this.selectedInstituto.id,
+      idPaciente : this.selectedPaciente.id,
+      idObraSocial : this.selectedObraSocial.id,
+      idPlan : this.selectedObraSocial.plan.id,
+      idEstudio : this.selectedEstudio.id
+    }
+
+    this.turnoService.createTurno(newTurno).subscribe( response => {
+      console.log(response);
+      this.router.navigate(['home'])     
+    })
   }
 
 }

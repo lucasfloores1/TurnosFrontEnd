@@ -11,7 +11,8 @@ import { FeaturesComponent } from './components/features/features.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CalendarFormComponent } from './components/calendar-form/calendar-form.component';
 import { SearchPipe } from './pipes/search.pipe';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AddPacienteComponent } from './components/add-paciente/add-paciente.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { FormsModule } from '@angular/forms';
     AddTurnoComponent,
     FeaturesComponent,
     CalendarFormComponent,
-    SearchPipe
+    SearchPipe,
+    AddPacienteComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +30,8 @@ import { FormsModule } from '@angular/forms';
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

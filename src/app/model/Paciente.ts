@@ -9,7 +9,7 @@ export interface Paciente {
     tel : string;
     mail : string;
     direccion : string;
-    obrasSociales : Set<Paciente_ObraSocial>;
+    obrasSociales : Array<Paciente_ObraSocial>;
     turnos : Set<Turno>;
 
 }
