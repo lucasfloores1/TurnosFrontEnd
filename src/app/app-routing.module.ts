@@ -5,6 +5,7 @@ import { AddTurnoComponent } from './components/add-turno/add-turno.component';
 import { AddPacienteComponent } from './components/add-paciente/add-paciente.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: FeaturesComponent },
   { path: 'turno/create', component: AddTurnoComponent },
   { path: 'paciente/create', component : AddPacienteComponent }

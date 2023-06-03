@@ -7,7 +7,7 @@ export interface Plan {
     id : number;
     nombre : string;
     obraSocial : ObraSocial;
-    turnos : Set<Turno>;
-    pacientes : Set<Paciente_ObraSocial>;
+    turnos : Array<Turno>;
+    pacientes : Array<Paciente_ObraSocial>;
 
 }

@@ -69,8 +69,6 @@ export class AddTurnoComponent implements OnInit{
   }
 
   loadMedicoToDTO(medico : Medico){    
-    //this.selectedMedico = medico;
-    //this.isMedicoSelected = !this.isMedicoSelected;
     this.medicoService.getMedicoById(medico.id).subscribe( response => this.institutos = response.institutos )
     this.turnoService.getTurnosByMedico(medico.id).subscribe( response => this.turnos = response )
   }
@@ -113,6 +111,10 @@ export class AddTurnoComponent implements OnInit{
 
   getPacienteDTO(){
     this.pacienteService.getPacienteById(this.selectedPaciente.id).subscribe( response => this.selectedPacienteDTO = response )
+  }
+
+  navigateToAddPaciente(){
+    this.router.navigate(['/paciente/create']) 
   }
 
   toggleObraSocialSelected(){
