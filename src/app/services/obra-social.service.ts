@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ObraSocial } from '../model/ObraSocial';
+import { Plan } from '../model/Plan';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,5 +20,9 @@ export class ObraSocialService {
 
   getObrasSociales() {
     return this.http.get<ObraSocial[]>( `${this.apiUrl}/load` )
+  }
+
+  getPlanesByObraSocial( id : number){
+    return this.http.get<Plan[]>( `${this.apiUrl}/planes/${id}` )
   }
 }

@@ -26,4 +26,8 @@ export class PacienteService {
     return this.http.get<GetPacienteDTO>( `${this.apiUrl}/load/${id}` )
   }
 
+  createPaciente ( paciente : any ){
+    return this.http.post<any>( `${this.apiUrl}/create`, paciente, httpOptions )
+  }
+
 }
