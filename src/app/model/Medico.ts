@@ -3,6 +3,7 @@ import { Turno } from "./Turno";
 
 export interface Medico {
 
+    userId : number;
     id : number;
     nombre : string;
     dni : number;

@@ -20,6 +20,7 @@ export class AddPacienteComponent implements OnInit {
   
 
   pacienteForm : FormGroup = this.fb.group({
+    userId : [localStorage.getItem('user') , Validators.required],
     id: ['0', Validators.required ],
     nombre : ['', Validators.required ],
     dni : ['', Validators.required ],

@@ -34,6 +34,7 @@ export class AddTurnoComponent implements OnInit{
   isObraSocialSelected : boolean = false;
   isEstudioSelected : boolean = false;
 
+  userId : any = localStorage.getItem('user')
   fecha! : string ;
   turnos! : Turno[];
   horarios! : HorarioDTO[];
@@ -142,6 +143,8 @@ export class AddTurnoComponent implements OnInit{
   createTurno(){
 
     const newTurno : NuevoTurnoDTO = {
+
+      userId : this.userId ? parseInt(this.userId) : 0,
       id : 0, 
       fecha : this.fecha,
       cargado : false,

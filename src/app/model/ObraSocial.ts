@@ -4,6 +4,7 @@ import { Turno } from "./Turno";
 
 export interface ObraSocial {
 
+    userId : number;
     id : number;
     nombre : string;
     direccion : string;

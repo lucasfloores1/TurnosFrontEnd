@@ -1,0 +1,21 @@
+<div class="login">
+    <h2 mat-card-title>Iniciar Sesión</h2>
+    <form class="form-container" [formGroup]="loginForm" (submit)="login()">
+        <mat-form-field>
+            <mat-label>Nombre de usuario</mat-label>
+            <input type="text" matInput formControlName="username" placeholder="Nombre de usuario">
+            <mat-error *ngIf="
+            loginForm.get('username')?.invalid && ( loginForm.get('username')?.dirty || loginForm.get('username')?.touched || isSubmitted)
+            ">Este campo es obligatorio</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Contraseña</mat-label>
+            <input type="password" matInput formControlName="password" placeholder="Contraseña">
+            <mat-error *ngIf="
+            loginForm.get('password')?.invalid && ( loginForm.get('password')?.dirty || loginForm.get('password')?.touched || isSubmitted)
+            ">Este campo es obligatorio</mat-error>
+        </mat-form-field>
+        <div class="error" *ngIf="showErrorMessage">Usuario o contraseña incorrectos</div>
+        <button class="submit-btn" color="primary" mat-raised-button type="submit">Iniciar Sesión</button>
+    </form>
+</div>
