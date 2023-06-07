@@ -22,4 +22,8 @@ export class FeaturesComponent implements OnInit{
     this.router.navigate(['/paciente/create'])
   }
 
+  navigateToAddInstituto(){
+    this.router.navigate(['instituto/create'])
+  }
+
 }

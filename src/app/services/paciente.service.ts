@@ -18,8 +18,8 @@ export class PacienteService {
 
   constructor( private http : HttpClient ) { }
 
-  getPacientes () {
-    return this.http.get<Paciente[]>( `${this.apiUrl}/load` )
+  getPacientes ( id : any ) {
+    return this.http.get<Paciente[]>( `${this.apiUrl}/user/${id}` )
   }
 
   getPacienteById ( id : number ) {

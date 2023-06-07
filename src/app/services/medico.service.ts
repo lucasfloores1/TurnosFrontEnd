@@ -18,8 +18,8 @@ export class MedicoService {
 
   constructor( private http : HttpClient ) { }
 
-  getMedicos(){
-    return this.http.get<Medico[]>( `${this.apiUrl}/load` )
+  getMedicos( id : any ){
+    return this.http.get<Medico[]>( `${this.apiUrl}/user/${id}` )
   }
 
   getMedicoById(id : number){

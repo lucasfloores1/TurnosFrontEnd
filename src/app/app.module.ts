@@ -15,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddPacienteComponent } from './components/add-paciente/add-paciente.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor, authInterceptorProviders } from './services/auth.interceptor';
+import { AddInstitutoComponent } from './components/add-instituto/add-instituto.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { AuthInterceptor, authInterceptorProviders } from './services/auth.inter
     SearchPipe,
     AddPacienteComponent,
     LoginComponent,
+    AddInstitutoComponent,
   ],
   imports: [
     BrowserModule,

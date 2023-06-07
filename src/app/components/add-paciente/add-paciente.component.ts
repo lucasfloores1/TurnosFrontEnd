@@ -17,6 +17,7 @@ export class AddPacienteComponent implements OnInit {
   obraSocial! : ObraSocial;
   planes! : Plan[]
   isSubmitted : boolean = false;
+  userId : any = localStorage.getItem('user')
   
 
   pacienteForm : FormGroup = this.fb.group({
@@ -41,7 +42,7 @@ export class AddPacienteComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.obraSocialService.getObrasSociales().subscribe( response => this.obrasSociales = response )    
+    this.obraSocialService.getObrasSociales( this.userId ).subscribe( response => this.obrasSociales = response )    
     this.pacienteForm.get('idObraSocial')?.valueChanges.subscribe( idObraSocial => { 
       this.obraSocialService.getPlanesByObraSocial(idObraSocial).subscribe( response => this.planes = response )
     })

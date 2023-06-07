@@ -59,9 +59,9 @@ export class AddTurnoComponent implements OnInit{
     ){}
 
   ngOnInit(): void {
-    this.pacienteService.getPacientes().subscribe( response => this.pacientes = response )
-    this.medicoService.getMedicos().subscribe( response => this.medicos = response )
-    this.estudioService.getEstudios().subscribe( response => this.estudios = response )
+    this.pacienteService.getPacientes( this.userId ).subscribe( response => this.pacientes = response )
+    this.medicoService.getMedicos( this.userId ).subscribe( response => this.medicos = response )
+    this.estudioService.getEstudios( this.userId ).subscribe( response => this.estudios = response )
   }
 
   selectMedico( medico : Medico){

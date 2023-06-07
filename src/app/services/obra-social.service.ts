@@ -18,8 +18,8 @@ export class ObraSocialService {
 
   constructor( private http : HttpClient ) { }
 
-  getObrasSociales() {
-    return this.http.get<ObraSocial[]>( `${this.apiUrl}/load` )
+  getObrasSociales( id : any ) {
+    return this.http.get<ObraSocial[]>( `${this.apiUrl}/user/${id}` )
   }
 
   getPlanesByObraSocial( id : number){

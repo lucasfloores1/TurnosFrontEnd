@@ -20,8 +20,8 @@ export class TurnoService {
 
   constructor( private http : HttpClient ) { }
 
-  getTurnos(){
-    return this.http.get<Turno[]>( `${this.apiUrl}/load` )
+  getTurnos( id : any ){
+    return this.http.get<Turno[]>( `${this.apiUrl}/user/${id}` )
   }
 
   getTurnosByMedico( id : number ){
