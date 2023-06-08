@@ -25,4 +25,8 @@ export class MedicoService {
   getMedicoById(id : number){
     return this.http.get<GetMedicoDTO>( `${this.apiUrl}/load/${id}` )
   }
+
+  createMedico( medico : any ){
+    return this.http.post<any>( `${this.apiUrl}/create`, medico, httpOptions )
+  }
 }

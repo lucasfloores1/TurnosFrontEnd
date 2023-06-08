@@ -13,7 +13,7 @@ import { MedicoService } from 'src/app/services/medico.service';
 })
 export class AddMedicoComponent implements OnInit{
 
-  isHorariosSelected : boolean = false;
+  isHorariosSelected : boolean = true;
   showBtn : boolean = false;
 
   indexInicio : number = 1
@@ -30,7 +30,7 @@ export class AddMedicoComponent implements OnInit{
   horarios! : FormArray
 
   medForm : FormGroup = this.fb.group({
-    userId : [localStorage.getItem('user'), Validators.required],
+    userId : ['', Validators.required],
     nombre : ['', Validators.required ],
     dni : ['', Validators.required ],
     mail : ['', [Validators.required, Validators.email] ],
@@ -54,7 +54,7 @@ export class AddMedicoComponent implements OnInit{
 
     this.horarios = this.medForm.get('horarios') as FormArray 
 
-    this.setNuevosHorarios();
+    this.setNuevosHorarios();    
     
   }
 
@@ -66,7 +66,8 @@ export class AddMedicoComponent implements OnInit{
   }
 
   createMedico(){
-
+    this.medicoService.createMedico(this.medForm.value).subscribe( response => console.log(response) )
+    this.router.navigate(['home'])
   }
 
   formatLabel( value : number ): string {
@@ -89,18 +90,20 @@ export class AddMedicoComponent implements OnInit{
 
   addHorarios(){
     this.isHorariosSelected = !this.isHorariosSelected
+    this.medForm.patchValue({
+      userId : localStorage.getItem('user')
+    }) 
     const horariosSeleccionados = this.nuevosHorarios.filter( (horario : any) => horario.trabaja )
     for ( let i = 0; i < horariosSeleccionados.length; i++ ){
       const nuevoHorario = this.fb.group({
-        id : [i, Validators.required],
+        id : [i+1, Validators.required],
         dia : [horariosSeleccionados[i].dia, Validators.required],
         inicio : [this.horas[horariosSeleccionados[i].inicio], Validators.required],
         fin : [this.horas[horariosSeleccionados[i].fin], Validators.required],
         intervalo: [horariosSeleccionados[i].intervalo, Validators.required]
       })
       this.horarios.push(nuevoHorario)
-    }
-    this.medForm.updateValueAndValidity();    
+    }    
   }
   
   triggerBtn(){
