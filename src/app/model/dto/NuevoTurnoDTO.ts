@@ -1,5 +1,6 @@
 export interface NuevoTurnoDTO {
 
+    userId : number;
     id : number;
     fecha : string;
     confirmado : boolean;

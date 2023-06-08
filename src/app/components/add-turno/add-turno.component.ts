@@ -34,6 +34,7 @@ export class AddTurnoComponent implements OnInit{
   isObraSocialSelected : boolean = false;
   isEstudioSelected : boolean = false;
 
+  userId : any = localStorage.getItem('user')
   fecha! : string ;
   turnos! : Turno[];
   horarios! : HorarioDTO[];
@@ -58,9 +59,9 @@ export class AddTurnoComponent implements OnInit{
     ){}
 
   ngOnInit(): void {
-    this.pacienteService.getPacientes().subscribe( response => this.pacientes = response )
-    this.medicoService.getMedicos().subscribe( response => this.medicos = response )
-    this.estudioService.getEstudios().subscribe( response => this.estudios = response )
+    this.pacienteService.getPacientes( this.userId ).subscribe( response => this.pacientes = response )
+    this.medicoService.getMedicos( this.userId ).subscribe( response => this.medicos = response )
+    this.estudioService.getEstudios( this.userId ).subscribe( response => this.estudios = response )
   }
 
   selectMedico( medico : Medico){
@@ -142,6 +143,8 @@ export class AddTurnoComponent implements OnInit{
   createTurno(){
 
     const newTurno : NuevoTurnoDTO = {
+
+      userId : this.userId ? parseInt(this.userId) : 0,
       id : 0, 
       fecha : this.fecha,
       cargado : false,

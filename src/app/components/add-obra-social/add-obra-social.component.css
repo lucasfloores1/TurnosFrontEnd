@@ -10,7 +10,7 @@
     flex-direction: column;
     gap: 15px;
 }
-.add-paciente {
+.obraForm {
     display: flex;
     flex-direction: column;
 }
@@ -22,4 +22,30 @@
 
 .error{
     color: red;
+}
+
+.planes{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.planes-form{
+    margin-top: 15px;
+}
+.planes-header{
+    display: flex;
+}
+.spacer{
+    flex: 1 1 auto;
+}
+
+.plan-form-content{
+    display: flex;
+}
+.plan-form-field{
+    width: 100%;
+}
+.plan-form-header{
+    display: flex;
+    margin-bottom: 10px;
 }

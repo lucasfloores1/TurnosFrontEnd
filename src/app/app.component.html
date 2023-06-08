@@ -1,2 +1,9 @@
-  <app-toolbar></app-toolbar>
+<mat-drawer-container class="drawer-container">
+  <mat-drawer #drawer class="sidenav" mode="over" [opened]="isDrawerOpen">
+    <p (click)="logout()">Cerrar Sesión</p>
+  </mat-drawer>
+  <div *ngIf="isLoggedIn">
+    <app-toolbar (sideNav)="drawer.toggle()"></app-toolbar>
+  </div>
   <router-outlet></router-outlet>
+</mat-drawer-container>

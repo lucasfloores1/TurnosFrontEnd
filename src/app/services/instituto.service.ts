@@ -17,7 +17,12 @@ export class InstitutoService {
 
   constructor( private http : HttpClient ) { }
 
-  getInstitutos(){
-    return this.http.get<Instituto[]>( `${this.apiUrl}/load` )
+  getInstitutos( id : any ){
+    return this.http.get<Instituto[]>( `${this.apiUrl}/user/${id}` )
   }
+
+  createInstituto( instituto : any ){
+    return this.http.post<any>( `${this.apiUrl}/create`, instituto, httpOptions ) 
+  }
+  
 }

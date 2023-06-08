@@ -3,6 +3,7 @@ import { Turno } from "./Turno";
 
 export interface Instituto {
 
+    userId : number;
     id : number;
     nombre : string;
     direccion : string;

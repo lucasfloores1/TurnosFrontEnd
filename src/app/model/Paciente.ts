@@ -3,6 +3,7 @@ import { Turno } from "./Turno";
 
 export interface Paciente {
 
+    userId : number;
     id : number;
     nombre : string;
     dni : number;

@@ -3,6 +3,7 @@ import { Instituto } from "../Instituto";
 
 export interface NuevoMedicoDTO {
     
+    userId : number;
     nombre : string;
     dni : number;
     tel : string;

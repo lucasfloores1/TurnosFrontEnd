@@ -10,7 +10,7 @@
     flex-direction: column;
     gap: 15px;
 }
-.add-paciente {
+.login {
     display: flex;
     flex-direction: column;
 }

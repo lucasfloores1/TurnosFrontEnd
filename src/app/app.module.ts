@@ -8,11 +8,16 @@ import { MaterialModule } from './material/material.module';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { AddTurnoComponent } from './components/add-turno/add-turno.component';
 import { FeaturesComponent } from './components/features/features.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CalendarFormComponent } from './components/calendar-form/calendar-form.component';
 import { SearchPipe } from './pipes/search.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddPacienteComponent } from './components/add-paciente/add-paciente.component';
+import { LoginComponent } from './components/login/login.component';
+import { AuthInterceptor, authInterceptorProviders } from './services/auth.interceptor';
+import { AddInstitutoComponent } from './components/add-instituto/add-instituto.component';
+import { AddObraSocialComponent } from './components/add-obra-social/add-obra-social.component';
+import { AddMedicoComponent } from './components/add-medico/add-medico.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +27,11 @@ import { AddPacienteComponent } from './components/add-paciente/add-paciente.com
     FeaturesComponent,
     CalendarFormComponent,
     SearchPipe,
-    AddPacienteComponent
+    AddPacienteComponent,
+    LoginComponent,
+    AddInstitutoComponent,
+    AddObraSocialComponent,
+    AddMedicoComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +42,7 @@ import { AddPacienteComponent } from './components/add-paciente/add-paciente.com
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [authInterceptorProviders],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

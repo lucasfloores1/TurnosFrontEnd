@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ObraSocial } from 'src/app/model/ObraSocial';
 import { Plan } from 'src/app/model/Plan';
 import { ObraSocialService } from 'src/app/services/obra-social.service';
@@ -14,14 +15,17 @@ export class AddPacienteComponent implements OnInit {
 
   obrasSociales! : ObraSocial[];
   obraSocial! : ObraSocial;
-  selectedObraSocial! : number ;
-  planes! : Plan[];
+  planes! : Plan[]
+  isSubmitted : boolean = false;
+  userId : any = localStorage.getItem('user')
+  
 
   pacienteForm : FormGroup = this.fb.group({
+    userId : [localStorage.getItem('user') , Validators.required],
     id: ['0', Validators.required ],
     nombre : ['', Validators.required ],
     dni : ['', Validators.required ],
-    mail : ['', Validators.required, Validators.email ],
+    mail : ['', [Validators.required, Validators.email] ],
     tel : ['', Validators.required ],
     direccion :  ['', Validators.required ],
     idObraSocial : ['', Validators.required ],
@@ -30,6 +34,7 @@ export class AddPacienteComponent implements OnInit {
   })
 
   constructor( 
+    private router : Router,
     private fb : FormBuilder,
     private pacienteService : PacienteService,
     private obraSocialService : ObraSocialService
@@ -37,14 +42,29 @@ export class AddPacienteComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.obraSocialService.getObrasSociales().subscribe( response => this.obrasSociales = response )
+    this.obraSocialService.getObrasSociales( this.userId ).subscribe( response => this.obrasSociales = response )    
+    this.pacienteForm.get('idObraSocial')?.valueChanges.subscribe( idObraSocial => { 
+      this.obraSocialService.getPlanesByObraSocial(idObraSocial).subscribe( response => this.planes = response )
+    })
     
   }
 
-  setPlanes( obraSocial : ObraSocial ){
-    this.planes = obraSocial.planes;
-    console.log(this.planes);
-    
+  createPaciente(){
+
+    if (this.pacienteForm.invalid){
+      this.isSubmitted = true
+    } else {
+      this.pacienteService.createPaciente(this.pacienteForm.value).subscribe( response => console.log(response) )
+      this.router.navigate(['/turno/create']) 
+    }
+
+  }
+
+  getErrorMessage(){
+    if(this.pacienteForm.get('mail')?.hasError('required')){
+      return 'Este campo es obligatorio'
+    }
+    return this.pacienteForm.get('mail')?.hasError('email') ? 'El mail que ingresaste no es válido' : ''
   }
 
 }

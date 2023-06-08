@@ -17,8 +17,8 @@ export class EstudioService {
 
   constructor( private http : HttpClient ) { }
 
-  getEstudios(){
-    return this.http.get<Estudio[]>( `${this.apiUrl}/load` )
+  getEstudios( id : any ){
+    return this.http.get<Estudio[]>( `${this.apiUrl}/user/${id}` )
   }
   
 }
