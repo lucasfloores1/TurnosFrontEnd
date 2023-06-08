@@ -5,6 +5,8 @@ import { AddTurnoComponent } from './components/add-turno/add-turno.component';
 import { AddPacienteComponent } from './components/add-paciente/add-paciente.component';
 import { LoginComponent } from './components/login/login.component';
 import { AddInstitutoComponent } from './components/add-instituto/add-instituto.component';
+import { AddObraSocialComponent } from './components/add-obra-social/add-obra-social.component';
+import { AddMedicoComponent } from './components/add-medico/add-medico.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -12,7 +14,9 @@ const routes: Routes = [
   { path: 'home', component: FeaturesComponent },
   { path: 'turno/create', component: AddTurnoComponent },
   { path: 'instituto/create', component: AddInstitutoComponent },
-  { path: 'paciente/create', component : AddPacienteComponent }
+  { path: 'paciente/create', component : AddPacienteComponent },
+  { path: 'obraSocial/create', component : AddObraSocialComponent },
+  { path: 'medico/create', component : AddMedicoComponent }
 ];
 
 @NgModule({

@@ -10,6 +10,8 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 
 @NgModule({
@@ -27,7 +29,9 @@ import { MatDividerModule } from '@angular/material/divider';
     MatStepperModule,
     MatSelectModule,
     MatSidenavModule,
-    MatDividerModule
+    MatDividerModule,
+    MatSliderModule,
+    MatCheckboxModule
   ]
 })
 export class MaterialModule { }

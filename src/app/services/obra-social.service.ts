@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ObraSocial } from '../model/ObraSocial';
 import { Plan } from '../model/Plan';
+import { NuevaObraSocialDTO } from '../model/dto/NuevaObraSocialDTO';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -24,5 +25,9 @@ export class ObraSocialService {
 
   getPlanesByObraSocial( id : number){
     return this.http.get<Plan[]>( `${this.apiUrl}/planes/${id}` )
+  }
+
+  createObraSocial ( obraSocial : NuevaObraSocialDTO ){
+    return this.http.post<NuevaObraSocialDTO>( `${this.apiUrl}/create`, obraSocial, httpOptions )
   }
 }

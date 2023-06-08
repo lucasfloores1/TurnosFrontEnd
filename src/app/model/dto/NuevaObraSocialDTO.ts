@@ -1,10 +1,10 @@
-import { Plan } from "../Plan";
+import { PlanDTO } from "./PlanDTO";
 
 export interface NuevaObraSocialDTO {
 
     userId : number;
     nombre : string;
     direccion? : string;
-    planes : Set<Plan>;
+    planes : Array<PlanDTO>;
     
 }

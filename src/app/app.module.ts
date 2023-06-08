@@ -16,6 +16,8 @@ import { AddPacienteComponent } from './components/add-paciente/add-paciente.com
 import { LoginComponent } from './components/login/login.component';
 import { AuthInterceptor, authInterceptorProviders } from './services/auth.interceptor';
 import { AddInstitutoComponent } from './components/add-instituto/add-instituto.component';
+import { AddObraSocialComponent } from './components/add-obra-social/add-obra-social.component';
+import { AddMedicoComponent } from './components/add-medico/add-medico.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +30,8 @@ import { AddInstitutoComponent } from './components/add-instituto/add-instituto.
     AddPacienteComponent,
     LoginComponent,
     AddInstitutoComponent,
+    AddObraSocialComponent,
+    AddMedicoComponent,
   ],
   imports: [
     BrowserModule,

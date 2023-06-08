@@ -5,23 +5,23 @@
             <mat-label>Nombre del instituto</mat-label>
             <input type="text" matInput formControlName="nombre" placeholder="Nombre del instituto">
             <mat-error *ngIf="
-            instForm.get('nombre')?.invalid && ( instForm.get('nombre')?.dirty || instForm.get('nombre')?.touched || isSubmitted)
+            instForm.get('nombre')?.invalid && ( instForm.get('nombre')?.dirty || instForm.get('nombre')?.touched)
             ">Este campo es obligatorio</mat-error>
         </mat-form-field>
         <mat-form-field>
             <mat-label>Dirección del instituto</mat-label>
             <input type="text" matInput formControlName="direccion" placeholder="Calle y número">
             <mat-error *ngIf="
-            instForm.get('direccion')?.invalid && ( instForm.get('direccion')?.dirty || instForm.get('direccion')?.touched || isSubmitted)
+            instForm.get('direccion')?.invalid && ( instForm.get('direccion')?.dirty || instForm.get('direccion')?.touched)
             ">Este campo es obligatorio</mat-error>
         </mat-form-field>
         <mat-form-field>
             <mat-label>Número de CUIT</mat-label>
             <input type="text" matInput formControlName="cuit" placeholder="20/42510244/4">
             <mat-error *ngIf="
-            instForm.get('cuit')?.invalid && ( instForm.get('cuit')?.dirty || instForm.get('cuit')?.touched || isSubmitted)
+            instForm.get('cuit')?.invalid && ( instForm.get('cuit')?.dirty || instForm.get('cuit')?.touched)
             ">Este campo es obligatorio</mat-error>
         </mat-form-field>
-        <button class="submit-btn" color="accent" mat-raised-button type="submit">Crear Instituto</button>
+        <button class="submit-btn" color="accent" mat-raised-button type="submit" [disabled]="instForm.invalid" >Crear Instituto</button>
     </form>
 </div>

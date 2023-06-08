@@ -11,8 +11,6 @@ import { LoginService } from 'src/app/services/login.service';
 })
 export class AddInstitutoComponent implements OnInit {
 
-  isSubmitted : boolean = false;
-
   instForm : FormGroup = this.fb.group({
     userId: [localStorage.getItem('user') ,Validators.required],
     nombre: ['' , Validators.required],
@@ -22,7 +20,6 @@ export class AddInstitutoComponent implements OnInit {
 
   constructor( 
     private fb : FormBuilder,
-    private loginService : LoginService,
     private institutoService : InstitutoService,
     private router : Router
   ){}
@@ -33,13 +30,9 @@ export class AddInstitutoComponent implements OnInit {
 
   createInstituto(){
 
-    if(this.instForm.invalid){
-      this.isSubmitted=!this.isSubmitted;
-    }else {
-      this.institutoService.createInstituto(this.instForm.value).subscribe( response => console.log( response ) );
-      this.router.navigate(['home'])
-    }
-
+    this.institutoService.createInstituto(this.instForm.value).subscribe( response => console.log( response ) );
+    this.router.navigate(['home'])
+    
   }
 
 }

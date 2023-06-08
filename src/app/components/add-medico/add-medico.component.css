@@ -1,0 +1,47 @@
+.submit-btn {
+    width: 90%;
+    margin-top: 15px;
+    margin-left: 10px;
+    align-self: center;
+}
+.form-container {
+    align-self: center;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.add-medico {
+    display: flex;
+    flex-direction: column;
+}
+.title {
+    margin-top: 15px;
+    align-self: center;
+    font-size: 1.5rem;
+}
+
+.error{
+    color: red;
+}
+
+.horarios{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    gap: 15px;
+}
+.horarios mat-card{
+    width: 100%;
+}
+
+.horarios mat-slider {
+    width: 70%;
+}
+.horarios mat-form-field{
+    width: 25%;
+}
+.spacer{
+    flex: 1 0 auto;
+}
