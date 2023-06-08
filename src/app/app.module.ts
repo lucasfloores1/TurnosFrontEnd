@@ -18,6 +18,7 @@ import { AuthInterceptor, authInterceptorProviders } from './services/auth.inter
 import { AddInstitutoComponent } from './components/add-instituto/add-instituto.component';
 import { AddObraSocialComponent } from './components/add-obra-social/add-obra-social.component';
 import { AddMedicoComponent } from './components/add-medico/add-medico.component';
+import { AddEstudioComponent } from './components/add-estudio/add-estudio.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { AddMedicoComponent } from './components/add-medico/add-medico.component
     AddInstitutoComponent,
     AddObraSocialComponent,
     AddMedicoComponent,
+    AddEstudioComponent,
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AddInstitutoComponent } from './components/add-instituto/add-instituto.component';
 import { AddObraSocialComponent } from './components/add-obra-social/add-obra-social.component';
 import { AddMedicoComponent } from './components/add-medico/add-medico.component';
+import { AddEstudioComponent } from './components/add-estudio/add-estudio.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -16,7 +17,8 @@ const routes: Routes = [
   { path: 'instituto/create', component: AddInstitutoComponent },
   { path: 'paciente/create', component : AddPacienteComponent },
   { path: 'obraSocial/create', component : AddObraSocialComponent },
-  { path: 'medico/create', component : AddMedicoComponent }
+  { path: 'medico/create', component : AddMedicoComponent },
+  { path: 'estudio/create', component : AddEstudioComponent }
 ];
 
 @NgModule({

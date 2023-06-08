@@ -34,4 +34,8 @@ export class FeaturesComponent implements OnInit{
     this.router.navigate(['medico/create'])
   }
 
+  navigateToAddEstudio(){
+    this.router.navigate(['estudio/create'])
+  }
+
 }

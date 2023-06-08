@@ -20,5 +20,9 @@ export class EstudioService {
   getEstudios( id : any ){
     return this.http.get<Estudio[]>( `${this.apiUrl}/user/${id}` )
   }
+
+  createEstudio( estudio : any ){
+    return this.http.post<any>( `${this.apiUrl}/create`, estudio, httpOptions )
+  }
   
 }
