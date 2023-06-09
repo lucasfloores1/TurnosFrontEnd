@@ -19,6 +19,9 @@ import { AddInstitutoComponent } from './components/add-instituto/add-instituto.
 import { AddObraSocialComponent } from './components/add-obra-social/add-obra-social.component';
 import { AddMedicoComponent } from './components/add-medico/add-medico.component';
 import { AddEstudioComponent } from './components/add-estudio/add-estudio.component';
+import { ConfirmTurnoComponent } from './components/confirm-turno/confirm-turno.component';
+import { CancelTurnoComponent } from './components/cancel-turno/cancel-turno.component';
+import { ErrorTurnoComponent } from './components/error-turno/error-turno.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,9 @@ import { AddEstudioComponent } from './components/add-estudio/add-estudio.compon
     AddObraSocialComponent,
     AddMedicoComponent,
     AddEstudioComponent,
+    ConfirmTurnoComponent,
+    CancelTurnoComponent,
+    ErrorTurnoComponent,
   ],
   imports: [
     BrowserModule,

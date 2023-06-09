@@ -17,8 +17,8 @@ export class AddMedicoComponent implements OnInit{
   showBtn : boolean = false;
 
   indexInicio : number = 1
-  indexFin : number = 38
-  horas : string[] = ['05:00','05:30','06:00','06:30','07:00','07:30','08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30','20:00','20:30','21:00','21:30','22:00','22:30','23:00','23:30','00:00']
+  indexFin : number = 37
+  horas : string[] = ['05:00','05:30','06:00','06:30','07:00','07:30','08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30','20:00','20:30','21:00','21:30','22:00','22:30','23:00','23:30']
   diasSemana : string[] = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo']
   intervalos : number[] = [15,30,45,60,75,90]
   nuevosHorarios : any = []
@@ -80,7 +80,7 @@ export class AddMedicoComponent implements OnInit{
       const horario = {
         dia : i+1,
         inicio : Math.floor( Math.random()* ( 17 - 0 + 1 ) ) + 0,
-        fin : Math.floor( Math.random()* ( 38 - 18 + 1 ) ) + 18,
+        fin : Math.floor( Math.random()* ( 37 - 18 + 1 ) ) + 18,
         intervalo : this.intervalos[0],
         trabaja : false,
       }

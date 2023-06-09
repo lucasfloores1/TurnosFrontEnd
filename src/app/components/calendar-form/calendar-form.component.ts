@@ -85,14 +85,14 @@ export class CalendarFormComponent implements OnInit, OnChanges{
           const horarioNuevo = this.setDate( day, currentTime );
           const isPast =  isBefore(horarioNuevo, new Date());
 
-          const isGiven = this.turnos.some((turno: Turno) => {   
-            return parse(turno.fecha, 'yyyy-MM-dd HH:mm:ss', new Date()).getTime() == horarioNuevo.getTime();
+          const isGivenOrCancelled = this.turnos.some((turno: Turno) => {   
+            return parse(turno.fecha, 'yyyy-MM-dd HH:mm:ss', new Date()).getTime() == horarioNuevo.getTime() && !turno.cancelado;
           });
 
           turnos.push({
             horario : horarioNuevo,
             pasado : isPast,
-            dado : isGiven
+            dado : isGivenOrCancelled,
           });
           
           currentTime = addMinutes( currentTime, horario.intervalo );

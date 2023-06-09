@@ -149,6 +149,7 @@ export class AddTurnoComponent implements OnInit{
       fecha : this.fecha,
       cargado : false,
       confirmado : false,
+      cancelado : false,
       idMedico : this.selectedMedico.id,
       idInstituto : this.selectedInstituto.id,
       idPaciente : this.selectedPaciente.id,
