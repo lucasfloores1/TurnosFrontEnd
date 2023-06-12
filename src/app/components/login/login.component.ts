@@ -25,6 +25,8 @@ export class LoginComponent implements OnInit{
   ){}
   
   ngOnInit(): void {
+
+    this.checkLogin()
     
   }
 
@@ -50,6 +52,12 @@ export class LoginComponent implements OnInit{
 
     this.showErrorMessage = !this.showErrorMessage;
 
+  }
+
+  checkLogin(){
+    if(this.loginService.validateToken() && (localStorage.getItem('user') != null || localStorage.getItem('token') != null )){
+      this.router.navigate(['home'])
+    }
   }
 
 }

@@ -1,5 +1,7 @@
 <mat-toolbar class="toolbar" color="primary">
-    <span class="title">Turnos</span>
-    <span class="spacer"></span>
-    <button mat-icon-button (click)="openSideNav()"><mat-icon>menu</mat-icon></button>
+  <span class="title">Turnos</span>
+  <span class="spacer"></span>
+  <button mat-icon-button [routerLink]="redireccion" (click)="icono === 'logout' ? logout() : null">
+    <mat-icon>{{ icono }}</mat-icon>
+  </button>
 </mat-toolbar>

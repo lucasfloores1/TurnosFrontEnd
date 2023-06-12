@@ -72,7 +72,7 @@
                 </mat-slider> 
                 <mat-form-field>
                     <mat-label>Cada</mat-label>
-                    <mat-select [disabled]="!horario.trabaja">
+                    <mat-select [disabled]="!horario.trabaja" [(ngModel)]="horario.intervalo">
                         <mat-option *ngFor="let intervalo of intervalos" [value]="intervalo">
                             {{intervalo}} min
                         </mat-option>
