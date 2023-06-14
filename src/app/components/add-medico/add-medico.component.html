@@ -1,49 +1,49 @@
 <div class="add-medico">
     <h2 class="title">Crear Medico</h2>
     <form class="form-container" [formGroup]="medForm" (submit)="createMedico()">
-        <mat-form-field>
+        <mat-form-field appearance="outline">
             <mat-label>Nombre</mat-label>
             <input type="text" matInput formControlName="nombre" placeholder="Nombre completo"/>
             <mat-error *ngIf="
             medForm.get('nombre')?.invalid && ( medForm.get('nombre')?.dirty || medForm.get('nombre')?.touched )
         ">Este campo es obligatorio</mat-error>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field appearance="outline">
             <mat-label>DNI</mat-label>
             <input type="text" matInput formControlName="dni" placeholder="DNI"/>
             <mat-error *ngIf="
             medForm.get('dni')?.invalid && ( medForm.get('dni')?.dirty || medForm.get('dni')?.touched )
         ">Este campo es obligatorio</mat-error>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field appearance="outline">
             <mat-label>E-mail</mat-label>
             <input type="text" matInput formControlName="mail" placeholder="ejemplo@gmail.com"/>
             <mat-error *ngIf="
                 medForm.get('mail')?.invalid && ( medForm.get('mail')?.dirty || medForm.get('mail')?.touched )
             ">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field appearance="outline">
             <mat-label>Teléfono</mat-label>
             <input type="text" matInput formControlName="tel" placeholder="Número"/>
             <mat-error *ngIf="
             medForm.get('tel')?.invalid && ( medForm.get('tel')?.dirty || medForm.get('tel')?.touched )
         ">Este campo es obligatorio</mat-error>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field appearance="outline">
             <mat-label>Dirección</mat-label>
             <input type="text" matInput formControlName="direccion" placeholder="Calle y número"/>
             <mat-error *ngIf="
             medForm.get('direccion')?.invalid && ( medForm.get('direccion')?.dirty || medForm.get('direccion')?.touched )
         ">Este campo es obligatorio</mat-error>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field appearance="outline">
             <mat-label>Matrícula</mat-label>
             <input type="text" matInput formControlName="matricula" placeholder="Calle y número"/>
             <mat-error *ngIf="
             medForm.get('matricula')?.invalid && ( medForm.get('matricula')?.dirty || medForm.get('matricula')?.touched )
         ">Este campo es obligatorio</mat-error>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field appearance="outline">
             <mat-label>Instituto</mat-label>
             <mat-select formControlName = "idInstituto">
                 <mat-option *ngFor="let instituto of institutos" [value]="instituto.id">
@@ -70,7 +70,7 @@
                     <input value="0" [(ngModel)]="horario.inicio"  matSliderStartThumb>
                     <input value="38" [(ngModel)]="horario.fin" matSliderEndThumb>
                 </mat-slider> 
-                <mat-form-field>
+                <mat-form-field appearance="outline">
                     <mat-label>Cada</mat-label>
                     <mat-select [disabled]="!horario.trabaja" [(ngModel)]="horario.intervalo">
                         <mat-option *ngFor="let intervalo of intervalos" [value]="intervalo">

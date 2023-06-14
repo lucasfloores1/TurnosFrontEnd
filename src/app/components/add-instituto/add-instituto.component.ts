@@ -6,7 +6,7 @@ import { InstitutoService } from 'src/app/services/instituto.service';
 @Component({
   selector: 'app-add-instituto',
   templateUrl: './add-instituto.component.html',
-  styleUrls: ['./add-instituto.component.css']
+  styleUrls: ['./add-instituto.component.scss']
 })
 export class AddInstitutoComponent implements OnInit {
 

@@ -6,14 +6,14 @@ import { EstudioService } from 'src/app/services/estudio.service';
 @Component({
   selector: 'app-add-estudio',
   templateUrl: './add-estudio.component.html',
-  styleUrls: ['./add-estudio.component.css']
+  styleUrls: ['./add-estudio.component.scss']
 })
 export class AddEstudioComponent implements OnInit{
 
   estForm : FormGroup = this.fb.group({
     userId : [localStorage.getItem('user'), Validators.required],
-    nombre : ['', Validators.required],
-    nomenclador : ['', Validators.required]
+    nomenclador : ['', Validators.required],
+    nombre : ['', Validators.required]
   })
 
   constructor(

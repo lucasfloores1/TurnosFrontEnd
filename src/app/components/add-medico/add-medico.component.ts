@@ -9,7 +9,7 @@ import { MedicoService } from 'src/app/services/medico.service';
 @Component({
   selector: 'app-add-medico',
   templateUrl: './add-medico.component.html',
-  styleUrls: ['./add-medico.component.css']
+  styleUrls: ['./add-medico.component.scss']
 })
 export class AddMedicoComponent implements OnInit{
 

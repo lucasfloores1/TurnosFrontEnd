@@ -9,7 +9,7 @@ import { PacienteService } from 'src/app/services/paciente.service';
 @Component({
   selector: 'app-add-paciente',
   templateUrl: './add-paciente.component.html',
-  styleUrls: ['./add-paciente.component.css']
+  styleUrls: ['./add-paciente.component.scss']
 })
 export class AddPacienteComponent implements OnInit {
 

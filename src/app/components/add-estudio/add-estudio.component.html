@@ -1,7 +1,7 @@
 <div class="estForm">
     <h2 class="title" mat-card-title>Agregar Estudio</h2>
     <form class="form-container" [formGroup]="estForm" (submit)="createEstudio()">
-        <mat-form-field>
+        <mat-form-field appearance="outline">
             <mat-label>Código del Nomenclador Nacional</mat-label>
             <input type="text" matInput formControlName="nomenclador" placeholder="Consulta : 420101">
             <mat-hint>Si no sabes el código entra <a href="https://prestadores.pami.org.ar/bot_nomenclador_unico/2023_03/Manual_Nomenclador_032023.pdf" target="_blank">aquí</a></mat-hint>
@@ -9,7 +9,7 @@
             estForm.get('nomenclador')?.invalid && ( estForm.get('nomenclador')?.dirty || estForm.get('nomenclador')?.touched)
             ">Este campo es obligatorio</mat-error>
         </mat-form-field>
-        <mat-form-field>
+        <mat-form-field appearance="outline">
             <mat-label>Nombre del Estudio</mat-label>
             <input type="text" matInput formControlName="nombre" placeholder="Nombre del Estudio">
             <mat-error *ngIf="
