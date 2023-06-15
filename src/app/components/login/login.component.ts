@@ -57,6 +57,8 @@ export class LoginComponent implements OnInit{
   checkLogin(){
     if(this.loginService.validateToken() && (localStorage.getItem('user') != null || localStorage.getItem('token') != null )){
       this.router.navigate(['home'])
+      console.log("is loggedin");
+      
     }
   }
 

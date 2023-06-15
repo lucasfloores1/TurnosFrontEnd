@@ -44,6 +44,8 @@ import { ErrorComponent } from './components/error/error.component';
 //Date import
 import LocaleAR from '@angular/common/locales/es-AR'
 import { LOCATION_INITIALIZED, registerLocaleData } from '@angular/common';
+import { TurnoPipe } from './pipes/turno.pipe';
+import { TurnoDetailsComponent } from './components/turno-details/turno-details.component';
 registerLocaleData( LocaleAR, 'es' );
 
 @NgModule({
@@ -72,6 +74,8 @@ registerLocaleData( LocaleAR, 'es' );
     MedicoComponent,
     EstudioComponent,
     ErrorComponent,
+    TurnoPipe,
+    TurnoDetailsComponent,
   ],
   imports: [
     BrowserModule,

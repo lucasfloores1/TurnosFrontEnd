@@ -19,6 +19,7 @@ import { ObraSocialComponent } from './components/obra-social/obra-social.compon
 import { MedicoComponent } from './components/medico/medico.component';
 import { EstudioComponent } from './components/estudio/estudio.component';
 import { ErrorComponent } from './components/error/error.component';
+import { TurnoDetailsComponent } from './components/turno-details/turno-details.component';
 
 const routes: Routes = [
   {
@@ -46,6 +47,10 @@ const routes: Routes = [
           {
             path : '',
             component : TurnoComponent
+          },
+          {
+            path : 'details/:id',
+            component : TurnoDetailsComponent
           },
           {
             path : 'create',

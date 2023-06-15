@@ -25,6 +25,11 @@ export class CalendarFormComponent implements OnInit, OnChanges{
   firstDayOfWeek! : Date;
   lastDayOfWeek! : Date;
 
+  selectedButton : number | null = null
+  selectedButtonIndex : number = -1
+
+  buttonColors: boolean[][] = [];
+
   constructor(){}
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -42,7 +47,9 @@ export class CalendarFormComponent implements OnInit, OnChanges{
       return a.dia - b.dia;
     });
     this.setWeekDays(this.horarios);
-    this.getDaysFromDate()    
+    this.getDaysFromDate()  
+    
+    this.buttonColors = this.horarios.map(() => []);
     
   }
 
@@ -152,8 +159,14 @@ export class CalendarFormComponent implements OnInit, OnChanges{
     })
   }
 
-  loadToHorarioDTO( horario : any){
-    this.fecha.emit( format(horario, 'yyyy-MM-dd HH:mm:ss') );    
+  loadToHorarioDTO(horario: any, rowIndex: number, colIndex: number) {
+    this.fecha.emit(format(horario, 'yyyy-MM-dd HH:mm:ss'));
+  
+    // Reiniciar todos los valores de buttonColors a false
+    this.buttonColors.forEach((row) => row.fill(false));
+  
+    // Establecer el valor del botón seleccionado a true
+    this.buttonColors[rowIndex][colIndex] = true;
   }
 
   private setDate(date: Date, time: Date) {

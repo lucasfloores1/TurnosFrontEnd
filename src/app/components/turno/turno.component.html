@@ -1,19 +1,92 @@
-<button mat-raised-button routerLink="/turno/create" color="primary">Crear Turno</button>
-<div class="search">
-    <mat-form-field appearance="outline">
-        <mat-label>Buscá un turno</mat-label>
-        <input type="text" matInput placeholder="turno, Médico, Instituto, Obra Social, Plan" [(ngModel)]="searchTurno">
-        <mat-icon matSuffix>search</mat-icon>
-    </mat-form-field>
-</div>
-<mat-card *ngFor="let turno of turnos | search : searchTurno" (click)="turno(turno)">
-    <mat-card-header>
-        <mat-card-title-group>
-            <h2 mat-card-title>{{turno.fecha | date : 'EEEE dd \'de\' MMM HH:mm' :undefined: 'es' | titlecase }}</h2>
-            <img class="turno-img" mat-card-sm-image src="https://i.imgur.com/j8y8arX.png" alt="pacient">
-            <p mat-card-subtitle>DNI : {{turno.dni}}</p>
-            <p mat-card-subtitle>Mail : {{turno.mail}}</p>
-        </mat-card-title-group>
-    </mat-card-header>
-    <mat-card-content></mat-card-content>
-</mat-card>
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer class="sidenav" mode="over" position="end" fixedInViewport>
+        <h2 class="mat-h2">Filtros</h2>
+        <div class="search">
+            <mat-form-field appearance="outline">
+                <mat-label>Elegí un médico</mat-label>
+                <mat-select [(ngModel)]="medicoId">
+                    <mat-option *ngFor ="let medico of medicos" [value]="medico.id" >
+                        {{medico.nombre}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Elegí un Instituto</mat-label>
+                <mat-select [(ngModel)]="institutoId">
+                    <mat-option *ngFor ="let instituto of institutos" [value]="instituto.id" >
+                        {{instituto.nombre}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Elegí un paciente</mat-label>
+                <mat-select [(ngModel)]="pacienteId">
+                    <mat-option *ngFor ="let paciente of pacientes" [value]="paciente.id" >
+                        {{paciente.nombre}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Elegí un Obra Social</mat-label>
+                <mat-select [(ngModel)]="obraSocialId">
+                    <mat-option *ngFor ="let obraSocial of obrasSociales" [value]="obraSocial.id" >
+                        {{obraSocial.nombre}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Elegí un estudio</mat-label>
+                <mat-select [(ngModel)]="estudioId">
+                    <mat-option *ngFor ="let estudio of estudios" [value]="estudio.nombre">
+                        {{estudio.nombre}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Elegí un plan</mat-label>
+                <mat-select [(ngModel)]="planId">
+                    <mat-option *ngFor ="let plan of planes" [value]="plan.id" >
+                        {{plan.nombre}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Filtrá por fecha</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)]="filterDate">
+                <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-radio-group [(ngModel)]="isCargado">
+                <mat-radio-button [value]="true">Cargado</mat-radio-button>
+                <mat-radio-button [value]="false">No Cargado</mat-radio-button>
+                <mat-radio-button [value]="undefined">Indistinto</mat-radio-button>
+            </mat-radio-group>
+            <mat-radio-group [(ngModel)]="isCancelado">
+                <mat-radio-button [value]="true">Cancelado</mat-radio-button>
+                <mat-radio-button [value]="false">No Cancelado</mat-radio-button>
+                <mat-radio-button [value]="undefined">Indistinto</mat-radio-button>
+            </mat-radio-group>
+            <mat-radio-group [(ngModel)]="isConfirmado">
+                <mat-radio-button [value]="true">Confirmado</mat-radio-button>
+                <mat-radio-button [value]="false">No Confirmado</mat-radio-button>
+                <mat-radio-button [value]="undefined">Indistinto</mat-radio-button>
+            </mat-radio-group>
+            <mat-checkbox [(ngModel)]="allowPast">Turnos Pasados</mat-checkbox>
+        </div>
+    </mat-sidenav>
+    <mat-sidenav-content>
+        <button mat-raised-button routerLink="/turno/create" color="primary">Crear Turno</button>
+        <button mat-icon-button (click)="drawer.toggle()"><mat-icon>filter_alt</mat-icon></button>
+        <mat-card *ngFor="let turno of turnos | turno : medicoId : institutoId : estudioId : pacienteId : obraSocialId : planId : isCargado : isCancelado : isConfirmado : allowPast :filterDate" (click)="turnoDetail(turno)">
+            <mat-card-header>
+                <mat-card-title-group>
+                    <h2 mat-card-title>{{turno.fecha | date : 'EEEE dd \'de\' MMM HH:mm' :undefined: 'es' | titlecase }}</h2>
+                    <img class="turno-img" mat-card-sm-image src="https://i.imgur.com/j8y8arX.png" alt="pacient">
+                    <p mat-card-subtitle>Pac : {{turno.paciente.nombre}}</p>
+                    <p mat-card-subtitle>Med : {{turno.medico.nombre}}</p>
+                </mat-card-title-group>
+            </mat-card-header>
+            <mat-card-content></mat-card-content>
+        </mat-card>
+    </mat-sidenav-content>
+</mat-sidenav-container>
