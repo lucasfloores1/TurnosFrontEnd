@@ -6,7 +6,7 @@ import { LoginService } from 'src/app/services/login.service';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit{
 
@@ -25,6 +25,8 @@ export class LoginComponent implements OnInit{
   ){}
   
   ngOnInit(): void {
+
+    this.checkLogin()
     
   }
 
@@ -50,6 +52,14 @@ export class LoginComponent implements OnInit{
 
     this.showErrorMessage = !this.showErrorMessage;
 
+  }
+
+  checkLogin(){
+    if(this.loginService.validateToken() && (localStorage.getItem('user') != null || localStorage.getItem('token') != null )){
+      this.router.navigate(['home'])
+      console.log("is loggedin");
+      
+    }
   }
 
 }

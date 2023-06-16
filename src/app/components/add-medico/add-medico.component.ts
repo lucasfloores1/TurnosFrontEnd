@@ -9,16 +9,16 @@ import { MedicoService } from 'src/app/services/medico.service';
 @Component({
   selector: 'app-add-medico',
   templateUrl: './add-medico.component.html',
-  styleUrls: ['./add-medico.component.css']
+  styleUrls: ['./add-medico.component.scss']
 })
 export class AddMedicoComponent implements OnInit{
 
-  isHorariosSelected : boolean = false;
+  isHorariosSelected : boolean = true;
   showBtn : boolean = false;
 
   indexInicio : number = 1
-  indexFin : number = 38
-  horas : string[] = ['05:00','05:30','06:00','06:30','07:00','07:30','08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30','20:00','20:30','21:00','21:30','22:00','22:30','23:00','23:30','00:00']
+  indexFin : number = 37
+  horas : string[] = ['05:00','05:30','06:00','06:30','07:00','07:30','08:00','08:30','09:00','09:30','10:00','10:30','11:00','11:30','12:00','12:30','13:00','13:30','14:00','14:30','15:00','15:30','16:00','16:30','17:00','17:30','18:00','18:30','19:00','19:30','20:00','20:30','21:00','21:30','22:00','22:30','23:00','23:30']
   diasSemana : string[] = ['Lunes','Martes','Miércoles','Jueves','Viernes','Sábado','Domingo']
   intervalos : number[] = [15,30,45,60,75,90]
   nuevosHorarios : any = []
@@ -30,7 +30,7 @@ export class AddMedicoComponent implements OnInit{
   horarios! : FormArray
 
   medForm : FormGroup = this.fb.group({
-    userId : [localStorage.getItem('user'), Validators.required],
+    userId : ['', Validators.required],
     nombre : ['', Validators.required ],
     dni : ['', Validators.required ],
     mail : ['', [Validators.required, Validators.email] ],
@@ -54,7 +54,7 @@ export class AddMedicoComponent implements OnInit{
 
     this.horarios = this.medForm.get('horarios') as FormArray 
 
-    this.setNuevosHorarios();
+    this.setNuevosHorarios();    
     
   }
 
@@ -66,7 +66,8 @@ export class AddMedicoComponent implements OnInit{
   }
 
   createMedico(){
-
+    this.medicoService.createMedico(this.medForm.value).subscribe( response => console.log(response) )
+    this.router.navigate(['home'])
   }
 
   formatLabel( value : number ): string {
@@ -79,7 +80,7 @@ export class AddMedicoComponent implements OnInit{
       const horario = {
         dia : i+1,
         inicio : Math.floor( Math.random()* ( 17 - 0 + 1 ) ) + 0,
-        fin : Math.floor( Math.random()* ( 38 - 18 + 1 ) ) + 18,
+        fin : Math.floor( Math.random()* ( 37 - 18 + 1 ) ) + 18,
         intervalo : this.intervalos[0],
         trabaja : false,
       }
@@ -89,18 +90,20 @@ export class AddMedicoComponent implements OnInit{
 
   addHorarios(){
     this.isHorariosSelected = !this.isHorariosSelected
+    this.medForm.patchValue({
+      userId : localStorage.getItem('user')
+    }) 
     const horariosSeleccionados = this.nuevosHorarios.filter( (horario : any) => horario.trabaja )
     for ( let i = 0; i < horariosSeleccionados.length; i++ ){
       const nuevoHorario = this.fb.group({
-        id : [i, Validators.required],
+        id : [i+1, Validators.required],
         dia : [horariosSeleccionados[i].dia, Validators.required],
         inicio : [this.horas[horariosSeleccionados[i].inicio], Validators.required],
         fin : [this.horas[horariosSeleccionados[i].fin], Validators.required],
         intervalo: [horariosSeleccionados[i].intervalo, Validators.required]
       })
       this.horarios.push(nuevoHorario)
-    }
-    this.medForm.updateValueAndValidity();    
+    }    
   }
   
   triggerBtn(){

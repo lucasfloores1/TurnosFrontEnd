@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-features',
   templateUrl: './features.component.html',
-  styleUrls: ['./features.component.css']
+  styleUrls: ['./features.component.scss']
 })
 export class FeaturesComponent implements OnInit{
 
@@ -23,15 +23,19 @@ export class FeaturesComponent implements OnInit{
   }
 
   navigateToAddInstituto(){
-    this.router.navigate(['instituto/create'])
+    this.router.navigate(['/instituto/create'])
   }
 
   navigateToAddObraSocial(){
-    this.router.navigate(['obraSocial/create'])
+    this.router.navigate(['/obraSocial/create'])
   }
 
   navigateToAddMedico(){
-    this.router.navigate(['medico/create'])
+    this.router.navigate(['/medico/create'])
+  }
+
+  navigateToAddEstudio(){
+    this.router.navigate(['/estudio/create'])
   }
 
 }

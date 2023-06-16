@@ -1,14 +1,14 @@
 <div class="obraForm" >
     <h2 class="title" mat-card-title>Agregar obra Social</h2>
     <form class="form-container" [formGroup]="obraForm" (submit)="createObraSocial()">
-      <mat-form-field>
+      <mat-form-field appearance="outline">
         <mat-label>Nombre de la obra social</mat-label>
         <input type="text" matInput formControlName="nombre" placeholder="Nombre de la obra social">
         <mat-error *ngIf="obraForm.get('nombre')?.invalid && (obraForm.get('nombre')?.dirty || obraForm.get('nombre')?.touched)">
           Este campo es obligatorio
         </mat-error>
       </mat-form-field>
-      <mat-form-field>
+      <mat-form-field appearance="outline">
         <mat-label>Dirección de la obra social</mat-label>
         <input type="text" matInput formControlName="direccion" placeholder="Calle y número">
         <mat-error *ngIf="obraForm.get('direccion')?.invalid && (obraForm.get('direccion')?.dirty || obraForm.get('direccion')?.touched)">
@@ -29,7 +29,7 @@
             <button class="del-btn"mat-mini-fab (click)="deletePlan(i)"><mat-icon>delete</mat-icon></button>
           </mat-card-header>
           <mat-card-content class="plan-form-content">
-            <mat-form-field class="plan-form-field">
+            <mat-form-field appearance="outline" class="plan-form-field">
               <mat-label>Nombre del plan:</mat-label>
               <input matInput formControlName="nombre" type="text" placeholder="Nombre del Plan">
               <mat-error *ngIf="planGroup.get('nombre')?.invalid && (planGroup.get('nombre')?.dirty || planGroup.get('nombre')?.touched)">

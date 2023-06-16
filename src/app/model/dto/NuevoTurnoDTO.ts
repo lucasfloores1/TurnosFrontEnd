@@ -5,6 +5,7 @@ export interface NuevoTurnoDTO {
     fecha : string;
     confirmado : boolean;
     cargado : boolean;
+    cancelado : boolean;
     idPaciente : number;
     idObraSocial : number;
     idPlan : number;

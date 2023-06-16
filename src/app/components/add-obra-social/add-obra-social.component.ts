@@ -6,7 +6,7 @@ import { ObraSocialService } from 'src/app/services/obra-social.service';
 @Component({
   selector: 'app-add-obra-social',
   templateUrl: './add-obra-social.component.html',
-  styleUrls: ['./add-obra-social.component.css']
+  styleUrls: ['./add-obra-social.component.scss']
 })
 export class AddObraSocialComponent implements OnInit {
 

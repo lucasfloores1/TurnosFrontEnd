@@ -18,6 +18,35 @@ import { AuthInterceptor, authInterceptorProviders } from './services/auth.inter
 import { AddInstitutoComponent } from './components/add-instituto/add-instituto.component';
 import { AddObraSocialComponent } from './components/add-obra-social/add-obra-social.component';
 import { AddMedicoComponent } from './components/add-medico/add-medico.component';
+import { AddEstudioComponent } from './components/add-estudio/add-estudio.component';
+import { ConfirmTurnoComponent } from './components/confirm-turno/confirm-turno.component';
+import { CancelTurnoComponent } from './components/cancel-turno/cancel-turno.component';
+import { ErrorTurnoComponent } from './components/error-turno/error-turno.component';
+import { NavigationComponent } from './components/navigation/navigation.component';
+import { LayoutModule } from '@angular/cdk/layout';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+import { MatListModule } from '@angular/material/list';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { MatMenuModule } from '@angular/material/menu';
+import { TurnoComponent } from './components/turno/turno.component';
+import { PacienteComponent } from './components/paciente/paciente.component';
+import { InstitutoComponent } from './components/instituto/instituto.component';
+import { ObraSocialComponent } from './components/obra-social/obra-social.component';
+import { MedicoComponent } from './components/medico/medico.component';
+import { EstudioComponent } from './components/estudio/estudio.component';
+import { ErrorComponent } from './components/error/error.component';
+
+//Date import
+import LocaleAR from '@angular/common/locales/es-AR'
+import { LOCATION_INITIALIZED, registerLocaleData } from '@angular/common';
+import { TurnoPipe } from './pipes/turno.pipe';
+import { TurnoDetailsComponent } from './components/turno-details/turno-details.component';
+registerLocaleData( LocaleAR, 'es' );
 
 @NgModule({
   declarations: [
@@ -32,6 +61,21 @@ import { AddMedicoComponent } from './components/add-medico/add-medico.component
     AddInstitutoComponent,
     AddObraSocialComponent,
     AddMedicoComponent,
+    AddEstudioComponent,
+    ConfirmTurnoComponent,
+    CancelTurnoComponent,
+    ErrorTurnoComponent,
+    NavigationComponent,
+    DashboardComponent,
+    TurnoComponent,
+    PacienteComponent,
+    InstitutoComponent,
+    ObraSocialComponent,
+    MedicoComponent,
+    EstudioComponent,
+    ErrorComponent,
+    TurnoPipe,
+    TurnoDetailsComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,9 +84,18 @@ import { AddMedicoComponent } from './components/add-medico/add-medico.component
     MaterialModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LayoutModule,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatIconModule,
+    MatListModule,
+    MatGridListModule,
+    MatCardModule,
+    MatMenuModule
   ],
-  providers: [authInterceptorProviders],
+  providers: [authInterceptorProviders,{ provide : LOCATION_INITIALIZED, useValue : 'es' }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

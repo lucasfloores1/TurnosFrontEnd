@@ -12,6 +12,7 @@ export interface Turno {
     fecha : string;
     confirmado : boolean;
     cargado : boolean;
+    cancelado : boolean;
     paciente : Paciente;
     obraSocial : ObraSocial;
     plan : Plan;

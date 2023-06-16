@@ -1,0 +1,46 @@
+.buttons{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.details-container{
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: auto;
+}
+
+.details-container mat-card {
+    margin-top: 15px;
+    width: 100%;
+}
+
+.input_fileupload--hidden{
+    display: none;
+}
+
+.informe-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.spacer{
+    flex: 1 1 auto
+}
+
+.file-preview-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;    
+}
+
+.file-preview{
+    margin-bottom: 10px;
+}
+
+.preview-button{
+    padding-bottom: 15px;    
+}

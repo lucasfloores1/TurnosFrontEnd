@@ -32,4 +32,20 @@ export class TurnoService {
     return this.http.post<NuevoTurnoDTO>( `${this.apiUrl}/create`, turno, httpOptions )
   }
 
+  getTurnoById( id : any ){
+    return this.http.get<Turno>( `${this.apiUrl}/load/${id}` )
+  }
+
+  updateTurno( turno : Turno ){
+    return this.http.put<Turno>( `${this.apiUrl}/update/${turno.id}`, turno, httpOptions )
+  }
+
+  sendInforme( turno : Turno, files : File[] ){
+    const formData = new FormData();
+    for (let file of files){
+      formData.append('files' , file)
+    }
+    return this.http.post<any>( `${this.apiUrl}/informe/${turno.id}`, formData )
+  }
+
 }

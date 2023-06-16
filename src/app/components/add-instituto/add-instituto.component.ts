@@ -2,12 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { InstitutoService } from 'src/app/services/instituto.service';
-import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-add-instituto',
   templateUrl: './add-instituto.component.html',
-  styleUrls: ['./add-instituto.component.css']
+  styleUrls: ['./add-instituto.component.scss']
 })
 export class AddInstitutoComponent implements OnInit {
 

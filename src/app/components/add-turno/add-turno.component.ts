@@ -17,7 +17,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-add-turno',
   templateUrl: './add-turno.component.html',
-  styleUrls: ['./add-turno.component.css']
+  styleUrls: ['./add-turno.component.scss']
 })
 export class AddTurnoComponent implements OnInit{
 
@@ -149,6 +149,7 @@ export class AddTurnoComponent implements OnInit{
       fecha : this.fecha,
       cargado : false,
       confirmado : false,
+      cancelado : false,
       idMedico : this.selectedMedico.id,
       idInstituto : this.selectedInstituto.id,
       idPaciente : this.selectedPaciente.id,

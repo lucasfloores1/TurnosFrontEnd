@@ -73,5 +73,11 @@ export class LoginService {
     return this.http.get(`${this.apiUrl}/actual-user`, token)
   }
 
+  public validateToken(){
+    const token = localStorage.getItem('token')
+    const id = localStorage.getItem('user')        
+    return this.http.get<any>( `${this.apiUrl}/validate/${token}/${id}` )
+  }
+
 
 }

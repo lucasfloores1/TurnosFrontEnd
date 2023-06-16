@@ -17,9 +17,14 @@
             </tr>
         </thead>
         <tbody [style.grid-template-columns]="tableColumns">
-            <tr *ngFor="let day of weekSelect">
-                <td *ngFor="let turno of day.horarios">
-                    <button mat-raised-button color="primary" [disabled]="turno.pasado || turno.dado" (click)="loadToHorarioDTO(turno.horario)">{{ turno.horario | date : 'HH:mm' }}</button>
+            <tr *ngFor="let day of weekSelect; let i = index">
+                <td *ngFor="let turno of day.horarios; let j = index">
+                  <button mat-raised-button
+                          [color]="buttonColors[i][j] ? 'accent' : 'primary'"
+                          [disabled]="turno.pasado || turno.dado"
+                          (click)="loadToHorarioDTO(turno.horario, i, j)">
+                    {{ turno.horario | date : 'HH:mm' }}
+                  </button>
                 </td>
             </tr>
         </tbody>

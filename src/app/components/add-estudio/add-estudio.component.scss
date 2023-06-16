@@ -1,0 +1,25 @@
+.submit-btn {
+    width: 100%;
+    margin-top: 15px;
+    margin-left: 10px;
+}
+.form-container {
+    align-self: center;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.estForm {
+    display: flex;
+    flex-direction: column;
+}
+.title {
+    margin-top: 15px;
+    align-self: center;
+    font-size: 1.5rem;
+}
+
+.error{
+    color: red;
+}
