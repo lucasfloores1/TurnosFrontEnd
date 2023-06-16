@@ -124,6 +124,14 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'confirm-turno',
+        component : ConfirmTurnoComponent
+      },
+      {
+        path: 'cancer-turno',
+        component : CancelTurnoComponent
+      },
+      {
         path : '**',
         redirectTo : '404'
       }

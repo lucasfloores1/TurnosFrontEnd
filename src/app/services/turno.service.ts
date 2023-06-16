@@ -40,4 +40,12 @@ export class TurnoService {
     return this.http.put<Turno>( `${this.apiUrl}/update/${turno.id}`, turno, httpOptions )
   }
 
+  sendInforme( turno : Turno, files : File[] ){
+    const formData = new FormData();
+    for (let file of files){
+      formData.append('files' , file)
+    }
+    return this.http.post<any>( `${this.apiUrl}/informe/${turno.id}`, formData )
+  }
+
 }
