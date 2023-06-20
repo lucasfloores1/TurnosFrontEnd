@@ -1,0 +1,111 @@
+<div *ngIf="paciente" class="details-container">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title-group>
+                <h2 mat-card-title>{{paciente.nombre}}</h2>
+                <img class="paciente-img" mat-card-sm-image src="https://i.imgur.com/j8y8arX.png" alt="doctor">
+            </mat-card-title-group>
+            <p mat-card-subtitle>DNI : {{paciente.dni}}</p>
+            <p mat-card-subtitle>Email : {{paciente.mail}}</p>
+            <p mat-card-subtitle>Telefono : {{paciente.tel}}</p>
+            <p mat-card-subtitle>Direccion : {{paciente.direccion}}</p>
+        </mat-card-header>
+        <mat-card-content>
+            <div *ngFor="let obra of paciente.obrasSociales">
+                <p mat-card-subtitle>{{obra.nombre}} : {{obra.plan.nombre}} nro: {{obra.afiliado}}</p>
+            </div>
+        </mat-card-content>
+    </mat-card>
+    <div class="add-paciente">
+        <h2 class="title">Crear Paciente</h2>
+        <form class="form-container" [formGroup]="pacienteForm" (submit)="updatePaciente()">
+            <mat-form-field appearance="outline">
+                <mat-label>Nombre</mat-label>
+                <input type="text" matInput formControlName="nombre" placeholder="Nombre completo"/>
+                <mat-error *ngIf="
+                pacienteForm.get('nombre')?.invalid && ( pacienteForm.get('nombre')?.dirty || pacienteForm.get('nombre')?.touched || isSubmitted)
+            ">Este campo es obligatorio</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>DNI</mat-label>
+                <input type="text" matInput formControlName="dni" placeholder="DNI"/>
+                <mat-error *ngIf="
+                pacienteForm.get('dni')?.invalid && ( pacienteForm.get('dni')?.dirty || pacienteForm.get('dni')?.touched || isSubmitted)
+            ">Este campo es obligatorio</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>E-mail</mat-label>
+                <input type="text" matInput formControlName="mail" placeholder="ejemplo@gmail.com"/>
+                <mat-error *ngIf="
+                    pacienteForm.get('mail')?.invalid && ( pacienteForm.get('mail')?.dirty || pacienteForm.get('mail')?.touched || isSubmitted)
+                ">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Teléfono</mat-label>
+                <input type="text" matInput formControlName="tel" placeholder="Número"/>
+                <mat-error *ngIf="
+                pacienteForm.get('tel')?.invalid && ( pacienteForm.get('tel')?.dirty || pacienteForm.get('tel')?.touched || isSubmitted)
+            ">Este campo es obligatorio</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Dirección</mat-label>
+                <input type="text" matInput formControlName="direccion" placeholder="Calle y número"/>
+                <mat-error *ngIf="
+                pacienteForm.get('direccion')?.invalid && ( pacienteForm.get('direccion')?.dirty || pacienteForm.get('direccion')?.touched || isSubmitted)
+            ">Este campo es obligatorio</mat-error>
+            </mat-form-field>
+        </form>
+        <div class="obras-sociales" *ngIf="defaultPlanes">
+            <div *ngFor="let obra of obras; let i = index">
+                <mat-card>
+                    <mat-card-header>
+                        <h4>{{obra.nombre}}</h4>
+                    </mat-card-header>
+                    <mat-card-content>
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{defaultPlanes[i].nombre}}</mat-label>
+                            <mat-select (valueChange)="onSelectedObraSocial($event, obra, i)">
+                                <mat-option *ngFor="let plan of obra.planes" [value]="plan">
+                                    {{plan.nombre}}
+                                </mat-option>
+                            </mat-select>
+                            <mat-hint>Plan actual: {{defaultPlanes[i].nombre}}</mat-hint>
+                        </mat-form-field>
+                        <mat-form-field appearance="outline" *ngIf="editedAfiliados[i]">
+                            <mat-label>Afiliado</mat-label>
+                            <input type="text" matInput [value]="selectedObrasSociales[i].afiliado"/>
+                        </mat-form-field>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <mat-card>
+                <mat-card-header>
+                    <h4>Agregar Obra Social</h4>
+                </mat-card-header>
+                <mat-card-content>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Seleccioná una obra Social</mat-label>
+                        <mat-select [(ngModel)]="NewObraSocialSelected"  (valueChange)="onSelectedNewObraSocial($event)">
+                            <mat-option *ngFor="let obraSocial of obrasSociales" [value]="obraSocial">
+                                {{obraSocial.nombre}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" *ngIf="!isNewObraSocialSelected">
+                        <mat-label>Seleccioná una obra Social</mat-label>
+                        <mat-select [(ngModel)]="NewPlanSelected"  (valueChange)="onSelectedNewPlan($event)">
+                            <mat-option *ngFor="let plan of NewObraSocialSelected.planes" [value]="plan">
+                                {{plan.nombre}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline" *ngIf="!isNewPlanSelected">
+                        <mat-label>Afiliado</mat-label>
+                        <input type="text" matInput [(ngModel)]="newAfiliado"/>
+                    </mat-form-field>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <button class="submit-btn" color="accent" mat-raised-button (click)="updatePaciente()" >Crear Paciente</button>
+    </div>
+</div>

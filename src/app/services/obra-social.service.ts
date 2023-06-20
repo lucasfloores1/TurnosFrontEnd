@@ -30,4 +30,8 @@ export class ObraSocialService {
   createObraSocial ( obraSocial : NuevaObraSocialDTO ){
     return this.http.post<NuevaObraSocialDTO>( `${this.apiUrl}/create`, obraSocial, httpOptions )
   }
+
+  getObraSocialById( id : number ){
+    return this.http.get<ObraSocial>( `${this.apiUrl}/load/${id}` )
+  }
 }

@@ -8,7 +8,7 @@ import { MedicoService } from 'src/app/services/medico.service';
 
 @Component({
   selector: 'app-add-medico',
-  templateUrl: './add-medico.component.html',
+  templateUrl: './add-medico.component.html',           
   styleUrls: ['./add-medico.component.scss']
 })
 export class AddMedicoComponent implements OnInit{
@@ -30,6 +30,7 @@ export class AddMedicoComponent implements OnInit{
   horarios! : FormArray
 
   medForm : FormGroup = this.fb.group({
+    id : 0,
     userId : ['', Validators.required],
     nombre : ['', Validators.required ],
     dni : ['', Validators.required ],

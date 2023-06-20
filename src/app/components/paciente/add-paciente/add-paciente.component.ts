@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ObraSocial } from 'src/app/model/ObraSocial';
 import { Plan } from 'src/app/model/Plan';
+import { NuevoPacienteDTO } from 'src/app/model/dto/NuevoPacienteDTO';
 import { ObraSocialService } from 'src/app/services/obra-social.service';
 import { PacienteService } from 'src/app/services/paciente.service';
 
@@ -42,7 +43,9 @@ export class AddPacienteComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.obraSocialService.getObrasSociales( this.userId ).subscribe( response => this.obrasSociales = response )    
+    this.obraSocialService.getObrasSociales( this.userId ).subscribe( response => {
+      this.obrasSociales = response.filter( obra => obra.nombre !== "Particular" )
+    })    
     this.pacienteForm.get('idObraSocial')?.valueChanges.subscribe( idObraSocial => { 
       this.obraSocialService.getPlanesByObraSocial(idObraSocial).subscribe( response => this.planes = response )
     })
@@ -54,7 +57,23 @@ export class AddPacienteComponent implements OnInit {
     if (this.pacienteForm.invalid){
       this.isSubmitted = true
     } else {
-      this.pacienteService.createPaciente(this.pacienteForm.value).subscribe( response => console.log(response) )
+      const paciente = this.pacienteForm.value
+
+      const NuevoPacienteDTO : NuevoPacienteDTO = {
+        userId : paciente.userId,
+        id : 0,
+        nombre : paciente.nombre,
+        dni : paciente.dni,
+        mail : paciente.mail,
+        tel : paciente.tel,
+        direccion : paciente.direccion,
+        obrasSociales : [{
+          idObraSocial : paciente.idObraSocial,
+          idPlan : paciente.idPlan,
+          afiliado : paciente.afiliado,
+        }]
+      }      
+      this.pacienteService.createPaciente(NuevoPacienteDTO).subscribe( response => console.log(response) )
       this.router.navigate(['/turno/create']) 
     }
 

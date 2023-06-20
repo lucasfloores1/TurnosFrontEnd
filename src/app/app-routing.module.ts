@@ -1,16 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { FeaturesComponent } from './components/features/features.component';
-import { AddTurnoComponent } from './components/add-turno/add-turno.component';
-import { AddPacienteComponent } from './components/add-paciente/add-paciente.component';
+import { AddTurnoComponent } from './components/turno/add-turno/add-turno.component';
+import { AddPacienteComponent } from './components/paciente/add-paciente/add-paciente.component';
 import { LoginComponent } from './components/login/login.component';
-import { AddInstitutoComponent } from './components/add-instituto/add-instituto.component';
-import { AddObraSocialComponent } from './components/add-obra-social/add-obra-social.component';
-import { AddMedicoComponent } from './components/add-medico/add-medico.component';
-import { AddEstudioComponent } from './components/add-estudio/add-estudio.component';
-import { ConfirmTurnoComponent } from './components/confirm-turno/confirm-turno.component';
-import { CancelTurnoComponent } from './components/cancel-turno/cancel-turno.component';
-import { ErrorTurnoComponent } from './components/error-turno/error-turno.component';
+import { AddInstitutoComponent } from './components/instituto/add-instituto/add-instituto.component';
+import { AddObraSocialComponent } from './components/obra-social/add-obra-social/add-obra-social.component';
+import { AddMedicoComponent } from './components/medico/add-medico/add-medico.component';
+import { AddEstudioComponent } from './components/estudio/add-estudio/add-estudio.component';
+import { ConfirmTurnoComponent } from './components/turno/confirm-turno/confirm-turno.component';
+import { CancelTurnoComponent } from './components/turno/cancel-turno/cancel-turno.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { TurnoComponent } from './components/turno/turno.component';
 import { PacienteComponent } from './components/paciente/paciente.component';
@@ -19,7 +18,13 @@ import { ObraSocialComponent } from './components/obra-social/obra-social.compon
 import { MedicoComponent } from './components/medico/medico.component';
 import { EstudioComponent } from './components/estudio/estudio.component';
 import { ErrorComponent } from './components/error/error.component';
-import { TurnoDetailsComponent } from './components/turno-details/turno-details.component';
+import { TurnoDetailsComponent } from './components/turno/turno-details/turno-details.component';
+import { PacienteDetailsComponent } from './components/paciente/paciente-details/paciente-details.component';
+import { InstitutoDetailsComponent } from './components/instituto/instituto-details/instituto-details.component';
+import { ObraSocialDetailsComponent } from './components/obra-social/obra-social-details/obra-social-details.component';
+import { MedicoDetailsComponent } from './components/medico/medico-details/medico-details.component';
+import { EstudioDetailsComponent } from './components/estudio/estudio-details/estudio-details.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -31,18 +36,21 @@ const routes: Routes = [
       },
       {
         path : 'home',
-        component : DashboardComponent
+        canActivateChild : [AuthGuard],
+        children : [
+          {
+            path : '',
+            component : DashboardComponent,
+          }
+        ]
       },
       {
         path : '404',
         component : ErrorComponent
       },
       {
-        path : 'features',
-        component : FeaturesComponent
-      },
-      {
         path : 'turno',
+        canActivateChild : [AuthGuard],
         children : [
           {
             path : '',
@@ -60,10 +68,15 @@ const routes: Routes = [
       },
       {
         path : 'paciente',
+        canActivateChild : [AuthGuard],
         children : [
           {
             path : '',
             component : PacienteComponent
+          },
+          {
+            path : 'details/:id',
+            component : PacienteDetailsComponent,
           },
           {
             path : 'create',
@@ -73,10 +86,15 @@ const routes: Routes = [
       },
       {
         path : 'instituto',
+        canActivateChild : [AuthGuard],
         children : [
           {
             path : '',
             component : InstitutoComponent
+          },
+          {
+            path : 'details/:id',
+            component : InstitutoDetailsComponent
           },
           {
             path : 'create',
@@ -86,10 +104,15 @@ const routes: Routes = [
       },
       {
         path : 'obra-social',
+        canActivateChild : [AuthGuard],
         children : [
           {
             path : '',
             component : ObraSocialComponent
+          },
+          {
+            path : 'details/:id',
+            component : ObraSocialDetailsComponent
           },
           {
             path : 'create',
@@ -99,10 +122,15 @@ const routes: Routes = [
       },
       {
         path : 'medico',
+        canActivateChild : [AuthGuard],
         children : [
           {
             path : '',
             component : MedicoComponent
+          },
+          {
+            path : 'details/:id',
+            component : MedicoDetailsComponent
           },
           {
             path : 'create',
@@ -112,10 +140,15 @@ const routes: Routes = [
       },
       {
         path : 'estudio',
+        canActivateChild : [AuthGuard],
         children : [
           {
             path : '',
             component : EstudioComponent
+          },
+          {
+            path : 'details/:id',
+            component : EstudioDetailsComponent
           },
           {
             path : 'create',

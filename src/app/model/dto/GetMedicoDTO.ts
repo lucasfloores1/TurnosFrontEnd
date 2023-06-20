@@ -2,6 +2,7 @@ import { InstitutoDTO } from "./InstitutoDTO";
 
 export interface GetMedicoDTO {
 
+    id : number;
     nombre : string;
     dni : number;
     tel : string;

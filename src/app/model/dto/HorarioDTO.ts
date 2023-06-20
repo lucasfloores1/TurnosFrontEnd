@@ -7,4 +7,5 @@ export interface HorarioDTO {
     inicio : string;
     fin : string;
     intervalo : number;
+    
 }

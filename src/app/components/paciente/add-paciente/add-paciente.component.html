@@ -47,7 +47,7 @@
             pacienteForm.get('idObraSocial')?.invalid && ( pacienteForm.get('idObraSocial')?.dirty || pacienteForm.get('idObraSocial')?.touched || isSubmitted)
         ">Este campo es obligatorio</mat-error>
         </mat-form-field>
-        <mat-form-field appearance="outline" *ngIf="planes">
+        <mat-form-field appearance="outline" *ngIf="planes" >
             <mat-label>Plan</mat-label>
             <mat-select formControlName="idPlan">
             <mat-option *ngFor="let plan of planes" [value]="plan.id">
