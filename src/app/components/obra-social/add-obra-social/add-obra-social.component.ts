@@ -16,6 +16,7 @@ export class AddObraSocialComponent implements OnInit {
 
   obraForm : FormGroup = this.fb.group({
     userId: [this.userId ,Validators.required],
+    id: [0, Validators.required],
     nombre: ['' , Validators.required],
     direccion: ['' , Validators.required],
     planes: this.fb.array([])
@@ -34,6 +35,7 @@ export class AddObraSocialComponent implements OnInit {
 
   addPlan() {
     const nuevoPlan = this.fb.group({
+      id: [0, Validators.required],
       nombre: ['', Validators.required]
     });
     this.planes.push(nuevoPlan);
@@ -43,7 +45,7 @@ export class AddObraSocialComponent implements OnInit {
     this.planes.removeAt(index);
   }
 
-  createObraSocial(){
+  createObraSocial(){    
     this.obraSocialService.createObraSocial( this.obraForm.value ).subscribe( response => console.log(response) )      
     this.router.navigate(['home'])
   }

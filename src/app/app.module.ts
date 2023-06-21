@@ -53,6 +53,8 @@ import { PacienteDetailsComponent } from './components/paciente/paciente-details
 import { InstitutoDetailsComponent } from './components/instituto/instituto-details/instituto-details.component';
 import { EstudioDetailsComponent } from './components/estudio/estudio-details/estudio-details.component';
 import { ObraSocialDetailsComponent } from './components/obra-social/obra-social-details/obra-social-details.component';
+import { RegisterComponent } from './components/register/register.component';
+import { VerifyAccountComponent } from './components/verify-account/verify-account.component';
 registerLocaleData( LocaleAR, 'es' );
 
 @NgModule({
@@ -88,6 +90,8 @@ registerLocaleData( LocaleAR, 'es' );
     InstitutoDetailsComponent,
     EstudioDetailsComponent,
     ObraSocialDetailsComponent,
+    RegisterComponent,
+    VerifyAccountComponent,
   ],
   imports: [
     BrowserModule,

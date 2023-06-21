@@ -25,6 +25,8 @@ import { ObraSocialDetailsComponent } from './components/obra-social/obra-social
 import { MedicoDetailsComponent } from './components/medico/medico-details/medico-details.component';
 import { EstudioDetailsComponent } from './components/estudio/estudio-details/estudio-details.component';
 import { AuthGuard } from './guards/auth.guard';
+import { RegisterComponent } from './components/register/register.component';
+import { VerifyAccountComponent } from './components/verify-account/verify-account.component';
 
 const routes: Routes = [
   {
@@ -33,6 +35,14 @@ const routes: Routes = [
       {
         path : 'login',
         component : LoginComponent
+      },
+      {
+        path : 'register',
+        component : RegisterComponent
+      },
+      {
+        path : 'verify-account/:id',
+        component : VerifyAccountComponent
       },
       {
         path : 'home',

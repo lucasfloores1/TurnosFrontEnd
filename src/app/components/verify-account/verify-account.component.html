@@ -1,0 +1,14 @@
+<div class="verify" *ngIf="user">
+    <h2 class="title" mat-card-title>Verifica tu cuenta</h2>
+    <form class="form-container" [formGroup]="codeForm" (submit)="verifyAccount()">
+        <mat-form-field appearance="outline">
+            <mat-label>Código</mat-label>
+            <input type="text" matInput formControlName="code" maxlength="6">
+            <mat-error *ngIf="codeForm.get('code')?.dirty || codeForm.get('code')?.touched" class="error">
+                Debes ingresar un código
+            </mat-error>
+            <mat-hint *ngIf="showError" class="error">Código inválido</mat-hint>
+        </mat-form-field>
+        <button class="submit-btn" color="primary" [disabled]="codeForm.invalid" mat-raised-button type="submit">Verificar mi cuenta</button>
+    </form>
+</div>

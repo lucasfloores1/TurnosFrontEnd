@@ -59,8 +59,8 @@ export class ObraSocialDetailsComponent implements OnInit {
   }
 
   updateObraSocial(){
-    console.log(this.obraForm.value);
-    
+    this.obraSocialService.createObraSocial( this.obraForm.value ).subscribe( response => console.log(response) )      
+    this.router.navigate(['obra-social'])
   }
 
   removePlan( index : number ){

@@ -40,7 +40,7 @@
               <mat-card-header class="plan-form-header">
                 <h3 mat-card-title>Plan {{i+1}}</h3>
                 <div class="spacer"></div>
-                <button class="del-btn"mat-mini-fab (click)="removePlan(i)"><mat-icon>delete</mat-icon></button>
+                <button class="del-btn"mat-mini-fab (click)="removePlan(i)" *ngIf="planGroup.get('id')?.value == 0"><mat-icon>delete</mat-icon></button>
               </mat-card-header>
               <mat-card-content class="plan-form-content">
                 <mat-form-field appearance="outline" class="plan-form-field">

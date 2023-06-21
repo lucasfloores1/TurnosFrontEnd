@@ -6,7 +6,7 @@
             <input type="text" matInput [(ngModel)]="searchText" placeholder="Nombre, DNI, Direccion, etc...">
             <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
-        <button mat-raised-button routerLink="/instituto/create" color="primary">Crear Medico</button>
+        <button mat-raised-button routerLink="/instituto/create" color="primary">Crear Instituto</button>
     </div>
     <mat-card *ngFor="let instituto of institutos | search : searchText" (click)="institutoDetail(instituto)">
         <mat-card-header>

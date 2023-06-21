@@ -22,7 +22,9 @@ export class ObraSocialComponent implements OnInit{
 
   ngOnInit(): void {
 
-    this.obraSocialService.getObrasSociales( localStorage.getItem('user') ).subscribe( response => this.obrasSociales = response )
+    this.obraSocialService.getObrasSociales( localStorage.getItem('user') ).subscribe( response => {
+      this.obrasSociales = response.filter( obra => obra.nombre !== 'Particular' )
+    })
     
   }
 

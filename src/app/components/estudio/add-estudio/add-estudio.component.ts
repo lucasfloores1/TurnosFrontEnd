@@ -12,6 +12,7 @@ export class AddEstudioComponent implements OnInit{
 
   estForm : FormGroup = this.fb.group({
     userId : [localStorage.getItem('user'), Validators.required],
+    id : [0, Validators.required],
     nomenclador : ['', Validators.required],
     nombre : ['', Validators.required]
   })

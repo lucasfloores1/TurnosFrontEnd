@@ -1,0 +1,42 @@
+<div class="register">
+    <h2 class="title" mat-card-title>Registrarse</h2>
+    <form class="form-container" [formGroup]="signupForm" (submit)="signUp()">
+        <mat-form-field appearance="outline">
+            <mat-label>Nombre</mat-label>
+            <input type="text" matInput formControlName="nombre" placeholder="Nombre completo">
+            <mat-error *ngIf="
+            signupForm.get('nombre')?.invalid && ( signupForm.get('nombre')?.dirty || signupForm.get('nombre')?.touched || isSubmitted)
+            ">Este campo es obligatorio</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Teléfono</mat-label>
+            <input type="text" matInput formControlName="tel" placeholder="2615111000">
+            <mat-error *ngIf="
+            signupForm.get('tel')?.invalid && ( signupForm.get('tel')?.dirty || signupForm.get('tel')?.touched || isSubmitted)
+            ">Este campo es obligatorio</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Nombre de usuario</mat-label>
+            <input type="text" matInput formControlName="username" placeholder="Nombre de usuario">
+            <mat-error *ngIf="
+            signupForm.get('username')?.invalid && ( signupForm.get('username')?.dirty || signupForm.get('username')?.touched || isSubmitted)
+            ">Este campo es obligatorio</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>E-mail</mat-label>
+            <input type="text" matInput formControlName="email" placeholder="ejemplo@gmail.com"/>
+            <mat-error *ngIf="
+                signupForm.get('email')?.invalid && ( signupForm.get('email')?.dirty || signupForm.get('email')?.touched || isSubmitted)
+            ">{{getErrorMessage()}}</mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Contraseña</mat-label>
+            <input type="password" matInput formControlName="password" placeholder="Contraseña">
+            <mat-error *ngIf="
+            signupForm.get('password')?.invalid && ( signupForm.get('password')?.dirty || signupForm.get('password')?.touched || isSubmitted)
+            ">Este campo es obligatorio</mat-error>
+        </mat-form-field>
+        <div class="error" *ngIf="showErrorMessage">Usuario o contraseña incorrectos</div>
+        <button class="submit-btn" color="primary" [disabled]="signupForm.invalid" mat-raised-button type="submit">Registrarse</button>
+    </form>
+</div>
