@@ -24,5 +24,13 @@ export class InstitutoService {
   createInstituto( instituto : any ){
     return this.http.post<any>( `${this.apiUrl}/create`, instituto, httpOptions ) 
   }
+
+  getInsitutoById( id : number ){
+    return this.http.get<any>( `${this.apiUrl}/load/${id}` )
+  }
+
+  updateInstituto( instituto : any ){
+    return this.http.put<any>( `${this.apiUrl}/update/${instituto.id}`, instituto, httpOptions )
+  }
   
 }

@@ -1,1 +1,59 @@
-<p>obra-social-details works!</p>
+<div *ngIf="obraSocial" class="details-container">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title-group>
+                <h2 mat-card-title>{{obraSocial.nombre}}</h2>
+                <img class="obraSocial-img" mat-card-sm-image src="https://i.imgur.com/j8y8arX.png" alt="health-plan">
+            </mat-card-title-group>
+            <p mat-card-subtitle>Direccion : {{obraSocial.direccion}}</p>
+            <p mat-card-subtitle>Planes :</p>
+            <div class="planes" *ngFor="let plan of obraSocial.planes">
+                <p mat-card-subtitle>{{plan.nombre}}</p>
+            </div>
+        </mat-card-header>
+    </mat-card>
+    <div class="obraForm" [formGroup]="obraForm">
+        <h2 class="title" mat-card-title>Editar obra Social</h2>
+        <form class="form-container" [formGroup]="obraForm" (submit)="updateObraSocial()">
+          <mat-form-field appearance="outline">
+            <mat-label>Nombre de la obra social</mat-label>
+            <input type="text" matInput formControlName="nombre" placeholder="Nombre de la obra social">
+            <mat-error *ngIf="obraForm.get('nombre')?.invalid && (obraForm.get('nombre')?.dirty || obraForm.get('nombre')?.touched)">
+              Este campo es obligatorio
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>Dirección de la obra social</mat-label>
+            <input type="text" matInput formControlName="direccion" placeholder="Calle y número">
+            <mat-error *ngIf="obraForm.get('direccion')?.invalid && (obraForm.get('direccion')?.dirty || obraForm.get('direccion')?.touched)">
+              Este campo es obligatorio
+            </mat-error>
+          </mat-form-field>
+          <mat-divider></mat-divider>
+          <div formArrayName="planes">
+            <div class="planes-header">
+              <p mat-card-title>Editar Planes</p>
+              <div class="spacer"></div>
+              <button mat-mini-fab type="button" class="add-btn"(click)="addPlan()"><mat-icon>add</mat-icon></button>
+            </div>
+            <mat-card class="planes-form" *ngFor="let planGroup of planes.controls; let i = index" [formGroupName]="i">
+              <mat-card-header class="plan-form-header">
+                <h3 mat-card-title>Plan {{i+1}}</h3>
+                <div class="spacer"></div>
+                <button class="del-btn"mat-mini-fab (click)="removePlan(i)"><mat-icon>delete</mat-icon></button>
+              </mat-card-header>
+              <mat-card-content class="plan-form-content">
+                <mat-form-field appearance="outline" class="plan-form-field">
+                  <mat-label>Nombre del plan:</mat-label>
+                  <input matInput formControlName="nombre" type="text" placeholder="Nombre del Plan">
+                  <mat-error *ngIf="planGroup.get('nombre')?.invalid && (planGroup.get('nombre')?.dirty || planGroup.get('nombre')?.touched)">
+                    Este campo es obligatorio
+                  </mat-error>
+                </mat-form-field>
+              </mat-card-content>
+            </mat-card>
+          </div>
+          <button class="submit-btn" color="accent" mat-raised-button type="submit" [disabled]="!obraForm.valid">Editar Obra Social</button>
+        </form>
+    </div>
+</div>

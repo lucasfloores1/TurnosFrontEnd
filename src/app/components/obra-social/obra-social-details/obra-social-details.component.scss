@@ -1,0 +1,84 @@
+.details-container{
+    width: 95%;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: auto;
+}
+
+.submit-btn {
+    width: 100%;
+    margin-top: 15px;
+    margin-left: 10px;
+}
+.form-container {
+    align-self: center;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.instForm {
+    display: flex;
+    flex-direction: column;
+}
+.title {
+    margin-top: 15px;
+    align-self: center;
+    font-size: 1.5rem;
+}
+
+.error{
+    color: red;
+}
+.submit-btn {
+    width: 100%;
+    margin-top: 15px;
+    margin-left: 10px;
+}
+.form-container {
+    padding-left: 15px;
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.obraForm {
+    display: flex;
+    flex-direction: column;
+}
+.title {
+    margin-top: 15px;
+    align-self: center;
+    font-size: 1.5rem;
+}
+
+.error{
+    color: red;
+}
+
+.planes{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.planes-form{
+    margin-top: 15px;
+}
+.planes-header{
+    display: flex;
+}
+.spacer{
+    flex: 1 1 auto;
+}
+
+.plan-form-content{
+    display: flex;
+}
+.plan-form-field{
+    width: 100%;
+}
+.plan-form-header{
+    display: flex;
+    margin-bottom: 10px;
+}
