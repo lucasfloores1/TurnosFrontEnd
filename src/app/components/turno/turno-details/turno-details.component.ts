@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Turno } from 'src/app/model/Turno';
-import { HorarioDTO } from 'src/app/model/dto/HorarioDTO';
+import { HorarioDTO } from 'src/app/model/Horario';
 import { MedicoService } from 'src/app/services/medico.service';
 import { TurnoService } from 'src/app/services/turno.service';
 

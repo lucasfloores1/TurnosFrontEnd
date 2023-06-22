@@ -2,11 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ObraSocial } from 'src/app/model/ObraSocial';
-import { Paciente } from 'src/app/model/Paciente';
 import { Plan } from 'src/app/model/Plan';
-import { GetPacienteDTO } from 'src/app/model/dto/GetPacienteDTO';
-import { ObraSocialDTO } from 'src/app/model/dto/ObraSocialDTO';
-import { PlanDTO } from 'src/app/model/dto/PlanDTO';
+import { GetPacienteDTO } from 'src/app/model/Paciente';
+import { ObraSocialDTO } from 'src/app/model/ObraSocial';
+import { PlanDTO } from 'src/app/model/Plan';
 import { ObraSocialService } from 'src/app/services/obra-social.service';
 import { PacienteService } from 'src/app/services/paciente.service';
 

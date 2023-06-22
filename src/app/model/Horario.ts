@@ -7,3 +7,13 @@ export interface Horario {
     intervalo : number;
 
 }
+
+export interface HorarioDTO {
+
+    id : number;
+    dia : number;
+    inicio : string;
+    fin : string;
+    intervalo : number;
+    
+}

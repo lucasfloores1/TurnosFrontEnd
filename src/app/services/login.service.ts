@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subject } from 'rxjs'
-import { NuevoUserDTO } from '../model/dto/NuevoUserDTO';
+import { NuevoUserDTO } from '../model/User';
 import { User } from '../model/User';
 
 const httpOptions = {

@@ -5,13 +5,13 @@ import { Paciente } from 'src/app/model/Paciente';
 import { PacienteService } from 'src/app/services/paciente.service';
 import { Medico } from 'src/app/model/Medico';
 import { MedicoService } from 'src/app/services/medico.service';
-import { InstitutoDTO } from 'src/app/model/dto/InstitutoDTO';
-import { HorarioDTO } from 'src/app/model/dto/HorarioDTO';
-import { GetPacienteDTO } from 'src/app/model/dto/GetPacienteDTO';
-import { ObraSocialDTO } from 'src/app/model/dto/ObraSocialDTO';
+import { InstitutoDTO } from 'src/app/model/Instituto';
+import { HorarioDTO } from 'src/app/model/Horario';
+import { GetPacienteDTO } from 'src/app/model/Paciente';
+import { ObraSocialDTO } from 'src/app/model/ObraSocial';
 import { Estudio } from 'src/app/model/Estudio';
 import { EstudioService } from 'src/app/services/estudio.service';
-import { NuevoTurnoDTO } from 'src/app/model/dto/NuevoTurnoDTO';
+import { NuevoTurnoDTO } from 'src/app/model/Turno';
 import { Router } from '@angular/router';
 
 @Component({

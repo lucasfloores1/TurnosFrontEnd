@@ -39,11 +39,6 @@ import { ObraSocialComponent } from './components/obra-social/obra-social.compon
 import { MedicoComponent } from './components/medico/medico.component';
 import { EstudioComponent } from './components/estudio/estudio.component';
 import { ErrorComponent } from './components/error/error.component';
-
-
-
-//Date import
-import LocaleAR from '@angular/common/locales/es-AR'
 import { LOCATION_INITIALIZED, registerLocaleData } from '@angular/common';
 import { TurnoPipe } from './pipes/turno.pipe';
 import { TurnoDetailsComponent } from './components/turno/turno-details/turno-details.component';
@@ -54,6 +49,9 @@ import { EstudioDetailsComponent } from './components/estudio/estudio-details/es
 import { ObraSocialDetailsComponent } from './components/obra-social/obra-social-details/obra-social-details.component';
 import { RegisterComponent } from './components/register/register.component';
 import { VerifyAccountComponent } from './components/verify-account/verify-account.component';
+
+//Date import
+import LocaleAR from '@angular/common/locales/es-AR'
 registerLocaleData( LocaleAR, 'es' );
 
 @NgModule({

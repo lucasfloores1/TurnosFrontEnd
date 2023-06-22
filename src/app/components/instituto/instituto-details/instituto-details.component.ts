@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Instituto } from 'src/app/model/Instituto';
-import { GetInstitutoDTO } from 'src/app/model/dto/GetInsitutoDTO';
+import { GetInstitutoDTO } from 'src/app/model/Instituto';
 import { InstitutoService } from 'src/app/services/instituto.service';
 
 @Component({

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormArray, FormBuilder, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Instituto } from 'src/app/model/Instituto';
-import { HorarioDTO } from 'src/app/model/dto/HorarioDTO';
 import { InstitutoService } from 'src/app/services/instituto.service';
 import { MedicoService } from 'src/app/services/medico.service';
 

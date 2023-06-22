@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ObraSocial } from '../model/ObraSocial';
 import { Plan } from '../model/Plan';
-import { NuevaObraSocialDTO } from '../model/dto/NuevaObraSocialDTO';
+import { NuevaObraSocialDTO } from '../model/ObraSocial';
 
 const httpOptions = {
   headers: new HttpHeaders({

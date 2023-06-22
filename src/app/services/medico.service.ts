@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Medico } from '../model/Medico';
-import { GetMedicoDTO } from '../model/dto/GetMedicoDTO';
-import { NuevoMedicoDTO } from '../model/dto/NuevoMedicoDTO';
+import { GetMedicoDTO } from '../model/Medico';
+import { NuevoMedicoDTO } from '../model/Medico';
 
 const httpOptions = {
   headers: new HttpHeaders({

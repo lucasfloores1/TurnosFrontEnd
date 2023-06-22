@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ObraSocial } from 'src/app/model/ObraSocial';
 import { Plan } from 'src/app/model/Plan';
-import { NuevoPacienteDTO } from 'src/app/model/dto/NuevoPacienteDTO';
+import { NuevoPacienteDTO } from 'src/app/model/Paciente';
 import { ObraSocialService } from 'src/app/services/obra-social.service';
 import { PacienteService } from 'src/app/services/paciente.service';
 

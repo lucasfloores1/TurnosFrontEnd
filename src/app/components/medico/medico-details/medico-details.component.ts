@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { GetMedicoDTO } from 'src/app/model/dto/GetMedicoDTO';
+import { GetMedicoDTO } from 'src/app/model/Medico';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Instituto } from 'src/app/model/Instituto';
-import { HorarioDTO } from 'src/app/model/dto/HorarioDTO';
+import { HorarioDTO } from 'src/app/model/Horario';
 import { InstitutoService } from 'src/app/services/instituto.service';
 import { MedicoService } from 'src/app/services/medico.service';
-import { InstitutoDTO } from 'src/app/model/dto/InstitutoDTO';
+import { InstitutoDTO } from 'src/app/model/Instituto';
 
 @Component({
   selector: 'app-medico-details',
