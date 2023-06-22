@@ -1,0 +1,21 @@
+<div class="grid-container">
+    <h2 class="mat-h2">Obras Sociales</h2>
+    <div class="features">
+        <mat-form-field appearance="outline">
+            <mat-label>Buscar</mat-label>
+            <input type="text" matInput [(ngModel)]="searchText" placeholder="Nombre, DNI, Direccion, etc...">
+            <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+        <button mat-raised-button routerLink="/obra-social/create" color="primary">Crear Obra Social</button>
+    </div>
+    <mat-card *ngFor="let obraSocial of obrasSociales | search : searchText" (click)="obraSocialDetail(obraSocial)">
+        <mat-card-header>
+            <mat-card-title-group>
+                <h2 mat-card-title>{{obraSocial.nombre}}</h2>
+                <img class="obraSocial-img" mat-card-sm-image src="https://i.imgur.com/j8y8arX.png" alt="institute">
+                <p mat-card-subtitle>Dir : {{obraSocial.direccion}}</p>
+            </mat-card-title-group>
+        </mat-card-header>
+        <mat-card-content></mat-card-content>
+    </mat-card>
+</div>

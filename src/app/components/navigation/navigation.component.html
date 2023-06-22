@@ -5,13 +5,13 @@
     <mat-toolbar color="primary">Menu</mat-toolbar>
     <mat-nav-list>
       <a mat-list-item routerLink="/home" (click)="drawer.toggle()">Dashboard</a>
-      <a mat-list-item routerLink="/turno" (click)="drawer.toggle()">Turnos</a>
-      <a mat-list-item routerLink="/medico" (click)="drawer.toggle()">Medicos</a>
-      <a mat-list-item routerLink="/paciente" (click)="drawer.toggle()">Pacientes</a>
-      <a mat-list-item routerLink="/instituto" (click)="drawer.toggle()">Instituto</a>
-      <a mat-list-item routerLink="/obra-social" (click)="drawer.toggle()">Obras Sociales</a>
-      <a mat-list-item routerLink="/estudio" (click)="drawer.toggle()">Estudios</a>
-      <a mat-list-item routerLink="/estudio" (click)="logout()">Cerrar Sesión</a>
+      <a mat-list-item routerLink="/turnos" (click)="drawer.toggle()">Turnos</a>
+      <a mat-list-item routerLink="/medicos" (click)="drawer.toggle()">Medicos</a>
+      <a mat-list-item routerLink="/pacientes" (click)="drawer.toggle()">Pacientes</a>
+      <a mat-list-item routerLink="/institutos" (click)="drawer.toggle()">Instituto</a>
+      <a mat-list-item routerLink="/obras-sociales" (click)="drawer.toggle()">Obras Sociales</a>
+      <a mat-list-item routerLink="/estudios" (click)="drawer.toggle()">Estudios</a>
+      <a mat-list-item routerLink="/estudios" (click)="logout()">Cerrar Sesión</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -28,12 +28,12 @@
       <span class="spacer"></span>
       <div [class.hidden]="isHandset$ | async">
         <a mat-button routerLink="/home">Dashboard</a>
-        <a mat-button routerLink="/turno">Turnos</a>
-        <a mat-button routerLink="/medico">Medicos</a>
-        <a mat-button routerLink="/paciente">Pacientes</a>
-        <a mat-button routerLink="/instituto">Instituto</a>
-        <a mat-button routerLink="/obra-social">Obras Sociales</a>
-        <a mat-button routerLink="/estudio">Estudios</a>
+        <a mat-button routerLink="/turnos">Turnos</a>
+        <a mat-button routerLink="/medicos">Medicos</a>
+        <a mat-button routerLink="/pacientes">Pacientes</a>
+        <a mat-button routerLink="/institutos">Instituto</a>
+        <a mat-button routerLink="/obras-sociales">Obras Sociales</a>
+        <a mat-button routerLink="/estudios">Estudios</a>
       </div>
     </mat-toolbar>
     <!-- Add Content Here -->
