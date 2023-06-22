@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, OnChanges, SimpleChanges } from '@angular/core';
 import { Turno } from 'src/app/model/Turno';
-import { HorarioDTO } from 'src/app/model/dto/HorarioDTO';
+import { HorarioDTO } from 'src/app/model/Horario';
 import { addMinutes, addWeeks, endOfWeek, format, getISOWeek, getYear, isBefore, parse, setISODay, startOfWeek, subWeeks } from 'date-fns'
 
 @Component({
