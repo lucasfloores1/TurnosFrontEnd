@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FeaturesComponent } from './components/features/features.component';
 import { AddTurnoComponent } from './components/turno/add-turno/add-turno.component';
 import { AddPacienteComponent } from './components/paciente/add-paciente/add-paciente.component';
 import { LoginComponent } from './components/login/login.component';

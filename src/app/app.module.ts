@@ -7,14 +7,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { AddTurnoComponent } from './components/turno/add-turno/add-turno.component';
-import { FeaturesComponent } from './components/features/features.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CalendarFormComponent } from './components/calendar-form/calendar-form.component';
 import { SearchPipe } from './pipes/search.pipe';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AddPacienteComponent } from './components/paciente/add-paciente/add-paciente.component';
 import { LoginComponent } from './components/login/login.component';
-import { AuthInterceptor, authInterceptorProviders } from './services/auth.interceptor';
+import { authInterceptorProviders } from './services/auth.interceptor';
 import { AddInstitutoComponent } from './components/instituto/add-instituto/add-instituto.component';
 import { AddObraSocialComponent } from './components/obra-social/add-obra-social/add-obra-social.component';
 import { AddMedicoComponent } from './components/medico/add-medico/add-medico.component';
@@ -62,7 +61,6 @@ registerLocaleData( LocaleAR, 'es' );
     AppComponent,
     ToolbarComponent,
     AddTurnoComponent,
-    FeaturesComponent,
     CalendarFormComponent,
     SearchPipe,
     AddPacienteComponent,
