@@ -1,0 +1,33 @@
+<div *ngIf="estudio" class="details-container">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title-group>
+                <h2 mat-card-title>{{estudio.nombre}}</h2>
+                <img class="estudio-img" mat-card-sm-image src="https://i.imgur.com/j8y8arX.png" alt="medical-test">
+            </mat-card-title-group>
+            <p mat-card-subtitle>Codigo : {{estudio.nomenclador}}</p>
+        </mat-card-header>
+    </mat-card>
+    <button color="primary" mat-mini-fab  (click)="toggleForm()"><mat-icon>{{showForm ? 'close' : 'edit'}}</mat-icon></button>
+    <div class="estForm" *ngIf="showForm">
+        <h2 class="title" mat-card-title>Editar Estudio</h2>
+        <form class="form-container" [formGroup]="estForm" (submit)="updateEstudio()">
+            <mat-form-field appearance="outline">
+                <mat-label>Código del Nomenclador Nacional</mat-label>
+                <input type="text" matInput formControlName="nomenclador" placeholder="Consulta : 420101">
+                <mat-hint>Si no sabes el código entra <a href="https://prestadores.pami.org.ar/bot_nomenclador_unico/2023_03/Manual_Nomenclador_032023.pdf" target="_blank">aquí</a></mat-hint>
+                <mat-error *ngIf="
+                estForm.get('nomenclador')?.invalid && ( estForm.get('nomenclador')?.dirty || estForm.get('nomenclador')?.touched)
+                ">Este campo es obligatorio</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Nombre del Estudio</mat-label>
+                <input type="text" matInput formControlName="nombre" placeholder="Nombre del Estudio">
+                <mat-error *ngIf="
+                estForm.get('nombre')?.invalid && ( estForm.get('nombre')?.dirty || estForm.get('nombre')?.touched)
+                ">Este campo es obligatorio</mat-error>
+            </mat-form-field>
+            <button class="submit-btn" color="accent" mat-raised-button type="submit" [disabled]="estForm.invalid" >Editar Estudio</button>
+        </form>
+    </div>
+</div>

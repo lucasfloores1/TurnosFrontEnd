@@ -24,5 +24,9 @@ export class EstudioService {
   createEstudio( estudio : any ){
     return this.http.post<any>( `${this.apiUrl}/create`, estudio, httpOptions )
   }
+
+  getEstudioById( id : any ){
+    return this.http.get<Estudio>( `${this.apiUrl}/load/${id}` )
+  }
   
 }

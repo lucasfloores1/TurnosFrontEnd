@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Paciente } from '../model/Paciente';
-import { GetPacienteDTO } from '../model/dto/GetPacienteDTO';
+import { GetPacienteDTO } from '../model/Paciente';
+import { NuevoPacienteDTO } from '../model/Paciente';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -26,8 +27,8 @@ export class PacienteService {
     return this.http.get<GetPacienteDTO>( `${this.apiUrl}/load/${id}` )
   }
 
-  createPaciente ( paciente : any ){
-    return this.http.post<any>( `${this.apiUrl}/create`, paciente, httpOptions )
+  createPaciente ( NuevopacienteDTO : NuevoPacienteDTO ){
+    return this.http.post<any>( `${this.apiUrl}/create`, NuevopacienteDTO, httpOptions )
   }
 
 }

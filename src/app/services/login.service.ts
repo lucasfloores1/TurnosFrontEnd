@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Subject } from 'rxjs'
+import { NuevoUserDTO } from '../model/User';
+import { User } from '../model/User';
 
 const httpOptions = {
   headers: new HttpHeaders({
@@ -19,6 +21,18 @@ export class LoginService {
   constructor( private http : HttpClient ) { }
 
   private apiUrl : string = 'http://localhost:8080/user'
+
+  public getUserById( id : any ){
+    return this.http.get<User>( `${this.apiUrl}/load/${id}` )
+  }
+
+  public registerUser( user : NuevoUserDTO ){
+    return this.http.post<User>( `${this.apiUrl}/create`, user, httpOptions )
+  }
+
+  public verifyAccount( id : any , code : string ){
+    return this.http.get<User>(`${this.apiUrl}/verify-account/${id}/${code}`)
+  }
 
   public generateToken( loginData : any ) {
     return this.http.post<any>( `${this.apiUrl}/generate-token`, loginData )

@@ -1,0 +1,12 @@
+$primary:#4569ec;
+
+mat-card {
+    border-radius: 15px;
+    max-width: 600px;
+    margin-top: 15px;
+    border: 2px solid $primary;
+}
+
+mat-card:hover{
+    cursor: pointer;
+}

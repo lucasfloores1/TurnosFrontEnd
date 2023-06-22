@@ -11,3 +11,16 @@ export interface Plan {
     pacientes : Array<Paciente_ObraSocial>;
 
 }
+
+export interface PlanDTO {
+
+    id : number;
+    nombre : string;
+
+}
+
+export interface NuevoPlanDTO {
+
+    nombre : string;
+
+}
