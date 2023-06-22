@@ -26,7 +26,7 @@ export class PacientesComponent implements OnInit{
   }
 
   pacienteDetail( paciente : Paciente ){
-    this.router.navigate([`paciente/details/${paciente.id}`])
+    this.router.navigate([`pacientes/details/${paciente.id}`])
   }
 
 

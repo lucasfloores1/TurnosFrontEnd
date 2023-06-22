@@ -7,13 +7,14 @@ import { AddInstitutoComponent } from './add-instituto/add-instituto.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PipesModule } from '../pipes/pipes.module';
 import { MaterialModule } from '../material/material.module';
+import { InstitutoDetailsComponent } from './instituto-details/instituto-details.component';
 
 
 @NgModule({
   declarations: [
     InstitutosComponent,
     AddInstitutoComponent,
-    InstitutosComponent
+    InstitutoDetailsComponent
   ],
   imports: [
     CommonModule,

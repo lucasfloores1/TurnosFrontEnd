@@ -13,18 +13,22 @@ export class DashboardComponent {
     map(({ matches }) => {
       if (matches) {
         return [
-          { title: 'Card 1', cols: 1, rows: 1 },
-          { title: 'Card 2', cols: 1, rows: 1 },
-          { title: 'Card 3', cols: 1, rows: 1 },
-          { title: 'Card 4', cols: 1, rows: 1 }
+          { title: 'Turnos', cols: 1, rows: 1 },
+          { title: 'Medicos', cols: 1, rows: 1 },
+          { title: 'Institutos', cols: 1, rows: 1 },
+          { title: 'Pacientes', cols: 1, rows: 1 },
+          { title: 'Obras Sociales', cols: 1, rows: 1 },
+          { title: 'Estudios', cols: 1, rows: 1 }
         ];
       }
 
       return [
-        { title: 'Card 1', cols: 2, rows: 1 },
-        { title: 'Card 2', cols: 1, rows: 1 },
-        { title: 'Card 3', cols: 1, rows: 2 },
-        { title: 'Card 4', cols: 1, rows: 1 }
+        { title: 'Turnos', cols: 2, rows: 1 },
+        { title: 'Medicos', cols: 1, rows: 1 },
+        { title: 'Institutos', cols: 1, rows: 1 },
+        { title: 'Pacientes', cols: 1, rows: 1 },
+        { title: 'Obras Sociales', cols: 1, rows: 1 },
+        { title: 'Estudios', cols: 1, rows: 1 }
       ];
     })
   );
