@@ -16,6 +16,10 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatStepperModule } from '@angular/material/stepper';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 @NgModule({
   declarations: [
@@ -36,8 +40,12 @@ import { MatStepperModule } from '@angular/material/stepper';
     MatButtonModule,
     MatRadioModule,
     MatDatepickerModule,
+    MatNativeDateModule,
     MatSelectModule,
-    MatStepperModule
+    MatStepperModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatToolbarModule
   ]
 })
 export class TurnosModule { }

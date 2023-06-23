@@ -10,6 +10,8 @@ import { MatDrawer } from '@angular/material/sidenav';
 })
 export class AppComponent implements OnInit{
 
+  getStarted : boolean = false;
+
   title = 'TurnosFrontEnd';
   
 

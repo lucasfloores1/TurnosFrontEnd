@@ -15,7 +15,8 @@ const httpOptions = {
 })
 export class TurnoService {
 
-  private apiUrl : string = 'http://localhost:8080/turno'
+  //private apiUrl : string = 'http://localhost:8080/turno'
+  private apiUrl : string = 'https://turnosapi.up.railway.app/turno'
 
   constructor( private http : HttpClient ) { }
 

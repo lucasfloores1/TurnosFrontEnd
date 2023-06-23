@@ -11,6 +11,8 @@ import { PipesModule } from '../pipes/pipes.module';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -26,7 +28,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     PipesModule,
     MatCardModule,
     MatIconModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatButtonModule,
+    MatInputModule
   ]
 })
 export class EstudiosModule { }

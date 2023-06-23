@@ -11,6 +11,8 @@ import { InstitutoDetailsComponent } from './instituto-details/instituto-details
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     MatCardModule,
     MatIconModule,
     MatFormFieldModule,
+    MatButtonModule,
+    MatInputModule
   ]
 })
 export class InstitutosModule { }

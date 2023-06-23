@@ -68,7 +68,7 @@ export class TurnoDetailsComponent implements OnInit{
   updateTurno( date : Date, turno : Turno ){
     turno.fecha = date.toString()
     this.turnoService.updateTurno( turno ).subscribe( response => {
-      this.router.navigate([`turno`])
+      this.router.navigate([`turnos`])
     })        
   }
 
@@ -79,7 +79,7 @@ export class TurnoDetailsComponent implements OnInit{
   sendInforme(turno : Turno, files : File[]){
 
     this.turnoService.sendInforme( turno, files ).subscribe( response => {
-      this.router.navigate([`turno`])
+      this.router.navigate([`turnos`])
     } )
 
   }

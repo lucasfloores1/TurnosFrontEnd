@@ -29,7 +29,8 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatButtonModule } from '@angular/material/button';
 
 //Date import
-import LocaleAR from '@angular/common/locales/es-AR'
+import LocaleAR from '@angular/common/locales/es-AR';
+import { AboutComponent } from './components/about/about.component'
 registerLocaleData( LocaleAR, 'es' );
 
 @NgModule({
@@ -42,7 +43,8 @@ registerLocaleData( LocaleAR, 'es' );
     DashboardComponent,
     ErrorComponent,
     RegisterComponent,
-    VerifyAccountComponent
+    VerifyAccountComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
