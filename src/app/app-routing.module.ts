@@ -16,8 +16,14 @@ const routes: Routes = [
     children: 
     [
       {
-        path: 'about',
-        component : AboutComponent
+        path : 'about',
+        canActivateChild : [AuthGuard],
+        children : [
+          {
+            path : '',
+            component : AboutComponent,
+          }
+        ]
       },
       {
         path : 'login',
@@ -40,10 +46,6 @@ const routes: Routes = [
             component : DashboardComponent,
           }
         ]
-      },
-      {
-        path : '404',
-        component : ErrorComponent
       },
       {
         path: 'confirm-turno',
