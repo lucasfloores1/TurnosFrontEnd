@@ -26,6 +26,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatButtonModule } from '@angular/material/button';
 
 //Date import
 import LocaleAR from '@angular/common/locales/es-AR'
@@ -57,7 +58,8 @@ registerLocaleData( LocaleAR, 'es' );
     MatToolbarModule,
     MatListModule,
     MatMenuModule,
-    MatGridListModule
+    MatGridListModule,
+    MatButtonModule
 
   ],
   providers: [authInterceptorProviders,{ provide : LOCATION_INITIALIZED, useValue : 'es' }],
