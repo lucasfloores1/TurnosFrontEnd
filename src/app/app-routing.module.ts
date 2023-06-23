@@ -12,7 +12,8 @@ import { VerifyAccountComponent } from './components/verify-account/verify-accou
 const routes: Routes = [
   {
     path : '',
-    children: [
+    children: 
+    [
       {
         path : 'login',
         component : LoginComponent
@@ -44,22 +45,21 @@ const routes: Routes = [
         component : ConfirmTurnoComponent
       },
       {
-        path: 'cancer-turno',
+        path: 'cancel-turno',
         component : CancelTurnoComponent
       },
+      { path: 'turnos', loadChildren: () => import('./turnos/turnos.module').then(m => m.TurnosModule) },
+      { path: 'pacientes', loadChildren: () => import('./pacientes/pacientes.module').then(m => m.PacientesModule) },
+      { path: 'medicos', loadChildren: () => import('./medicos/medicos.module').then(m => m.MedicosModule) },
+      { path: 'obras-sociales', loadChildren: () => import('./obras-sociales/obras-sociales.module').then(m => m.ObrasSocialesModule) },
+      { path: 'institutos', loadChildren: () => import('./institutos/institutos.module').then(m => m.InstitutosModule) },
+      { path: 'estudios', loadChildren: () => import('./estudios/estudios.module').then(m => m.EstudiosModule) },
       {
         path : '**',
-        redirectTo : 'home'
+        redirectTo : '404'
       }
-
     ]
-  },
-  { path: 'turnos', loadChildren: () => import('./turnos/turnos.module').then(m => m.TurnosModule) },
-  { path: 'pacientes', loadChildren: () => import('./pacientes/pacientes.module').then(m => m.PacientesModule) },
-  { path: 'medicos', loadChildren: () => import('./medicos/medicos.module').then(m => m.MedicosModule) },
-  { path: 'obras-sociales', loadChildren: () => import('./obras-sociales/obras-sociales.module').then(m => m.ObrasSocialesModule) },
-  { path: 'institutos', loadChildren: () => import('./institutos/institutos.module').then(m => m.InstitutosModule) },
-  { path: 'estudios', loadChildren: () => import('./estudios/estudios.module').then(m => m.EstudiosModule) }
+  }
 ]
 
 @NgModule({

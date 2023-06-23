@@ -5,10 +5,15 @@ import { MedicosRoutingModule } from './medicos-routing.module';
 import { MedicosComponent } from './medicos.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PipesModule } from '../pipes/pipes.module';
-import { MaterialModule } from '../material/material.module';
 import { AddMedicoComponent } from './add-medico/add-medico.component';
 import { MedicoDetailsComponent } from './medico-details/medico-details.component';
-
+//Material
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
+import { MatSliderModule } from '@angular/material/slider';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -22,7 +27,12 @@ import { MedicoDetailsComponent } from './medico-details/medico-details.componen
     ReactiveFormsModule,
     FormsModule,
     PipesModule,
-    MaterialModule
+    MatCardModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatSelectModule,
+    MatSliderModule,
+    MatDividerModule
   ]
 })
 export class MedicosModule { }

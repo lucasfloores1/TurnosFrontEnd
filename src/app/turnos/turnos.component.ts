@@ -54,7 +54,7 @@ export class TurnosComponent implements OnInit{
   }
 
   turnoDetail(turno : any){
-    this.router.navigate([`turno/details/${turno.id}`])
+    this.router.navigate([`turnos/details/${turno.id}`])
   }
 
   loadArrays() {

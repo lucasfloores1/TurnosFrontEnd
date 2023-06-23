@@ -5,10 +5,13 @@ import { ObrasSocialesRoutingModule } from './obras-sociales-routing.module';
 import { ObrasSocialesComponent } from './obras-sociales.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PipesModule } from '../pipes/pipes.module';
-import { MaterialModule } from '../material/material.module';
 import { AddObraSocialComponent } from './add-obra-social/add-obra-social.component';
 import { ObraSocialDetailsComponent } from './obra-social-details/obra-social-details.component';
-
+//Material
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatDividerModule } from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { ObraSocialDetailsComponent } from './obra-social-details/obra-social-de
     ReactiveFormsModule,
     FormsModule,
     PipesModule,
-    MaterialModule
+    MatCardModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatDividerModule,
   ]
 })
 export class ObrasSocialesModule { }

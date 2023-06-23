@@ -25,7 +25,7 @@ export class EstudiosComponent implements OnInit{
   }
   
   estudioDetail( estudio : Estudio ){
-    this.router.navigate([`estudio/details/${estudio.id}`])
+    this.router.navigate([`estudios/details/${estudio.id}`])
   }
 
 }

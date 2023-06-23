@@ -4,10 +4,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './material/material.module';
-import { ToolbarComponent } from './components/toolbar/toolbar.component';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { authInterceptorProviders } from './services/auth.interceptor';
 import { ConfirmTurnoComponent } from './turnos/confirm-turno/confirm-turno.component';
@@ -18,7 +16,16 @@ import { ErrorComponent } from './components/error/error.component';
 import { LOCATION_INITIALIZED, registerLocaleData } from '@angular/common';
 import { RegisterComponent } from './components/register/register.component';
 import { VerifyAccountComponent } from './components/verify-account/verify-account.component';
-import { PipesModule } from './pipes/pipes.module';
+//Material
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatListModule } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 //Date import
 import LocaleAR from '@angular/common/locales/es-AR'
@@ -27,7 +34,6 @@ registerLocaleData( LocaleAR, 'es' );
 @NgModule({
   declarations: [
     AppComponent,
-    ToolbarComponent,
     LoginComponent,
     ConfirmTurnoComponent,
     CancelTurnoComponent,
@@ -35,17 +41,24 @@ registerLocaleData( LocaleAR, 'es' );
     DashboardComponent,
     ErrorComponent,
     RegisterComponent,
-    VerifyAccountComponent,
+    VerifyAccountComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule,
-    HttpClientModule,
-    FormsModule,
     ReactiveFormsModule,
-    PipesModule
+    HttpClientModule,
+    MatCardModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatListModule,
+    MatMenuModule,
+    MatGridListModule
+
   ],
   providers: [authInterceptorProviders,{ provide : LOCATION_INITIALIZED, useValue : 'es' }],
   bootstrap: [AppComponent]

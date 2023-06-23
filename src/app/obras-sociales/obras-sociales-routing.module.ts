@@ -8,7 +8,7 @@ import { AuthGuard } from '../guards/auth.guard';
 const routes: Routes = 
 [
   {
-    path : 'obra-social',
+    path : '',
     canActivateChild : [AuthGuard],
     children : [
       {

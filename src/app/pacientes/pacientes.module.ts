@@ -5,10 +5,13 @@ import { PacientesRoutingModule } from './pacientes-routing.module';
 import { PacientesComponent } from './pacientes.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PipesModule } from '../pipes/pipes.module';
-import { MaterialModule } from '../material/material.module';
 import { AddPacienteComponent } from './add-paciente/add-paciente.component';
 import { PacienteDetailsComponent } from './paciente-details/paciente-details.component';
-
+//Material
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -22,7 +25,10 @@ import { PacienteDetailsComponent } from './paciente-details/paciente-details.co
     ReactiveFormsModule,
     FormsModule,
     PipesModule,
-    MaterialModule
+    MatCardModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatSelectModule
   ]
 })
 export class PacientesModule { }

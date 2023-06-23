@@ -29,7 +29,7 @@ export class ObrasSocialesComponent implements OnInit{
 
   obraSocialDetail( obraSocial : ObraSocial ){
 
-    this.router.navigate([`obra-social/details/${obraSocial.id}`])
+    this.router.navigate([`obras-sociales/details/${obraSocial.id}`])
 
   }
 
