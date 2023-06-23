@@ -15,7 +15,8 @@ const httpOptions = {
 })
 export class MedicoService {
 
-  private apiUrl : string = 'http://localhost:8080/medico'
+  //private apiUrl : string = 'http://localhost:8080/medico'
+  private apiUrl : string = 'https://turnosapi.up.railway.app/medico'
 
   constructor( private http : HttpClient ) { }
 
