@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { BreakpointObserver } from '@angular/cdk/layout';
 import { Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
-import { ActivatedRoute, NavigationEnd, Router, RouterOutlet } from '@angular/router';
+import { NavigationEnd, Router, RouterOutlet } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
 import { MatSidenav } from '@angular/material/sidenav';
 
@@ -13,17 +13,49 @@ import { MatSidenav } from '@angular/material/sidenav';
 })
 export class NavigationComponent implements OnInit {
 
+  showToolbar : boolean = true;
+
+  showNavigation : boolean = true;
+
+  currentRoute! : string 
+
   @ViewChild('drawer') drawer!: MatSidenav;
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe('(max-width: 900px)')
     .pipe(
       map(result => result.matches),
       shareReplay()
     );
 
-  showToolbar! : boolean
-
   ngOnInit(): void {
+
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.currentRoute = event.urlAfterRedirects;
+        switch(this.currentRoute ){
+          case '/login' :
+            this.showToolbar = false
+            break;
+          case '/register' :
+            this.showToolbar = false
+            break;
+          case '/about' :
+            this.showNavigation = false;
+            this.showToolbar = false;
+            break;
+          case '/' :
+            this.showNavigation = false;
+            this.showToolbar = false;           
+            break;    
+          default :
+            this.showToolbar = true;
+            break;
+        }
+        console.log(this.showNavigation);
+        console.log(this.showToolbar);
+        console.log(this.currentRoute);       
+      }
+    });
     
   }
 
@@ -33,9 +65,11 @@ export class NavigationComponent implements OnInit {
     private loginService : LoginService,
   ) {}
 
-  logout(){
+  logout( nav : boolean ){
     this.loginService.logout();
-    this.drawer.toggle();
+    if (nav){
+      this.drawer.toggle();
+    }
     this.router.navigate(['login'])
   }
 

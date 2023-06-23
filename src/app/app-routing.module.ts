@@ -8,12 +8,17 @@ import { ErrorComponent } from './components/error/error.component';
 import { AuthGuard } from './guards/auth.guard';
 import { RegisterComponent } from './components/register/register.component';
 import { VerifyAccountComponent } from './components/verify-account/verify-account.component';
+import { AboutComponent } from './components/about/about.component';
 
 const routes: Routes = [
   {
     path : '',
     children: 
     [
+      {
+        path: 'about',
+        component : AboutComponent
+      },
       {
         path : 'login',
         component : LoginComponent
@@ -56,7 +61,7 @@ const routes: Routes = [
       { path: 'estudios', loadChildren: () => import('./estudios/estudios.module').then(m => m.EstudiosModule) },
       {
         path : '**',
-        redirectTo : '404'
+        redirectTo : 'about'
       }
     ]
   }

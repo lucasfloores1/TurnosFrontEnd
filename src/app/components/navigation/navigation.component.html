@@ -11,11 +11,11 @@
       <a mat-list-item routerLink="/institutos" (click)="drawer.toggle()">Instituto</a>
       <a mat-list-item routerLink="/obras-sociales" (click)="drawer.toggle()">Obras Sociales</a>
       <a mat-list-item routerLink="/estudios" (click)="drawer.toggle()">Estudios</a>
-      <a mat-list-item routerLink="/estudios" (click)="logout()">Cerrar Sesión</a>
+      <a mat-list-item routerLink="/estudios" (click)="logout(true)">Cerrar Sesión</a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <mat-toolbar color="primary">
+    <mat-toolbar color="primary" class="toolbar" *ngIf="showToolbar">
       <button
         type="button"
         aria-label="Toggle sidenav"
@@ -26,7 +26,7 @@
       </button>
       <span>TurnosApp</span>
       <span class="spacer"></span>
-      <div [class.hidden]="isHandset$ | async">
+      <div [class.hidden]="isHandset$ | async" class="dashboard" *ngIf="showNavigation">
         <a mat-button routerLink="/home">Dashboard</a>
         <a mat-button routerLink="/turnos">Turnos</a>
         <a mat-button routerLink="/medicos">Medicos</a>
@@ -35,6 +35,8 @@
         <a mat-button routerLink="/obras-sociales">Obras Sociales</a>
         <a mat-button routerLink="/estudios">Estudios</a>
       </div>
+      <span class="spacer"></span>
+      <button mat-icon-button (click)="logout(false)" *ngIf="showNavigation"><mat-icon>logout</mat-icon></button>
     </mat-toolbar>
     <router-outlet></router-outlet>
   </mat-sidenav-content>

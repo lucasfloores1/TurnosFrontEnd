@@ -1,6 +1,6 @@
-<mat-sidenav-container class="sidenav-container">
+<mat-sidenav-container class="sidenav-container" *ngIf="turnos">
     <mat-sidenav #drawer class="sidenav" mode="over" position="end" fixedInViewport>
-        <h2 class="mat-h2">Filtros</h2>
+        <mat-toolbar color="primary">Filtros</mat-toolbar>
         <div class="search">
             <mat-form-field appearance="outline">
                 <mat-label>Elegí un médico</mat-label>
@@ -50,7 +50,7 @@
                     </mat-option>
                 </mat-select>
             </mat-form-field>
-            <mat-form-field>
+            <mat-form-field appearance="outline">
                 <mat-label>Filtrá por fecha</mat-label>
                 <input matInput [matDatepicker]="picker" [(ngModel)]="filterDate">
                 <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
@@ -74,7 +74,8 @@
             <mat-checkbox [(ngModel)]="allowPast">Turnos Pasados</mat-checkbox>
         </div>
     </mat-sidenav>
-    <mat-sidenav-content>
+    <mat-sidenav-content class="sidenav-content">
+        <h2 mat-card-title>Turnos</h2>
         <button mat-raised-button routerLink="/turnos/create" color="primary">Crear Turno</button>
         <button mat-icon-button (click)="drawer.toggle()"><mat-icon>filter_alt</mat-icon></button>
         <mat-card *ngFor="let turno of turnos | turno : medicoId : institutoId : estudioId : pacienteId : obraSocialId : planId : isCargado : isCancelado : isConfirmado : allowPast :filterDate" (click)="turnoDetail(turno)">

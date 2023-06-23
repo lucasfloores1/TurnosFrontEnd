@@ -14,6 +14,9 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSliderModule } from '@angular/material/slider';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -32,7 +35,10 @@ import { MatDividerModule } from '@angular/material/divider';
     MatFormFieldModule,
     MatSelectModule,
     MatSliderModule,
-    MatDividerModule
+    MatDividerModule,
+    MatButtonModule,
+    MatInputModule,
+    MatCheckboxModule
   ]
 })
 export class MedicosModule { }

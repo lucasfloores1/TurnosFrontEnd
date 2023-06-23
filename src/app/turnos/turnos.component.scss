@@ -16,8 +16,22 @@ mat-card:hover{
     display: flex;
     flex-direction: column;
     margin-top: 20px;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+.sidenav{
+    width: 300px;
 }
 
 .sidenav-container{
     height: 100%;
+}
+
+.sidenav-content{
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    flex-direction: column;
 }

@@ -12,6 +12,8 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatButtonModule } from '@angular/material/button';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
   declarations: [
@@ -29,6 +31,8 @@ import { MatDividerModule } from '@angular/material/divider';
     MatIconModule,
     MatFormFieldModule,
     MatDividerModule,
+    MatButtonModule,
+    MatInputModule
   ]
 })
 export class ObrasSocialesModule { }
