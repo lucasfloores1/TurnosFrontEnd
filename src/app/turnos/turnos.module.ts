@@ -4,11 +4,18 @@ import { TurnosRoutingModule } from './turnos-routing.module';
 import { TurnosComponent } from './turnos.component';
 import { TurnoDetailsComponent } from './turno-details/turno-details.component';
 import { AddTurnoComponent } from './add-turno/add-turno.component';
-import { MaterialModule } from '../material/material.module';
 import { CalendarFormComponent } from './calendar-form/calendar-form.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PipesModule } from '../pipes/pipes.module';
-
+//Material
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatButtonModule } from '@angular/material/button';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatSelectModule } from '@angular/material/select';
+import { MatStepperModule } from '@angular/material/stepper';
 
 @NgModule({
   declarations: [
@@ -20,10 +27,17 @@ import { PipesModule } from '../pipes/pipes.module';
   imports: [
     CommonModule,
     TurnosRoutingModule,
-    MaterialModule,
     ReactiveFormsModule,
     FormsModule,
-    PipesModule
+    PipesModule,
+    MatCardModule,
+    MatIconModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatRadioModule,
+    MatDatepickerModule,
+    MatSelectModule,
+    MatStepperModule
   ]
 })
 export class TurnosModule { }
