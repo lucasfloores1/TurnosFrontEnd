@@ -15,6 +15,9 @@ import { InstitutoDTO } from 'src/app/model/Instituto';
 })
 export class MedicoDetailsComponent implements OnInit{
 
+  showForm : boolean = false;
+  showButtons : boolean = true;
+
   medico! : GetMedicoDTO;
 
   isHorariosSelected : boolean = false;
@@ -161,7 +164,7 @@ export class MedicoDetailsComponent implements OnInit{
     console.log(this.medForm.value);    
     this.medicoService.updateMedico( this.medForm.value ).subscribe( response => {
       console.log(response);
-      this.router.navigate(['medico'])
+      this.router.navigate(['home'])
     }) 
   }
 
@@ -188,6 +191,11 @@ export class MedicoDetailsComponent implements OnInit{
     this.nuevosHorarios = []
     this.setNuevosHorarios ( value.horarios , true )
     this.triggerBtn()
+  }
+
+  toggleForm(){
+    this.showForm = !this.showForm
+    this.showButtons = !this.showButtons
   }
 
 }

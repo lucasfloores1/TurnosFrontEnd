@@ -29,7 +29,7 @@ export class AddMedicoComponent implements OnInit{
   horarios! : FormArray
 
   medForm : FormGroup = this.fb.group({
-    id : 0,
+    id : -1,
     userId : ['', Validators.required],
     nombre : ['', Validators.required ],
     dni : ['', Validators.required ],

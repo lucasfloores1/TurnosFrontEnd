@@ -3,13 +3,16 @@
         <mat-card-header>
             <mat-card-title-group>
                 <h2 mat-card-title>{{estudio.nombre}}</h2>
-                <img class="estudio-img" mat-card-sm-image src="https://i.imgur.com/j8y8arX.png" alt="medical-test">
+                <img class="estudio-img" mat-card-sm-image src="https://i.imgur.com/9ulsDM8.png" alt="medical-exam">
+                <p mat-card-subtitle>Codigo : {{estudio.nomenclador}}</p>
             </mat-card-title-group>
-            <p mat-card-subtitle>Codigo : {{estudio.nomenclador}}</p>
         </mat-card-header>
     </mat-card>
-    <button color="primary" mat-mini-fab  (click)="toggleForm()"><mat-icon>{{showForm ? 'close' : 'edit'}}</mat-icon></button>
-    <div class="estForm" *ngIf="showForm">
+    <div class="nav-buttons">
+        <button mat-raised-button [color]="showButtons ? 'primary' : 'warn'" (click)="toggleForm()">{{showButtons ? 'Editar Estudio' : 'Cancelar'}}</button>
+        <button mat-raised-button color="warn" routerLink="/estudios" *ngIf="showButtons">Volver</button>
+    </div>
+    <div class="form" *ngIf="showForm">
         <h2 class="title" mat-card-title>Editar Estudio</h2>
         <form class="form-container" [formGroup]="estForm" (submit)="updateEstudio()">
             <mat-form-field appearance="outline">

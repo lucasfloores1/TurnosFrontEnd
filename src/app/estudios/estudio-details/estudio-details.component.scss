@@ -1,15 +1,32 @@
 .details-container{
-    width: 95%;
     display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
     flex-direction: column;
-    gap: 10px;
-    margin: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+mat-card {
+    width: 100%;
+    border-radius: 15px;
+    max-width: 600px;
+    margin-top: 15px;
+    background-color: #EBEBFF;
+    p{
+        margin-top: 4px;
+    }
+    mat-card-header{
+        margin-bottom: 10px;
+    }
 }
 
 .submit-btn {
-    width: 100%;
+    width: 90%;
     margin-top: 15px;
     margin-left: 10px;
+    align-self: center;
 }
 .form-container {
     align-self: center;
@@ -17,10 +34,6 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
-}
-.estForm {
-    display: flex;
-    flex-direction: column;
 }
 .title {
     margin-top: 15px;
@@ -30,4 +43,25 @@
 
 .error{
     color: red;
+}
+
+.spacer{
+    flex: 1 0 auto;
+}
+
+.form{
+    align-self: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.nav-buttons{
+    margin-top: 15px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 }

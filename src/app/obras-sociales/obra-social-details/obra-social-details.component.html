@@ -3,16 +3,22 @@
         <mat-card-header>
             <mat-card-title-group>
                 <h2 mat-card-title>{{obraSocial.nombre}}</h2>
-                <img class="obraSocial-img" mat-card-sm-image src="https://i.imgur.com/j8y8arX.png" alt="health-plan">
+                <img class="obraSocial-img" mat-card-sm-image src="https://i.imgur.com/bi7ghdy.png" alt="health-plan">
+                <p mat-card-subtitle>Direccion : {{obraSocial.direccion}}</p>
+                <p mat-card-subtitle>Planes :</p>
             </mat-card-title-group>
-            <p mat-card-subtitle>Direccion : {{obraSocial.direccion}}</p>
-            <p mat-card-subtitle>Planes :</p>
-            <div class="planes" *ngFor="let plan of obraSocial.planes">
-                <p mat-card-subtitle>{{plan.nombre}}</p>
-            </div>
         </mat-card-header>
+        <mat-card-content>
+          <div class="planes" *ngFor="let plan of obraSocial.planes">
+            <p mat-card-subtitle>{{plan.nombre}}</p>
+          </div>
+        </mat-card-content>
     </mat-card>
-    <div class="obraForm" [formGroup]="obraForm">
+    <div class="nav-buttons">
+      <button mat-raised-button [color]="showButtons ? 'primary' : 'warn'" (click)="toggleForm()">{{showButtons ? 'Editar Obra Social' : 'Cancelar'}}</button>
+      <button mat-raised-button color="warn" routerLink="/obras-sociales" *ngIf="showButtons">Volver</button>
+    </div>
+    <div class="form" [formGroup]="obraForm" *ngIf="showForm">
         <h2 class="title" mat-card-title>Editar obra Social</h2>
         <form class="form-container" [formGroup]="obraForm" (submit)="updateObraSocial()">
           <mat-form-field appearance="outline">
@@ -32,13 +38,13 @@
           <mat-divider></mat-divider>
           <div formArrayName="planes">
             <div class="planes-header">
-              <p mat-card-title>Editar Planes</p>
+              <h2>Editar Planes</h2>
               <div class="spacer"></div>
               <button mat-mini-fab type="button" class="add-btn"(click)="addPlan()"><mat-icon>add</mat-icon></button>
             </div>
             <mat-card class="planes-form" *ngFor="let planGroup of planes.controls; let i = index" [formGroupName]="i">
               <mat-card-header class="plan-form-header">
-                <h3 mat-card-title>Plan {{i+1}}</h3>
+                <p mat-card-title>Plan {{i+1}}</p>
                 <div class="spacer"></div>
                 <button class="del-btn"mat-mini-fab (click)="removePlan(i)" *ngIf="planGroup.get('id')?.value == 0"><mat-icon>delete</mat-icon></button>
               </mat-card-header>

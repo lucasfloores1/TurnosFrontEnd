@@ -1,21 +1,45 @@
-.grid-container {
-  margin: 20px;
+$primary : #4569ec;
+
+.container{
+  h1 {
+    margin-left: 15px;
+  }
+  width: 100%;
+}
+.card-list{
+  display: flex;
+  flex-direction: column;
+  width: 87%;
+  padding-left: 25px;
 }
 
-.dashboard-card {
-  position: absolute;
-  top: 15px;
-  left: 15px;
-  right: 15px;
-  bottom: 15px;
-}
+.card {
+  display: flex;
+  align-items: center;
+  border-radius: 15px;
+  max-width: 600px;
+  margin-top: 15px;
+  background-color: #EBEBFF;
+  width: 100%;
+  height: 100px;
 
-.more-button {
-  position: absolute;
-  top: 5px;
-  right: 10px;
-}
+  h2{
+    padding-left: 25px;
+  }
 
-.dashboard-card-content {
-  text-align: center;
+  .spacer{
+    flex : 1 1 auto;
+  }
+
+  .button{
+    margin-right: 15px;
+    mat-icon{
+      color : $primary;
+    }
+  }
+
+  .title{
+    font-size: 1.5em;
+    font-family: Poppins;
+  }
 }

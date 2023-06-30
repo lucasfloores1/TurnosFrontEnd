@@ -12,7 +12,6 @@ import { ConfirmTurnoComponent } from './turnos/confirm-turno/confirm-turno.comp
 import { CancelTurnoComponent } from './turnos/cancel-turno/cancel-turno.component';
 import { NavigationComponent } from './components/navigation/navigation.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { ErrorComponent } from './components/error/error.component';
 import { LOCATION_INITIALIZED, registerLocaleData } from '@angular/common';
 import { RegisterComponent } from './components/register/register.component';
 import { VerifyAccountComponent } from './components/verify-account/verify-account.component';
@@ -41,7 +40,6 @@ registerLocaleData( LocaleAR, 'es' );
     CancelTurnoComponent,
     NavigationComponent,
     DashboardComponent,
-    ErrorComponent,
     RegisterComponent,
     VerifyAccountComponent,
     AboutComponent

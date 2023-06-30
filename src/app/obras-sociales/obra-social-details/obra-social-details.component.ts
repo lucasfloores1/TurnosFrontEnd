@@ -11,6 +11,9 @@ import { ObraSocialService } from 'src/app/services/obra-social.service';
 })
 export class ObraSocialDetailsComponent implements OnInit {
 
+  showForm : boolean = false;
+  showButtons : boolean = true;
+
   planes! : FormArray
 
   obraSocial! : GetObraSocialDTO
@@ -83,5 +86,9 @@ export class ObraSocialDetailsComponent implements OnInit {
     }
   }
 
+  toggleForm(){
+    this.showForm = !this.showForm
+    this.showButtons = !this.showButtons
+  }
 
 }

@@ -4,7 +4,6 @@ import { LoginComponent } from './components/login/login.component';
 import { ConfirmTurnoComponent } from './turnos/confirm-turno/confirm-turno.component';
 import { CancelTurnoComponent } from './turnos/cancel-turno/cancel-turno.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { ErrorComponent } from './components/error/error.component';
 import { AuthGuard } from './guards/auth.guard';
 import { RegisterComponent } from './components/register/register.component';
 import { VerifyAccountComponent } from './components/verify-account/verify-account.component';
@@ -17,13 +16,7 @@ const routes: Routes = [
     [
       {
         path : 'about',
-        canActivateChild : [AuthGuard],
-        children : [
-          {
-            path : '',
-            component : AboutComponent,
-          }
-        ]
+        component : AboutComponent,
       },
       {
         path : 'login',

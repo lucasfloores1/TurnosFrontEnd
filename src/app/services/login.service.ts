@@ -20,8 +20,8 @@ export class LoginService {
 
   constructor( private http : HttpClient ) { }
 
-  //private apiUrl : string = 'http://localhost:8080/user'
-  private apiUrl : string = 'https://turnosapi.up.railway.app/user'
+  private apiUrl : string = 'http://localhost:8080/user'
+  //private apiUrl : string = 'https://turnosapi.up.railway.app/user'
 
   public getUserById( id : any ){
     return this.http.get<User>( `${this.apiUrl}/load/${id}` )

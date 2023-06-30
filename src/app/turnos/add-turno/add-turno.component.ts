@@ -21,6 +21,8 @@ import { Router } from '@angular/router';
 })
 export class AddTurnoComponent implements OnInit{
 
+  animation : boolean = false;
+
   linear : boolean = true;
   searchMedico : string = ''
   searchInstituto : string = ''
@@ -70,8 +72,14 @@ export class AddTurnoComponent implements OnInit{
   }
 
   loadMedicoToDTO(medico : Medico){    
-    this.medicoService.getMedicoById(medico.id).subscribe( response => this.institutos = response.institutos )
-    this.turnoService.getTurnosByMedico(medico.id).subscribe( response => this.turnos = response )
+    this.medicoService.getMedicoById(medico.id).subscribe( response => {
+      this.institutos = response.institutos
+      console.log(response);
+    })
+    this.turnoService.getTurnosByMedico(medico.id).subscribe( response => {
+      this.turnos = response
+      console.log(this.turnos);
+    })
   }
 
   toggleMedicoSelected(){
@@ -158,10 +166,19 @@ export class AddTurnoComponent implements OnInit{
       idEstudio : this.selectedEstudio.id
     }
 
-    this.turnoService.createTurno(newTurno).subscribe( response => {
-      console.log(response);
-      this.router.navigate(['home'])     
-    })
+    //Animation ON
+    this.animation = true;
+
+    this.turnoService.createTurno(newTurno).subscribe(
+      response => {
+        this.animation = false;
+        //this.router.navigate(['home'])
+      },
+      error => {
+        this.animation = false;
+        console.log("error");
+      }
+    )
   }
 
 }

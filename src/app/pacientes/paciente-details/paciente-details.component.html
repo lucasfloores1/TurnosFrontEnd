@@ -3,12 +3,12 @@
         <mat-card-header>
             <mat-card-title-group>
                 <h2 mat-card-title>{{paciente.nombre}}</h2>
-                <img class="paciente-img" mat-card-sm-image src="https://i.imgur.com/j8y8arX.png" alt="doctor">
+                <img class="paciente-img" mat-card-sm-image src="https://i.imgur.com/5RPafRS.png" alt="pacient">
+                <p mat-card-subtitle>DNI : {{paciente.dni}}</p>
+                <p mat-card-subtitle>Email : {{paciente.mail}}</p>
+                <p mat-card-subtitle>Telefono : {{paciente.tel}}</p>
+                <p mat-card-subtitle>Direccion : {{paciente.direccion}}</p>
             </mat-card-title-group>
-            <p mat-card-subtitle>DNI : {{paciente.dni}}</p>
-            <p mat-card-subtitle>Email : {{paciente.mail}}</p>
-            <p mat-card-subtitle>Telefono : {{paciente.tel}}</p>
-            <p mat-card-subtitle>Direccion : {{paciente.direccion}}</p>
         </mat-card-header>
         <mat-card-content>
             <div *ngFor="let obra of paciente.obrasSociales">
@@ -16,8 +16,12 @@
             </div>
         </mat-card-content>
     </mat-card>
-    <div class="add-paciente">
-        <h2 class="title">Crear Paciente</h2>
+    <div class="nav-buttons">
+        <button mat-raised-button [color]="showButtons ? 'primary' : 'warn'" (click)="toggleForm()">{{showButtons ? 'Editar Paciente' : 'Cancelar'}}</button>
+        <button mat-raised-button color="warn" routerLink="/medicos" *ngIf="showButtons">Volver</button>
+    </div>
+    <div class="form" *ngIf="showForm">
+        <h2 mat-card-title align="center">Editar Paciente</h2>
         <form class="form-container" [formGroup]="pacienteForm" (submit)="updatePaciente()">
             <mat-form-field appearance="outline">
                 <mat-label>Nombre</mat-label>

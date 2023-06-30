@@ -1,18 +1,23 @@
-<div class="grid-container">
-    <h2 class="mat-h2">Pacientes</h2>
-    <div class="features">
-        <mat-form-field appearance="outline">
-            <mat-label>Buscar</mat-label>
-            <input type="text" matInput [(ngModel)]="searchText" placeholder="Nombre, DNI, Direccion, etc...">
-            <mat-icon matSuffix>search</mat-icon>
-        </mat-form-field>
-        <button mat-raised-button routerLink="/pacientes/create" color="primary">Crear paciente</button>
+<div class="container">
+    <div class="header">
+        <div class="title">
+            <h2 mat-card-title>Pacientes</h2>
+            <div class="spacer"></div>
+            <button mat-mini-fab routerLink="/pacientes/create" color="primary"><mat-icon>add</mat-icon></button>
+        </div>
+        <div class="search">
+            <mat-form-field appearance="outline">
+                <mat-label>Buscar</mat-label>
+                <input type="text" matInput [(ngModel)]="searchText" placeholder="Nombre, DNI, Direccion, etc...">
+                <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+        </div>
     </div>
     <mat-card *ngFor="let paciente of pacientes | search : searchText" (click)="pacienteDetail(paciente)">
         <mat-card-header>
             <mat-card-title-group>
                 <h2 mat-card-title>{{paciente.nombre}}</h2>
-                <img class="paciente-img" mat-card-sm-image src="https://i.imgur.com/j8y8arX.png" alt="pacient">                
+                <img class="paciente-img" mat-card-sm-image src="https://i.imgur.com/5RPafRS.png" alt="pacient">                
                 <p mat-card-subtitle>Mail : {{paciente.mail}}</p>
                 <p mat-card-subtitle>Tel : {{paciente.tel}}</p>
                 <p mat-card-subtitle>Dir : {{paciente.direccion}}</p>

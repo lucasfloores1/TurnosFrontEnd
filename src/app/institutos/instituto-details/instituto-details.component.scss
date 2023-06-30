@@ -1,15 +1,45 @@
 .details-container{
-    width: 95%;
     display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
     flex-direction: column;
-    gap: 10px;
-    margin: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.medicos-container{
+    width: 100%;
+}
+
+.medicos{
+    width: 100%;
+    padding-left:  25px;
+    margin-top: 10px;
+}
+
+mat-card {
+    width: 100%;
+    border-radius: 15px;
+    max-width: 600px;
+    margin-top: 15px;
+    background-color: #EBEBFF;
+    p{
+        margin-top: 4px;
+    }
+    mat-card-header{
+        margin-bottom: 10px;
+    }
+}
+
+.horarios{
+    margin-top: 10px;
 }
 
 .submit-btn {
-    width: 100%;
+    width: 90%;
     margin-top: 15px;
     margin-left: 10px;
+    align-self: center;
 }
 .form-container {
     align-self: center;
@@ -18,7 +48,7 @@
     flex-direction: column;
     gap: 15px;
 }
-.instForm {
+.add-medico {
     display: flex;
     flex-direction: column;
 }
@@ -31,3 +61,42 @@
 .error{
     color: red;
 }
+
+.horarios-form{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    gap: 15px;
+}
+.horarios-form mat-card{
+    width: 100%;
+}
+
+.horarios-form mat-slider {
+    width: 60%;
+}
+.horarios-form mat-form-field{
+    width: 25%;
+}
+.spacer{
+    flex: 1 0 auto;
+}
+
+.form{
+    align-self: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.nav-buttons{
+    margin-top: 15px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+

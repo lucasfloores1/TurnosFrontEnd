@@ -51,9 +51,6 @@ export class NavigationComponent implements OnInit {
             this.showToolbar = true;
             break;
         }
-        console.log(this.showNavigation);
-        console.log(this.showToolbar);
-        console.log(this.currentRoute);       
       }
     });
     

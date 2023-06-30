@@ -16,6 +16,9 @@ import { PacienteService } from 'src/app/services/paciente.service';
 })
 export class PacienteDetailsComponent implements OnInit{
 
+  showForm : boolean = false;
+  showButtons : boolean = true;
+
   editedAfiliados : any[]  = []
   isObraSocialSelected : boolean = true;
   isNewPlanSelected : boolean = true;
@@ -164,6 +167,11 @@ export class PacienteDetailsComponent implements OnInit{
 
   onSelectedNewPlan( plan : any ){
     this.isNewPlanSelected = false;
+  }
+
+  toggleForm(){
+    this.showForm = !this.showForm
+    this.showButtons = !this.showButtons
   }
 
 }

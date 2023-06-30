@@ -42,7 +42,7 @@ export class AuthGuard implements CanActivateChild {
   private handleUnauthorizedAccess(): void {
     localStorage.removeItem('token');
     localStorage.removeItem('user');
-    this.router.navigate(['about']);
+    this.router.navigate(['login']);
   }
   
 }

@@ -2,43 +2,43 @@
     <h2 class="title">Crear Paciente</h2>
     <form class="form-container" [formGroup]="pacienteForm" (submit)="createPaciente()">
         <mat-form-field appearance="outline">
-            <mat-label>Nombre</mat-label>
+            <mat-label for="pacienteForm">Nombre</mat-label>
             <input type="text" matInput formControlName="nombre" placeholder="Nombre completo"/>
             <mat-error *ngIf="
             pacienteForm.get('nombre')?.invalid && ( pacienteForm.get('nombre')?.dirty || pacienteForm.get('nombre')?.touched || isSubmitted)
         ">Este campo es obligatorio</mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
-            <mat-label>DNI</mat-label>
+            <mat-label for="pacienteForm">DNI</mat-label>
             <input type="text" matInput formControlName="dni" placeholder="DNI"/>
             <mat-error *ngIf="
             pacienteForm.get('dni')?.invalid && ( pacienteForm.get('dni')?.dirty || pacienteForm.get('dni')?.touched || isSubmitted)
         ">Este campo es obligatorio</mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
-            <mat-label>E-mail</mat-label>
+            <mat-label for="pacienteForm">E-mail</mat-label>
             <input type="text" matInput formControlName="mail" placeholder="ejemplo@gmail.com"/>
             <mat-error *ngIf="
                 pacienteForm.get('mail')?.invalid && ( pacienteForm.get('mail')?.dirty || pacienteForm.get('mail')?.touched || isSubmitted)
             ">{{getErrorMessage()}}</mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
-            <mat-label>Teléfono</mat-label>
+            <mat-label for="pacienteForm">Teléfono</mat-label>
             <input type="text" matInput formControlName="tel" placeholder="Número"/>
             <mat-error *ngIf="
             pacienteForm.get('tel')?.invalid && ( pacienteForm.get('tel')?.dirty || pacienteForm.get('tel')?.touched || isSubmitted)
         ">Este campo es obligatorio</mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
-            <mat-label>Dirección</mat-label>
+            <mat-label for="pacienteForm">Dirección</mat-label>
             <input type="text" matInput formControlName="direccion" placeholder="Calle y número"/>
             <mat-error *ngIf="
             pacienteForm.get('direccion')?.invalid && ( pacienteForm.get('direccion')?.dirty || pacienteForm.get('direccion')?.touched || isSubmitted)
         ">Este campo es obligatorio</mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline">
-            <mat-label>Obra Social</mat-label>
-            <mat-select formControlName = "idObraSocial">
+            <mat-label for="pacienteForm">Obra Social</mat-label>
+            <mat-select formControlName = "idObraSocial" for="pacienteForm">
                 <mat-option *ngFor="let obraSocial of obrasSociales" [value]="obraSocial.id">
                     {{obraSocial.nombre}}
                 </mat-option>
@@ -48,7 +48,7 @@
         ">Este campo es obligatorio</mat-error>
         </mat-form-field>
         <mat-form-field appearance="outline" *ngIf="planes" >
-            <mat-label>Plan</mat-label>
+            <mat-label for="pacienteForm">Plan</mat-label>
             <mat-select formControlName="idPlan">
             <mat-option *ngFor="let plan of planes" [value]="plan.id">
                 {{ plan.nombre }}
@@ -59,7 +59,7 @@
         ">Este campo es obligatorio</mat-error>
         </mat-form-field>      
         <mat-form-field appearance="outline">
-            <mat-label>Afiliado</mat-label>
+            <mat-label for="pacienteForm">Afiliado</mat-label>
             <input type="text" matInput formControlName="afiliado" placeholder="Número afiliado"/>
             <mat-error *ngIf="
             pacienteForm.get('afiliado')?.invalid && ( pacienteForm.get('afiliado')?.dirty || pacienteForm.get('afiliado')?.touched || isSubmitted)

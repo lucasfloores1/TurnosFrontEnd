@@ -1,12 +1,49 @@
-$primary:#4569ec;
-
 mat-card {
     border-radius: 15px;
     max-width: 600px;
     margin-top: 15px;
-    border: 2px solid $primary;
+    background-color: #EBEBFF;
+    width: 100%;
 }
 
 mat-card:hover{
     cursor: pointer;
+}
+
+.container{
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
+    flex-direction: column;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+
+.header {
+    .title{
+        display: flex;
+    }
+    h2 {
+        font-size: 2em;
+    }
+    button{
+        margin-left: 15px;
+    }
+    margin-top: 15px;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.spacer{
+    flex: 1 1 auto;
+}
+
+.search{
+    margin-top: 15px;
+    width: 100%;
+    mat-form-field{
+        width: 100%;
+    }
 }

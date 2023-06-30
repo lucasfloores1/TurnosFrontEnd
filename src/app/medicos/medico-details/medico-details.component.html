@@ -3,119 +3,129 @@
         <mat-card-header>
             <mat-card-title-group>
                 <h2 mat-card-title>{{medico.nombre}}</h2>
-                <img class="medico-img" mat-card-sm-image src="https://i.imgur.com/j8y8arX.png" alt="doctor">
+                <img class="medico-img" mat-card-sm-image src="https://i.imgur.com/er9m1h6.png" alt="doctor">
+                <p mat-card-subtitle>DNI : {{medico.dni}}</p>
+                <p mat-card-subtitle>Email : {{medico.mail}}</p>
+                <p mat-card-subtitle>Telefono : {{medico.tel}}</p>
+                <p mat-card-subtitle>Direccion : {{medico.direccion}}</p>
+                <p mat-card-subtitle>Matricula : {{medico.matricula}}</p>
+                <p mat-card-subtitle>Institutos :</p>
             </mat-card-title-group>
-            <p mat-card-subtitle>DNI : {{medico.dni}}</p>
-            <p mat-card-subtitle>Email : {{medico.mail}}</p>
-            <p mat-card-subtitle>Telefono : {{medico.tel}}</p>
-            <p mat-card-subtitle>Direccion : {{medico.direccion}}</p>
-            <p mat-card-subtitle>Matricula : {{medico.matricula}}</p>
         </mat-card-header>
+        <mat-divider></mat-divider>
         <mat-card-content>
-            <div *ngFor="let instituto of medico.institutos">
-                <p mat-card-subtitle>{{instituto.nombre}} : </p>
-                <div *ngFor="let horario of instituto.horarios">
-                    <p mat-card-subtitle>{{diasSemana[horario.dia-1]}} : de {{horario.inicio}} a {{horario.fin}}</p>
-                </div>
-            </div>
+            <mat-tab-group fitInkBarToContent>
+                <mat-tab *ngFor="let instituto of medico.institutos" label="{{instituto.nombre}}">
+                    <div class="horarios" *ngFor="let horario of instituto.horarios">
+                        <p mat-card-subtitle>{{diasSemana[horario.dia-1]}} : de {{horario.inicio}} a {{horario.fin}}</p>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
         </mat-card-content>
     </mat-card>
-    <form class="form-container" [formGroup]="medForm" (submit)="updateMedico()">
-        <mat-form-field appearance="outline">
-            <mat-label>Nombre</mat-label>
-            <input type="text" matInput formControlName="nombre" placeholder="Nombre completo"/>
-            <mat-error *ngIf="
-            medForm.get('nombre')?.invalid && ( medForm.get('nombre')?.dirty || medForm.get('nombre')?.touched )
-        ">Este campo es obligatorio</mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label>DNI</mat-label>
-            <input type="text" matInput formControlName="dni" placeholder="DNI"/>
-            <mat-error *ngIf="
-            medForm.get('dni')?.invalid && ( medForm.get('dni')?.dirty || medForm.get('dni')?.touched )
-        ">Este campo es obligatorio</mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label>E-mail</mat-label>
-            <input type="text" matInput formControlName="mail" placeholder="ejemplo@gmail.com"/>
-            <mat-error *ngIf="
-                medForm.get('mail')?.invalid && ( medForm.get('mail')?.dirty || medForm.get('mail')?.touched )
-            ">{{getErrorMessage()}}</mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label>Teléfono</mat-label>
-            <input type="text" matInput formControlName="tel" placeholder="Número"/>
-            <mat-error *ngIf="
-            medForm.get('tel')?.invalid && ( medForm.get('tel')?.dirty || medForm.get('tel')?.touched )
-        ">Este campo es obligatorio</mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label>Dirección</mat-label>
-            <input type="text" matInput formControlName="direccion" placeholder="Calle y número"/>
-            <mat-error *ngIf="
-            medForm.get('direccion')?.invalid && ( medForm.get('direccion')?.dirty || medForm.get('direccion')?.touched )
-        ">Este campo es obligatorio</mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-            <mat-label>Matrícula</mat-label>
-            <input type="text" matInput formControlName="matricula" placeholder="Calle y número"/>
-            <mat-error *ngIf="
-            medForm.get('matricula')?.invalid && ( medForm.get('matricula')?.dirty || medForm.get('matricula')?.touched )
-        ">Este campo es obligatorio</mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="outline" *ngIf="!newInsituto">
-            <mat-label>Instituto</mat-label>
-            <mat-select formControlName = "idInstituto" (valueChange)="onSelectInsituto($event)">
-                <mat-option *ngFor="let instituto of medico.institutos" [value]="instituto">
-                    {{instituto.nombre}}
-                </mat-option>
-                <mat-option value="nuevo">
-                    Nuevo Instituto
-                </mat-option>
-            </mat-select>
-            <mat-hint *ngIf="!medForm.get('idInstituto')?.valid">Selecciona un instituto para ver los horarios</mat-hint>
-            <mat-error *ngIf="
-            medForm.get('idInstituto')?.invalid && ( medForm.get('idInstituto')?.dirty || medForm.get('idInstituto')?.touched )
-        ">Este campo es obligatorio</mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="outline" *ngIf="newInsituto">
-            <mat-label>Instituto</mat-label>
-            <mat-select formControlName = "idInstituto" (valueChange)="onSelectNewInsituto($event)">
-                <mat-option *ngFor="let instituto of institutos" [value]="instituto">
-                    {{instituto.nombre}}
-                </mat-option>
-            </mat-select>
-            <mat-hint *ngIf="!medForm.get('idInstituto')?.valid">Selecciona un instituto para ver los horarios</mat-hint>
-            <mat-error *ngIf="
-            medForm.get('idInstituto')?.invalid && ( medForm.get('idInstituto')?.dirty || medForm.get('idInstituto')?.touched )
-        ">Este campo es obligatorio</mat-error>
-        </mat-form-field>
-    </form>
-    <div class="horarios" *ngIf="nuevosHorarios">
-        <mat-divider></mat-divider>
-        <mat-card *ngFor="let horario of nuevosHorarios; let i = index">
-            <mat-card-header class="horario-header">
-                <p mat-card-title>{{diasSemana[i]}}</p>
-                <div class="spacer"></div>
-                <mat-checkbox [(ngModel)]="horario.trabaja" (click)="triggerBtn()"></mat-checkbox>
-                <p mat-card-subtitle>Desde {{horas[horario.inicio]}} hasta {{horas[horario.fin]}} cada {{horario.intervalo}} mins</p>
-            </mat-card-header>
-            <mat-card-content class="horario-content">
-                <mat-slider step="1" min="0" [max]="horas.length - 1" discrete [displayWith]="formatLabel" [disabled]="!horario.trabaja">
-                    <input value="0" [(ngModel)]="horario.inicio"  matSliderStartThumb>
-                    <input value="38" [(ngModel)]="horario.fin" matSliderEndThumb>
-                </mat-slider> 
-                <mat-form-field appearance="outline">
-                    <mat-label>Cada</mat-label>
-                    <mat-select [disabled]="!horario.trabaja" [(ngModel)]="horario.intervalo">
-                        <mat-option *ngFor="let intervalo of intervalos" [value]="intervalo">
-                            {{intervalo}} min
-                        </mat-option>
-                    </mat-select>
-                </mat-form-field>
-            </mat-card-content>
-        </mat-card>
-        <button class="confirm-btn" color="primary" mat-raised-button type="button" (click)="addHorarios()" *ngIf="showBtn">Confirmar Horarios</button>
+    <div class="nav-buttons">
+        <button mat-raised-button [color]="showButtons ? 'primary' : 'warn'" (click)="toggleForm()">{{showButtons ? 'Editar Médico' : 'Cancelar'}}</button>
+        <button mat-raised-button color="warn" routerLink="/medicos" *ngIf="showButtons">Volver</button>
     </div>
-    <button class="submit-btn" color="accent" (click)="updateMedico()" mat-raised-button [disabled]="!isHorariosSelected" >Crear Médico</button>
+    <div class="form" *ngIf="showForm">
+        <h2 mat-card-title align="center">Editar Médico</h2>
+        <form class="form-container" [formGroup]="medForm" (submit)="updateMedico()">
+            <mat-form-field appearance="outline">
+                <mat-label>Nombre</mat-label>
+                <input type="text" matInput formControlName="nombre" placeholder="Nombre completo"/>
+                <mat-error *ngIf="
+                medForm.get('nombre')?.invalid && ( medForm.get('nombre')?.dirty || medForm.get('nombre')?.touched )
+            ">Este campo es obligatorio</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>DNI</mat-label>
+                <input type="text" matInput formControlName="dni" placeholder="DNI"/>
+                <mat-error *ngIf="
+                medForm.get('dni')?.invalid && ( medForm.get('dni')?.dirty || medForm.get('dni')?.touched )
+            ">Este campo es obligatorio</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>E-mail</mat-label>
+                <input type="text" matInput formControlName="mail" placeholder="ejemplo@gmail.com"/>
+                <mat-error *ngIf="
+                    medForm.get('mail')?.invalid && ( medForm.get('mail')?.dirty || medForm.get('mail')?.touched )
+                ">{{getErrorMessage()}}</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Teléfono</mat-label>
+                <input type="text" matInput formControlName="tel" placeholder="Número"/>
+                <mat-error *ngIf="
+                medForm.get('tel')?.invalid && ( medForm.get('tel')?.dirty || medForm.get('tel')?.touched )
+            ">Este campo es obligatorio</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Dirección</mat-label>
+                <input type="text" matInput formControlName="direccion" placeholder="Calle y número"/>
+                <mat-error *ngIf="
+                medForm.get('direccion')?.invalid && ( medForm.get('direccion')?.dirty || medForm.get('direccion')?.touched )
+            ">Este campo es obligatorio</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Matrícula</mat-label>
+                <input type="text" matInput formControlName="matricula" placeholder="Calle y número"/>
+                <mat-error *ngIf="
+                medForm.get('matricula')?.invalid && ( medForm.get('matricula')?.dirty || medForm.get('matricula')?.touched )
+            ">Este campo es obligatorio</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" *ngIf="!newInsituto">
+                <mat-label>Instituto</mat-label>
+                <mat-select formControlName = "idInstituto" (valueChange)="onSelectInsituto($event)">
+                    <mat-option *ngFor="let instituto of medico.institutos" [value]="instituto">
+                        {{instituto.nombre}}
+                    </mat-option>
+                    <mat-option value="nuevo">
+                        Nuevo Instituto
+                    </mat-option>
+                </mat-select>
+                <mat-hint *ngIf="!medForm.get('idInstituto')?.valid">Selecciona un instituto para ver los horarios</mat-hint>
+                <mat-error *ngIf="
+                medForm.get('idInstituto')?.invalid && ( medForm.get('idInstituto')?.dirty || medForm.get('idInstituto')?.touched )
+            ">Este campo es obligatorio</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" *ngIf="newInsituto">
+                <mat-label>Instituto</mat-label>
+                <mat-select formControlName = "idInstituto" (valueChange)="onSelectNewInsituto($event)">
+                    <mat-option *ngFor="let instituto of institutos" [value]="instituto">
+                        {{instituto.nombre}}
+                    </mat-option>
+                </mat-select>
+                <mat-hint *ngIf="!medForm.get('idInstituto')?.valid">Selecciona un instituto para ver los horarios</mat-hint>
+                <mat-error *ngIf="
+                medForm.get('idInstituto')?.invalid && ( medForm.get('idInstituto')?.dirty || medForm.get('idInstituto')?.touched )
+            ">Este campo es obligatorio</mat-error>
+            </mat-form-field>
+        </form>
+        <div class="horarios-form" *ngIf="nuevosHorarios">
+            <mat-divider></mat-divider>
+            <mat-card *ngFor="let horario of nuevosHorarios; let i = index">
+                <mat-card-header class="horario-header">
+                    <p mat-card-title>{{diasSemana[i]}}</p>
+                    <div class="spacer"></div>
+                    <mat-checkbox [(ngModel)]="horario.trabaja" (click)="triggerBtn()"></mat-checkbox>
+                    <p mat-card-subtitle>Desde {{horas[horario.inicio]}} hasta {{horas[horario.fin]}} cada {{horario.intervalo}} mins</p>
+                </mat-card-header>
+                <mat-card-content class="horario-content">
+                    <mat-slider step="1" min="0" [max]="horas.length - 1" discrete [displayWith]="formatLabel" [disabled]="!horario.trabaja">
+                        <input value="0" [(ngModel)]="horario.inicio"  matSliderStartThumb>
+                        <input value="38" [(ngModel)]="horario.fin" matSliderEndThumb>
+                    </mat-slider>
+                    <mat-form-field appearance="outline">
+                        <mat-label>Cada</mat-label>
+                        <mat-select [disabled]="!horario.trabaja" [(ngModel)]="horario.intervalo">
+                            <mat-option *ngFor="let intervalo of intervalos" [value]="intervalo">
+                                {{intervalo}} min
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </mat-card-content>
+            </mat-card>
+            <button class="confirm-btn" color="primary" mat-raised-button type="button" (click)="addHorarios()" *ngIf="showBtn">Confirmar Horarios</button>
+        </div>
+        <button class="submit-btn" color="accent" (click)="updateMedico()" mat-raised-button [disabled]="!isHorariosSelected" >Confirmar Edición</button>
+    </div>
 </div>

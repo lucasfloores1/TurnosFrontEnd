@@ -1,24 +1,35 @@
-<div class="grid-container">
+<div class="container">
   <h1 class="mat-h1">Dashboard</h1>
-  <mat-grid-list cols="2" rowHeight="350px">
-    <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
-      <mat-card class="dashboard-card">
-        <mat-card-header>
-          <mat-card-title>
-            {{card.title}}
-            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expand</button>
-              <button mat-menu-item>Remove</button>
-            </mat-menu>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-          <div>Card Content Here</div>
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
+  <section class="card-list">
+    <div class="card">
+      <h2 class="title">Turnos</h2>
+      <div class="spacer"></div>
+      <button mat-icon-button class="button" routerLink="/turnos"><mat-icon>arrow_forward_ios</mat-icon></button>
+    </div>
+    <div class="card">
+      <h2 class="title">Pacientes</h2>
+      <div class="spacer"></div>
+      <button mat-icon-button class="button" routerLink="/pacientes"><mat-icon>arrow_forward_ios</mat-icon></button>
+    </div>
+    <div class="card">
+      <h2 class="title">Medicos</h2>
+      <div class="spacer"></div>
+      <button mat-icon-button class="button" routerLink="/medicos"><mat-icon>arrow_forward_ios</mat-icon></button>
+    </div>
+    <div class="card">
+      <h2 class="title">Institutos</h2>
+      <div class="spacer"></div>
+      <button mat-icon-button class="button" routerLink="/institutos"><mat-icon>arrow_forward_ios</mat-icon></button>
+    </div>
+    <div class="card">
+      <h2 class="title">Obras Sociales</h2>
+      <div class="spacer"></div>
+      <button mat-icon-button class="button" routerLink="/obras-sociales"><mat-icon>arrow_forward_ios</mat-icon></button>
+    </div>
+    <div class="card">
+      <h2 class="title">Estudios</h2>
+      <div class="spacer"></div>
+      <button mat-icon-button class="button" routerLink="/estudios"><mat-icon>arrow_forward_ios</mat-icon></button>
+    </div>
+  </section>
 </div>

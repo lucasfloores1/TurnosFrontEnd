@@ -45,7 +45,7 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     MatStepperModule,
     MatFormFieldModule,
     MatInputModule,
-    MatToolbarModule
+    MatToolbarModule,
   ]
 })
 export class TurnosModule { }

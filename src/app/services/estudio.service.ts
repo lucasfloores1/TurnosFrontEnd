@@ -13,8 +13,8 @@ const httpOptions = {
 })
 export class EstudioService {
 
-  //private apiUrl : string = 'http://localhost:8080/estudio'
-  private apiUrl : string = 'https://turnosapi.up.railway.app/estudio'
+  private apiUrl : string = 'http://localhost:8080/estudio'
+  //private apiUrl : string = 'https://turnosapi.up.railway.app/estudio'
 
   constructor( private http : HttpClient ) { }
 

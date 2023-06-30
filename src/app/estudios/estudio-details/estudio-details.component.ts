@@ -11,7 +11,8 @@ import { EstudioService } from 'src/app/services/estudio.service';
 })
 export class EstudioDetailsComponent implements OnInit{
 
-  showForm : boolean = false
+  showForm : boolean = false;
+  showButtons : boolean = true;
 
   estudio! : Estudio
 
@@ -52,7 +53,9 @@ export class EstudioDetailsComponent implements OnInit{
   }
 
   toggleForm(){
-    this.showForm = !this.showForm;
+    this.showForm = !this.showForm
+    this.showButtons = !this.showButtons
   }
+
 
 }

@@ -3,7 +3,7 @@
         <mat-toolbar color="primary">Filtros</mat-toolbar>
         <div class="search">
             <mat-form-field appearance="outline">
-                <mat-label>Elegí un médico</mat-label>
+                <mat-label for="medico">Elegí un médico</mat-label>
                 <mat-select [(ngModel)]="medicoId">
                     <mat-option *ngFor ="let medico of medicos" [value]="medico.id" >
                         {{medico.nombre}}
@@ -11,7 +11,7 @@
                 </mat-select>
             </mat-form-field>
             <mat-form-field appearance="outline">
-                <mat-label>Elegí un Instituto</mat-label>
+                <mat-label for="instituto">Elegí un Instituto</mat-label>
                 <mat-select [(ngModel)]="institutoId">
                     <mat-option *ngFor ="let instituto of institutos" [value]="instituto.id" >
                         {{instituto.nombre}}
@@ -19,7 +19,7 @@
                 </mat-select>
             </mat-form-field>
             <mat-form-field appearance="outline">
-                <mat-label>Elegí un paciente</mat-label>
+                <mat-label for="paciente">Elegí un paciente</mat-label>
                 <mat-select [(ngModel)]="pacienteId">
                     <mat-option *ngFor ="let paciente of pacientes" [value]="paciente.id" >
                         {{paciente.nombre}}
@@ -27,7 +27,7 @@
                 </mat-select>
             </mat-form-field>
             <mat-form-field appearance="outline">
-                <mat-label>Elegí un Obra Social</mat-label>
+                <mat-label for="obraSocial">Elegí un Obra Social</mat-label>
                 <mat-select [(ngModel)]="obraSocialId">
                     <mat-option *ngFor ="let obraSocial of obrasSociales" [value]="obraSocial.id" >
                         {{obraSocial.nombre}}
@@ -35,7 +35,7 @@
                 </mat-select>
             </mat-form-field>
             <mat-form-field appearance="outline">
-                <mat-label>Elegí un estudio</mat-label>
+                <mat-label for="estudio">Elegí un estudio</mat-label>
                 <mat-select [(ngModel)]="estudioId">
                     <mat-option *ngFor ="let estudio of estudios" [value]="estudio.nombre">
                         {{estudio.nombre}}
@@ -43,7 +43,7 @@
                 </mat-select>
             </mat-form-field>
             <mat-form-field appearance="outline">
-                <mat-label>Elegí un plan</mat-label>
+                <mat-label for="plan">Elegí un plan</mat-label>
                 <mat-select [(ngModel)]="planId">
                     <mat-option *ngFor ="let plan of planes" [value]="plan.id" >
                         {{plan.nombre}}
@@ -75,14 +75,17 @@
         </div>
     </mat-sidenav>
     <mat-sidenav-content class="sidenav-content">
-        <h2 mat-card-title>Turnos</h2>
-        <button mat-raised-button routerLink="/turnos/create" color="primary">Crear Turno</button>
-        <button mat-icon-button (click)="drawer.toggle()"><mat-icon>filter_alt</mat-icon></button>
+        <div class="header">
+            <h2 mat-card-title>Turnos</h2>
+            <div class="spacer"></div>
+            <button mat-mini-fab routerLink="/turnos/create" color="primary"><mat-icon>add</mat-icon></button>
+            <button mat-mini-fab color="primary" (click)="drawer.toggle()"><mat-icon>search</mat-icon></button>
+        </div>
         <mat-card *ngFor="let turno of turnos | turno : medicoId : institutoId : estudioId : pacienteId : obraSocialId : planId : isCargado : isCancelado : isConfirmado : allowPast :filterDate" (click)="turnoDetail(turno)">
             <mat-card-header>
                 <mat-card-title-group>
                     <h2 mat-card-title>{{turno.fecha | date : 'EEEE dd \'de\' MMM HH:mm' :undefined: 'es' | titlecase }}</h2>
-                    <img class="turno-img" mat-card-sm-image src="https://i.imgur.com/j8y8arX.png" alt="pacient">
+                    <img class="turno-img" mat-card-sm-image src="https://i.imgur.com/g5VZxMf.png" alt="appointment">
                     <p mat-card-subtitle>Pac : {{turno.paciente.nombre}}</p>
                     <p mat-card-subtitle>Med : {{turno.medico.nombre}}</p>
                 </mat-card-title-group>

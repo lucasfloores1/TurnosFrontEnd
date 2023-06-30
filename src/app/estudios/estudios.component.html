@@ -1,18 +1,23 @@
-<div class="grid-container">
-    <h2 class="mat-h2">Obras Sociales</h2>
-    <div class="features">
+<div class="container">
+    <div class="header">
+        <div class="title">
+            <h2 mat-card-title>Estudios</h2>
+            <div class="spacer"></div>
+            <button mat-mini-fab routerLink="/estudios/create" color="primary"><mat-icon>add</mat-icon></button>
+        </div>
+    </div>
+    <div class="search">
         <mat-form-field appearance="outline">
             <mat-label>Buscar</mat-label>
             <input type="text" matInput [(ngModel)]="searchText" placeholder="Nombre, DNI, Direccion, etc...">
             <mat-icon matSuffix>search</mat-icon>
         </mat-form-field>
-        <button mat-raised-button routerLink="/estudios/create" color="primary">Crear Estudio</button>
     </div>
     <mat-card *ngFor="let estudio of estudios | search : searchText" (click)="estudioDetail(estudio)">
         <mat-card-header>
             <mat-card-title-group>
                 <h2 mat-card-title>{{estudio.nombre}}</h2>
-                <img class="estudio-img" mat-card-sm-image src="https://i.imgur.com/j8y8arX.png" alt="institute">
+                <img class="estudio-img" mat-card-sm-image src="https://i.imgur.com/9ulsDM8.png" alt="medical-exam">
                 <p mat-card-subtitle>Codigo : {{estudio.nomenclador}}</p>
             </mat-card-title-group>
         </mat-card-header>

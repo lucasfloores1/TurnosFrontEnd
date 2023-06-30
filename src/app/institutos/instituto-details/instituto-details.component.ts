@@ -11,7 +11,8 @@ import { InstitutoService } from 'src/app/services/instituto.service';
 })
 export class InstitutoDetailsComponent implements OnInit  {
 
-  showEditForm : boolean = false;
+  showForm : boolean = false;
+  showButtons : boolean = true;
 
   instituto! : GetInstitutoDTO
 
@@ -65,8 +66,9 @@ export class InstitutoDetailsComponent implements OnInit  {
     
   }
 
-  toggleEdit(){
-    this.showEditForm = !this.showEditForm
+  toggleForm(){
+    this.showForm = !this.showForm
+    this.showButtons = !this.showButtons
   }
 
 }

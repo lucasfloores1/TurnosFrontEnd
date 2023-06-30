@@ -1,52 +1,42 @@
 .details-container{
-    width: 95%;
     display: flex;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
     flex-direction: column;
-    gap: 10px;
-    margin: auto;
-}
-
-.submit-btn {
-    width: 100%;
-    margin-top: 15px;
-    margin-left: 10px;
-}
-.form-container {
-    align-self: center;
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-.instForm {
-    display: flex;
-    flex-direction: column;
-}
-.title {
-    margin-top: 15px;
-    align-self: center;
-    font-size: 1.5rem;
-}
-
-.error{
-    color: red;
-}
-.submit-btn {
-    width: 100%;
-    margin-top: 15px;
-    margin-left: 10px;
-}
-.form-container {
     padding-left: 15px;
+    padding-right: 15px;
+}
+
+mat-card {
+    width: 100%;
+    border-radius: 15px;
+    max-width: 600px;
+    margin-top: 15px;
+    background-color: #EBEBFF;
+    p{
+        margin-top: 4px;
+    }
+    mat-card-header{
+        margin-bottom: 10px;
+    }
+}
+
+.submit-btn {
+    width: 100%;
+    margin-top: 15px;
+    margin-left: 10px;
+    align-self: center;
+}
+
+.form-container {
+    align-self: center;
     width: 90%;
     display: flex;
     flex-direction: column;
     gap: 15px;
 }
-.obraForm {
-    display: flex;
-    flex-direction: column;
-}
+
 .title {
     margin-top: 15px;
     align-self: center;
@@ -57,28 +47,47 @@
     color: red;
 }
 
-.planes{
-    width: 100%;
+.horarios-form{
+    width: 90%;
     display: flex;
     flex-direction: column;
+    align-self: center;
+    gap: 15px;
 }
-.planes-form{
-    margin-top: 15px;
-}
-.planes-header{
-    display: flex;
-}
+
 .spacer{
     flex: 1 1 auto;
 }
 
-.plan-form-content{
-    display: flex;
-}
-.plan-form-field{
+.form{
+    align-self: center;
     width: 100%;
-}
-.plan-form-header{
     display: flex;
-    margin-bottom: 10px;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
 }
+
+.nav-buttons{
+    margin-top: 15px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.planes-header{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.planes{
+    align-self: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
+}
+
