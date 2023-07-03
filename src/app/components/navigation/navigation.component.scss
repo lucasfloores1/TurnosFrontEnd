@@ -1,14 +1,11 @@
 .sidenav-container {
   height: 100%;
+  overflow: hidden;
 }
 
 .sidenav {
   width: 200px;
 }
-
-// .sidenav .mat-toolbar {
-//   background: inherit;
-// }
 
 .mat-toolbar.mat-primary {
   position: sticky;
@@ -27,4 +24,8 @@
 
   margin-left: 15px;
 
+}
+
+.sidenav-content{
+  overflow: scroll;
 }

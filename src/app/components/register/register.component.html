@@ -1,6 +1,7 @@
 <div class="register">
     <h2 class="title" mat-card-title>Registrarse</h2>
-    <form class="form-container" [formGroup]="signupForm" (submit)="signUp()">
+    <app-loading *ngIf="sendAnimation"></app-loading>
+    <form class="form-container" [formGroup]="signupForm" (submit)="signUp()" *ngIf="!sendAnimation">
         <mat-form-field appearance="outline">
             <mat-label>Nombre</mat-label>
             <input type="text" matInput formControlName="nombre" placeholder="Nombre completo">

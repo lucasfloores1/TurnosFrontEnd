@@ -4,6 +4,7 @@ import { Turno } from 'src/app/model/Turno';
 import { HorarioDTO } from 'src/app/model/Horario';
 import { MedicoService } from 'src/app/services/medico.service';
 import { TurnoService } from 'src/app/services/turno.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-turno-details',
@@ -11,6 +12,11 @@ import { TurnoService } from 'src/app/services/turno.service';
   styleUrls: ['./turno-details.component.scss']
 })
 export class TurnoDetailsComponent implements OnInit{
+
+  animation : boolean = false;
+  schedAnimation : boolean = false;
+  informeAnimation : boolean = false;
+  sendAnimation : boolean = false;
 
   @ViewChild('fileUpload')
   fileUpload! : ElementRef
@@ -31,9 +37,11 @@ export class TurnoDetailsComponent implements OnInit{
     private router : Router,
     private route : ActivatedRoute,
     private medicoService : MedicoService,
+    private notiService : NotificationService,
   ){ }
 
   ngOnInit(): void {
+    this.animation =  true;
     this.route.paramMap.subscribe( (paramMap : any) => {
       const {params} = paramMap;
       this.loadTurno(params.id) 
@@ -41,23 +49,39 @@ export class TurnoDetailsComponent implements OnInit{
   }
 
   loadTurno( id : any ){
-    this.turnoService.getTurnoById( id ).subscribe( response => this.turno = response )
+    this.turnoService.getTurnoById( id ).subscribe( response => {
+      this.turno = response
+      this.animation = false;
+    })
   }
 
   cancelTurno( turno : Turno ){
+    this.sendAnimation = true;
     turno.cancelado = true;
-    this.turnoService.updateTurno( turno ). subscribe( response => {
-      this.router.navigate(['turnos'])
-    })
+    this.turnoService.updateTurno( turno ). subscribe( 
+      response => {
+        this.sendAnimation = false;
+        this.notiService.OkNotification("Turno cancelado con éxito!!")
+        this.router.navigate([`turnos`])
+      }, error => {
+        this.sendAnimation = false;
+        this.notiService.ErrorNotification("Ups algo salió mal")
+        this.router.navigate([`turnos`])
+      }
+    )
   }
 
 
   reprogramarTurno(){
-    this.showCalendar = true;
-    this.turnoService.getTurnosByMedico( this.turno.medico.id ).subscribe( response => this.turnos = response )
-    this.medicoService.getMedicoById(this.turno.medico.id).subscribe( response => {
-      const inst = response.institutos.filter( insti => insti.id == this.turno.instituto.id )
-      this.horarios = inst[0].horarios
+    this.schedAnimation = true
+    this.turnoService.getTurnosByMedico( this.turno.medico.id ).subscribe( response => {
+      this.turnos = response
+      this.medicoService.getMedicoById(this.turno.medico.id).subscribe( response => {
+        const inst = response.institutos.filter( insti => insti.id == this.turno.instituto.id )
+        this.horarios = inst[0].horarios
+        this.schedAnimation = false;
+        this.showCalendar = true;
+      })
     })
   }
 
@@ -66,10 +90,19 @@ export class TurnoDetailsComponent implements OnInit{
   }
 
   updateTurno( date : Date, turno : Turno ){
+    this.sendAnimation = true;
     turno.fecha = date.toString()
-    this.turnoService.updateTurno( turno ).subscribe( response => {
-      this.router.navigate([`turnos`])
-    })        
+    this.turnoService.updateTurno( turno ).subscribe(
+      response => {
+        this.sendAnimation = false;
+        this.notiService.OkNotification("Turno actualizado con éxito!!")
+        this.router.navigate([`turnos`])
+      }, error => {
+        this.sendAnimation = false;
+        this.notiService.ErrorNotification("Ups algo salió mal")
+        this.router.navigate([`turnos`])
+      }
+    )        
   }
 
   toggleInforme(){
@@ -77,10 +110,18 @@ export class TurnoDetailsComponent implements OnInit{
   }
 
   sendInforme(turno : Turno, files : File[]){
-
-    this.turnoService.sendInforme( turno, files ).subscribe( response => {
-      this.router.navigate([`turnos`])
-    } )
+    this.sendAnimation = true;
+    this.turnoService.sendInforme( turno, files ).subscribe(
+      response => {
+        this.sendAnimation = false;
+        this.notiService.OkNotification("Informe enviado con éxito!!")
+        this.router.navigate([`turnos`])
+      }, error => {
+        this.sendAnimation = false;
+        this.notiService.ErrorNotification("Ups algo salió mal")
+        this.router.navigate([`turnos`])
+      }
+    )
 
   }
 

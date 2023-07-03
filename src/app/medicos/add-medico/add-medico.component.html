@@ -1,4 +1,5 @@
-<div class="add-medico">
+<app-loading *ngIf="sendAnimation"></app-loading>
+<div class="add-medico" *ngIf="!sendAnimation">
     <h2 class="title">Crear Medico</h2>
     <form class="form-container" [formGroup]="medForm" (submit)="createMedico()">
         <mat-form-field appearance="outline">

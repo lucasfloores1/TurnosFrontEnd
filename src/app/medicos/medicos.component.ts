@@ -11,6 +11,8 @@ import { MedicoService } from 'src/app/services/medico.service';
 })
 export class MedicosComponent implements OnInit {
 
+  animation : boolean = false;
+
   medicos! : Medico[]
 
   searchText : string = ''
@@ -18,10 +20,10 @@ export class MedicosComponent implements OnInit {
   constructor( private router : Router, private medicoService : MedicoService ){}
 
   ngOnInit(){
-
+    this.animation = true;
     this.medicoService.getMedicos( localStorage.getItem('user') ).subscribe( response =>{
       this.medicos = response;
-      console.log(this.medicos);      
+      this.animation = false;     
     })
 
   }

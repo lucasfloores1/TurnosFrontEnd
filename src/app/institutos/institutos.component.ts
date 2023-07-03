@@ -10,6 +10,8 @@ import { InstitutoService } from 'src/app/services/instituto.service';
 })
 export class InstitutosComponent implements OnInit{
 
+  animation : boolean = false;
+
   institutos! : Instituto[]
 
   searchText : string = ''
@@ -20,9 +22,11 @@ export class InstitutosComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
-
-    this.institutoService.getInstitutos( localStorage.getItem('user') ).subscribe( response => this.institutos = response )
-    
+    this.animation = true;
+    this.institutoService.getInstitutos( localStorage.getItem('user') ).subscribe( response => {
+      this.institutos = response
+      this.animation = false;
+    })    
   }
 
   institutoDetail( instituto : Instituto ){

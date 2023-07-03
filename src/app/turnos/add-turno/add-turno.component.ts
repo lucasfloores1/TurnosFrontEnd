@@ -13,6 +13,7 @@ import { Estudio } from 'src/app/model/Estudio';
 import { EstudioService } from 'src/app/services/estudio.service';
 import { NuevoTurnoDTO } from 'src/app/model/Turno';
 import { Router } from '@angular/router';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-add-turno',
@@ -22,6 +23,9 @@ import { Router } from '@angular/router';
 export class AddTurnoComponent implements OnInit{
 
   animation : boolean = false;
+  startAnimation : boolean = false;
+  obraAnimation : boolean = false;
+  medAnimation : boolean = false;
 
   linear : boolean = true;
   searchMedico : string = ''
@@ -58,12 +62,36 @@ export class AddTurnoComponent implements OnInit{
       private medicoService : MedicoService,
       private turnoService :  TurnoService,
       private estudioService : EstudioService,
+      private notiService : NotificationService
     ){}
 
   ngOnInit(): void {
-    this.pacienteService.getPacientes( this.userId ).subscribe( response => this.pacientes = response )
-    this.medicoService.getMedicos( this.userId ).subscribe( response => this.medicos = response )
-    this.estudioService.getEstudios( this.userId ).subscribe( response => this.estudios = response )
+    this.startAnimation = true;
+    this.pacienteService.getPacientes( this.userId ).subscribe( response => {
+      this.pacientes = response
+      if(this.pacientes.length == 0){
+        this.notiService.ErrorNotification('Aún no tienes pacientes creados')
+        this.router.navigate(['home'])
+        this.startAnimation = false;
+      }
+      this.medicoService.getMedicos( this.userId ).subscribe( response => {
+        this.medicos = response
+        if(this.medicos.length == 0){
+          this.notiService.ErrorNotification('Aún no tienes medicos creados')
+          this.router.navigate(['home'])
+          this.startAnimation = false;
+        }
+        this.estudioService.getEstudios( this.userId ).subscribe( response => {
+          this.estudios = response
+          if(this.estudios.length == 0){
+            this.notiService.ErrorNotification('Aún no tienes estudios creados')
+            this.router.navigate(['home'])
+            this.startAnimation = false;
+          }
+          this.startAnimation = false;
+        })
+      })
+    })
   }
 
   selectMedico( medico : Medico){
@@ -71,14 +99,14 @@ export class AddTurnoComponent implements OnInit{
     this.toggleMedicoSelected()
   }
 
-  loadMedicoToDTO(medico : Medico){    
+  loadMedicoToDTO(medico : Medico){
+    this.medAnimation = true;
     this.medicoService.getMedicoById(medico.id).subscribe( response => {
       this.institutos = response.institutos
-      console.log(response);
-    })
-    this.turnoService.getTurnosByMedico(medico.id).subscribe( response => {
-      this.turnos = response
-      console.log(this.turnos);
+      this.turnoService.getTurnosByMedico(medico.id).subscribe( response => {
+        this.turnos = response
+        this.medAnimation = false;
+      })
     })
   }
 
@@ -119,11 +147,15 @@ export class AddTurnoComponent implements OnInit{
   }
 
   getPacienteDTO(){
-    this.pacienteService.getPacienteById(this.selectedPaciente.id).subscribe( response => this.selectedPacienteDTO = response )
+    this.obraAnimation = true;
+    this.pacienteService.getPacienteById(this.selectedPaciente.id).subscribe( response => {
+      this.selectedPacienteDTO = response
+      this.obraAnimation = false;
+    })
   }
 
   navigateToAddPaciente(){
-    this.router.navigate(['/paciente/create']) 
+    this.router.navigate(['/pacientes/create']) 
   }
 
   toggleObraSocialSelected(){
@@ -172,11 +204,12 @@ export class AddTurnoComponent implements OnInit{
     this.turnoService.createTurno(newTurno).subscribe(
       response => {
         this.animation = false;
-        //this.router.navigate(['home'])
-      },
-      error => {
+        this.notiService.OkNotification("Turno creado con éxito!!")
+        this.router.navigate([`turnos`])
+      }, error => {
         this.animation = false;
-        console.log("error");
+        this.notiService.ErrorNotification("Ups algo salió mal")
+        this.router.navigate([`turnos`])
       }
     )
   }

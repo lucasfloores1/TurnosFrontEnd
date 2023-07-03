@@ -1,0 +1,15 @@
+.container{
+    display: flex;
+}
+.spacer{
+    flex: 1 1 auto;
+}
+.message{
+    align-self: center;
+    font-size: 1.2em;
+    color: #FF6F6F;
+}
+
+mat-icon{
+    color : #FF6F6F;
+}

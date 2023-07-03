@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-login',
@@ -9,7 +10,7 @@ import { LoginService } from 'src/app/services/login.service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit{
-
+  animation : boolean = false;
   isSubmitted : boolean = false;
   showErrorMessage : boolean = false;
 
@@ -21,15 +22,18 @@ export class LoginComponent implements OnInit{
   constructor( 
     private router : Router,
     private fb : FormBuilder,
-    private loginService : LoginService
+    private loginService : LoginService,
+    private notiService : NotificationService
   ){}
   
   ngOnInit(): void {
+
+    this.loginService.logout();
     
   }
 
   login(){
-
+    this.animation = true;
     this.isSubmitted = !this.isSubmitted 
     this.loginService.generateToken(this.loginForm.value).subscribe(
       (response : any) => {       
@@ -38,9 +42,19 @@ export class LoginComponent implements OnInit{
           const text = JSON.stringify(response)
           const user = JSON.parse(text)
           this.loginService.setUser(user.id);
+          this.animation = false;
           this.router.navigate(['home']);
         });        
-      },(error) => {if(error.status = 403){this.toggleShowErrorMessage()}
+      },(error) => {
+        if(error.status = 403){
+          this.animation = false;
+          this.toggleShowErrorMessage()
+        }
+        if(error.status = 401){
+          this.animation = false;
+          this.loginService.logout()
+          this.notiService.ErrorNotification("Tu sesión expiró :(")
+        }
       }
     );
 

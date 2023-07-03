@@ -3,13 +3,22 @@ $primary : #4569ec;
 .container{
   h1 {
     margin-left: 15px;
+    align-self: center;
   }
   width: 100%;
+  max-width: 600px;
+  min-width: 270px;
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
 }
 .card-list{
   display: flex;
   flex-direction: column;
   width: 87%;
+  max-width: 600px;
+  min-width: 270px;
   padding-left: 25px;
 }
 
@@ -18,6 +27,7 @@ $primary : #4569ec;
   align-items: center;
   border-radius: 15px;
   max-width: 600px;
+  min-width: 270px;
   margin-top: 15px;
   background-color: #EBEBFF;
   width: 100%;

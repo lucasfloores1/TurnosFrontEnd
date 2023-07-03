@@ -9,6 +9,7 @@ import { Plan } from 'src/app/model/Plan';
 import { Turno } from 'src/app/model/Turno';
 import { LoginService } from 'src/app/services/login.service';
 import { TurnoService } from 'src/app/services/turno.service';
+import { NotificationService } from '../services/notification.service';
 
 @Component({
   selector: 'app-turnos',
@@ -16,6 +17,8 @@ import { TurnoService } from 'src/app/services/turno.service';
   styleUrls: ['./turnos.component.scss']
 })
 export class TurnosComponent implements OnInit{
+
+  animation : boolean = false;
 
   turnos! : Turno[]
   searchTurno! : string;
@@ -40,17 +43,16 @@ export class TurnosComponent implements OnInit{
 
   constructor( 
     private router : Router,
-    private loginService : LoginService,
     private turnoService : TurnoService
   ){}
 
   ngOnInit(): void {
-
+    this.animation = true;
     this.turnoService.getTurnos( localStorage.getItem('user') ).subscribe( response => {
       this.turnos = response;
       this.loadArrays()
+      this.animation = false;
     });
-    
   }
 
   turnoDetail(turno : any){

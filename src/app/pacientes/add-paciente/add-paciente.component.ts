@@ -6,6 +6,7 @@ import { Plan } from 'src/app/model/Plan';
 import { NuevoPacienteDTO } from 'src/app/model/Paciente';
 import { ObraSocialService } from 'src/app/services/obra-social.service';
 import { PacienteService } from 'src/app/services/paciente.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-add-paciente',
@@ -13,6 +14,8 @@ import { PacienteService } from 'src/app/services/paciente.service';
   styleUrls: ['./add-paciente.component.scss']
 })
 export class AddPacienteComponent implements OnInit {
+
+  sendAnimation: boolean = false;
 
   obrasSociales! : ObraSocial[];
   obraSocial! : ObraSocial;
@@ -38,18 +41,29 @@ export class AddPacienteComponent implements OnInit {
     private router : Router,
     private fb : FormBuilder,
     private pacienteService : PacienteService,
-    private obraSocialService : ObraSocialService
+    private obraSocialService : ObraSocialService,
+    private notiService : NotificationService
   ){}
 
   ngOnInit(): void {
-
+    this.sendAnimation = true;
     this.obraSocialService.getObrasSociales( this.userId ).subscribe( response => {
-      this.obrasSociales = response.filter( obra => obra.nombre !== "Particular" )
-    })    
-    this.pacienteForm.get('idObraSocial')?.valueChanges.subscribe( idObraSocial => { 
-      this.obraSocialService.getPlanesByObraSocial(idObraSocial).subscribe( response => this.planes = response )
+      this.obrasSociales = response
+      this.pacienteForm.get('idObraSocial')?.valueChanges.subscribe( idObraSocial => { 
+        const isPart = this.obrasSociales.find( obra => obra.id == idObraSocial )
+        if( isPart ){
+          if( isPart.nombre == "Particular" ){
+            this.pacienteForm.get('afiliado')?.patchValue(this.pacienteForm.get('dni')?.value)
+          }else{
+            this.pacienteForm.get('afiliado')?.patchValue('')
+          }
+        }
+        this.obraSocialService.getPlanesByObraSocial(idObraSocial).subscribe( response => {
+          this.planes = response
+        })
+      })
     })
-    
+    this.sendAnimation = false;    
   }
 
   createPaciente(){
@@ -73,7 +87,17 @@ export class AddPacienteComponent implements OnInit {
           afiliado : paciente.afiliado,
         }]
       }      
-      this.pacienteService.createPaciente(NuevoPacienteDTO).subscribe( response => console.log(response) )
+      this.pacienteService.createPaciente(NuevoPacienteDTO).subscribe(
+        response => {
+          this.sendAnimation = false;
+          this.notiService.OkNotification("Paciente creado con éxito!!")
+          this.router.navigate([`pacientes`])
+        }, error => {
+          this.sendAnimation = false;
+          this.notiService.ErrorNotification("Ups algo salió mal")
+          this.router.navigate([`pacientes`])
+        }
+      )
       this.router.navigate(['home']) 
     }
 
@@ -84,6 +108,10 @@ export class AddPacienteComponent implements OnInit {
       return 'Este campo es obligatorio'
     }
     return this.pacienteForm.get('mail')?.hasError('email') ? 'El mail que ingresaste no es válido' : ''
+  }
+
+  isParticularPlan( value : any ){
+    console.log(value);
   }
 
 }

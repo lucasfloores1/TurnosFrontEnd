@@ -8,6 +8,7 @@ import { ObraSocialDTO } from 'src/app/model/ObraSocial';
 import { PlanDTO } from 'src/app/model/Plan';
 import { ObraSocialService } from 'src/app/services/obra-social.service';
 import { PacienteService } from 'src/app/services/paciente.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-paciente-details',
@@ -15,6 +16,9 @@ import { PacienteService } from 'src/app/services/paciente.service';
   styleUrls: ['./paciente-details.component.scss']
 })
 export class PacienteDetailsComponent implements OnInit{
+
+  animation : boolean = false;
+  sendAnimation : boolean = false;
 
   showForm : boolean = false;
   showButtons : boolean = true;
@@ -45,23 +49,21 @@ export class PacienteDetailsComponent implements OnInit{
     private route : ActivatedRoute,
     private pacienteService : PacienteService,
     private fb : FormBuilder,
-    private obraSocialService : ObraSocialService
+    private obraSocialService : ObraSocialService,
+    private notiService : NotificationService
   ){}
 
   ngOnInit(): void {
-
+    this.animation = true;
     this.route.paramMap.subscribe( (paramMap : any) => {
       const {params} = paramMap;
       this.loadPaciente(params.id)
     })
-    
   }
 
   loadPaciente( id : any ){
     this.pacienteService.getPacienteById( id ).subscribe( response => {
-      this.paciente = response
-      console.log("paciente recibido", response);
-      
+      this.paciente = response      
       this.pacienteForm = this.fb.group({
         userId : [localStorage.getItem('user') , Validators.required],
         id: [this.paciente.id , Validators.required ],
@@ -78,8 +80,6 @@ export class PacienteDetailsComponent implements OnInit{
         this.obras = response.filter(obra => {
           return obra.nombre !== 'Particular' && this.paciente.obrasSociales.some(os => os.nombre === obra.nombre);
         });
-        console.log(this.obras);
-        
         // las que no tiene mi paciente sin particular        
         this.obrasSociales = response.filter(obra => {
           const isParticular = obra.nombre === 'Particular';
@@ -94,16 +94,13 @@ export class PacienteDetailsComponent implements OnInit{
           }
         }
         this.toLoadObrasSociales = this.pacienteForm.get('obrasSociales') as FormArray
-      })      
+      })
+      this.animation = false;      
     })
   }
 
   updatePaciente(){
-
-    console.log("obras sociales editadas",this.selectedObrasSociales);
-    console.log("obra social añadida",this.NewObraSocialSelected, this.NewPlanSelected, this.newAfiliado);
-    console.log("paciente form", this.pacienteForm);
-
+    this.sendAnimation = true;
     if ( this.selectedObrasSociales.length > 0 ){
       for ( let obra of this.selectedObrasSociales ){
         const obraSocial = this.fb.group({
@@ -122,10 +119,17 @@ export class PacienteDetailsComponent implements OnInit{
       })
       this.toLoadObrasSociales.push(obraSocial)
     }
-    this.pacienteService.createPaciente( this.pacienteForm.value ).subscribe( response => {
-      console.log(response)
-      this.router.navigate(['pacientes'])
-    });
+    this.pacienteService.createPaciente( this.pacienteForm.value ).subscribe( 
+      response => {
+        this.sendAnimation = false;
+        this.notiService.OkNotification("Paciente actualizado con éxito!!")
+        this.router.navigate([`pacientes`])
+      }, error => {
+        this.sendAnimation = false;
+        this.notiService.ErrorNotification("Ups algo salió mal")
+        this.router.navigate([`pacientes`])
+      }
+    );
     
   }
 
@@ -144,25 +148,15 @@ export class PacienteDetailsComponent implements OnInit{
       afiliado: this.paciente.obrasSociales[index].afiliado
     }
     this.editedAfiliados[index] = true;
-    console.log(this.editedAfiliados);
-    console.log(this.selectedObrasSociales);
-    
-        
   }
 
   getSelectedPlan(obra: any): any {
-    console.log("sejecuta");
-    
-    const selectedObraSocial = this.paciente.obrasSociales.find(os => os.nombre === obra.nombre);
-    console.log(selectedObraSocial ? selectedObraSocial.plan : null);
-    
+    const selectedObraSocial = this.paciente.obrasSociales.find(os => os.nombre === obra.nombre);    
     return selectedObraSocial ? selectedObraSocial.plan : null;
   }
 
   onSelectedNewObraSocial( obra : any ){
-
     this.isNewObraSocialSelected = false
-
   }
 
   onSelectedNewPlan( plan : any ){

@@ -1,4 +1,5 @@
-<div *ngIf="obraSocial" class="details-container">
+<app-loading *ngIf="animation"></app-loading>
+<div *ngIf="obraSocial && !animation" class="details-container">
     <mat-card>
         <mat-card-header>
             <mat-card-title-group>
@@ -18,7 +19,8 @@
       <button mat-raised-button [color]="showButtons ? 'primary' : 'warn'" (click)="toggleForm()">{{showButtons ? 'Editar Obra Social' : 'Cancelar'}}</button>
       <button mat-raised-button color="warn" routerLink="/obras-sociales" *ngIf="showButtons">Volver</button>
     </div>
-    <div class="form" [formGroup]="obraForm" *ngIf="showForm">
+    <app-loading *ngIf="sendAnimation"></app-loading>
+    <div class="form" [formGroup]="obraForm" *ngIf="showForm && !sendAnimation">
         <h2 class="title" mat-card-title>Editar obra Social</h2>
         <form class="form-container" [formGroup]="obraForm" (submit)="updateObraSocial()">
           <mat-form-field appearance="outline">

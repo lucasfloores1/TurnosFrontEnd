@@ -9,6 +9,8 @@ import { ObraSocialService } from 'src/app/services/obra-social.service';
 })
 export class ObrasSocialesComponent implements OnInit{
 
+  animation : boolean = false;
+
   obrasSociales! : ObraSocial[]
 
   searchText : string = ''
@@ -20,11 +22,11 @@ export class ObrasSocialesComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
-
+    this.animation = true;
     this.obraSocialService.getObrasSociales( localStorage.getItem('user') ).subscribe( response => {
       this.obrasSociales = response.filter( obra => obra.nombre !== 'Particular' )
+      this.animation = false;
     })
-    
   }
 
   obraSocialDetail( obraSocial : ObraSocial ){

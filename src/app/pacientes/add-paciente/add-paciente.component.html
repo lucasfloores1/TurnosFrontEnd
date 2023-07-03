@@ -1,4 +1,5 @@
-<div class="add-paciente">
+<app-loading *ngIf="sendAnimation"></app-loading>
+<div class="add-paciente" *ngIf="!sendAnimation">
     <h2 class="title">Crear Paciente</h2>
     <form class="form-container" [formGroup]="pacienteForm" (submit)="createPaciente()">
         <mat-form-field appearance="outline">
@@ -36,7 +37,7 @@
             pacienteForm.get('direccion')?.invalid && ( pacienteForm.get('direccion')?.dirty || pacienteForm.get('direccion')?.touched || isSubmitted)
         ">Este campo es obligatorio</mat-error>
         </mat-form-field>
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" *ngIf="pacienteForm.get('dni')?.value">
             <mat-label for="pacienteForm">Obra Social</mat-label>
             <mat-select formControlName = "idObraSocial" for="pacienteForm">
                 <mat-option *ngFor="let obraSocial of obrasSociales" [value]="obraSocial.id">
@@ -47,9 +48,9 @@
             pacienteForm.get('idObraSocial')?.invalid && ( pacienteForm.get('idObraSocial')?.dirty || pacienteForm.get('idObraSocial')?.touched || isSubmitted)
         ">Este campo es obligatorio</mat-error>
         </mat-form-field>
-        <mat-form-field appearance="outline" *ngIf="planes" >
+        <mat-form-field appearance="outline" *ngIf="planes">
             <mat-label for="pacienteForm">Plan</mat-label>
-            <mat-select formControlName="idPlan">
+            <mat-select formControlName="idPlan" (valueChange)="isParticularPlan(pacienteForm.get('idPlan')?.value)">
             <mat-option *ngFor="let plan of planes" [value]="plan.id">
                 {{ plan.nombre }}
             </mat-option>
@@ -65,6 +66,6 @@
             pacienteForm.get('afiliado')?.invalid && ( pacienteForm.get('afiliado')?.dirty || pacienteForm.get('afiliado')?.touched || isSubmitted)
         ">Este campo es obligatorio</mat-error>
         </mat-form-field>
-        <button class="submit-btn" color="accent" mat-raised-button type="submit">Crear Paciente</button>
+        <button class="submit-btn" color="accent" mat-raised-button type="submit" [disabled]="pacienteForm.invalid">Crear Paciente</button>
     </form>
 </div>

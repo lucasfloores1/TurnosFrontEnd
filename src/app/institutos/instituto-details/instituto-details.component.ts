@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GetInstitutoDTO } from 'src/app/model/Instituto';
 import { InstitutoService } from 'src/app/services/instituto.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-instituto-details',
@@ -10,6 +11,9 @@ import { InstitutoService } from 'src/app/services/instituto.service';
   styleUrls: ['./instituto-details.component.scss']
 })
 export class InstitutoDetailsComponent implements OnInit  {
+
+  sendAnimation : boolean = false;
+  animation : boolean = false;
 
   showForm : boolean = false;
   showButtons : boolean = true;
@@ -24,16 +28,16 @@ export class InstitutoDetailsComponent implements OnInit  {
     private fb : FormBuilder,
     private route : ActivatedRoute,
     private router : Router,
-    private institutoService : InstitutoService
+    private institutoService : InstitutoService,
+    private notiService : NotificationService
   ){}
 
   ngOnInit(): void {
-
+    this.animation = true;
     this.route.paramMap.subscribe( (paramMap : any) => {
       const {params} = paramMap;
       this.loadInstituto(params.id)
     })
-    
   }
 
   loadInstituto( id : number ){
@@ -54,16 +58,24 @@ export class InstitutoDetailsComponent implements OnInit  {
         direccion: [this.instituto.direccion , Validators.required],
         cuit: [this.instituto.cuit , Validators.required]
       })
-      
+      this.animation = false;
     })
 
   }
 
   updateInstituto(){
 
-    this.institutoService.updateInstituto(this.instForm.value).subscribe( response => console.log( response ) );
-    this.router.navigate(['institutos'])
-    
+    this.institutoService.updateInstituto(this.instForm.value).subscribe( 
+      response => {
+        this.sendAnimation = false;
+        this.notiService.OkNotification("Insituto actualizado con éxito!!")
+        this.router.navigate([`institutos`])
+      }, error => {
+        this.sendAnimation = false;
+        this.notiService.ErrorNotification("Ups algo salió mal")
+        this.router.navigate([`institutos`])
+      }
+    )
   }
 
   toggleForm(){

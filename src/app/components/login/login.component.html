@@ -1,6 +1,8 @@
+
 <div class="login">
     <h2 class="title" mat-card-title>Iniciar Sesión</h2>
-    <form class="form-container" [formGroup]="loginForm" (submit)="login()">
+    <app-loading *ngIf="animation"></app-loading>
+    <form class="form-container" [formGroup]="loginForm" (submit)="login()" *ngIf="!animation">
         <mat-form-field appearance="outline">
             <mat-label>Nombre de usuario</mat-label>
             <input type="text" matInput formControlName="username" placeholder="Nombre de usuario">

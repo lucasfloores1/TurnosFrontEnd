@@ -1,50 +1,57 @@
-<mat-sidenav-container class="sidenav-container" *ngIf="turnos">
+<app-loading *ngIf="animation"></app-loading>
+<mat-sidenav-container class="sidenav-container" *ngIf="turnos && !animation">
     <mat-sidenav #drawer class="sidenav" mode="over" position="end" fixedInViewport>
         <mat-toolbar color="primary">Filtros</mat-toolbar>
         <div class="search">
             <mat-form-field appearance="outline">
-                <mat-label for="medico">Elegí un médico</mat-label>
+                <mat-label for="medico">Filtrá por médico</mat-label>
                 <mat-select [(ngModel)]="medicoId">
+                    <mat-option [value]="undefined">--</mat-option>
                     <mat-option *ngFor ="let medico of medicos" [value]="medico.id" >
                         {{medico.nombre}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field appearance="outline">
-                <mat-label for="instituto">Elegí un Instituto</mat-label>
+                <mat-label for="instituto">Filtrá por Instituto</mat-label>
                 <mat-select [(ngModel)]="institutoId">
+                    <mat-option [value]="undefined">--</mat-option>
                     <mat-option *ngFor ="let instituto of institutos" [value]="instituto.id" >
                         {{instituto.nombre}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field appearance="outline">
-                <mat-label for="paciente">Elegí un paciente</mat-label>
+                <mat-label for="paciente">Filtrá por paciente</mat-label>
                 <mat-select [(ngModel)]="pacienteId">
+                    <mat-option [value]="undefined">--</mat-option>
                     <mat-option *ngFor ="let paciente of pacientes" [value]="paciente.id" >
                         {{paciente.nombre}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field appearance="outline">
-                <mat-label for="obraSocial">Elegí un Obra Social</mat-label>
+                <mat-label for="obraSocial">Filtrá por Obra Social</mat-label>
                 <mat-select [(ngModel)]="obraSocialId">
+                    <mat-option [value]="undefined">--</mat-option>
                     <mat-option *ngFor ="let obraSocial of obrasSociales" [value]="obraSocial.id" >
                         {{obraSocial.nombre}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field appearance="outline">
-                <mat-label for="estudio">Elegí un estudio</mat-label>
+                <mat-label for="estudio">Filtrá por estudio</mat-label>
                 <mat-select [(ngModel)]="estudioId">
+                    <mat-option [value]="undefined">--</mat-option>
                     <mat-option *ngFor ="let estudio of estudios" [value]="estudio.nombre">
                         {{estudio.nombre}}
                     </mat-option>
                 </mat-select>
             </mat-form-field>
             <mat-form-field appearance="outline">
-                <mat-label for="plan">Elegí un plan</mat-label>
+                <mat-label for="plan">Filtrá por plan</mat-label>
                 <mat-select [(ngModel)]="planId">
+                    <mat-option [value]="undefined">--</mat-option>
                     <mat-option *ngFor ="let plan of planes" [value]="plan.id" >
                         {{plan.nombre}}
                     </mat-option>
@@ -56,42 +63,52 @@
                 <mat-datepicker-toggle matSuffix [for]="picker" ></mat-datepicker-toggle>
                 <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
-            <mat-radio-group [(ngModel)]="isCargado">
-                <mat-radio-button [value]="true">Cargado</mat-radio-button>
-                <mat-radio-button [value]="false">No Cargado</mat-radio-button>
-                <mat-radio-button [value]="undefined">Indistinto</mat-radio-button>
-            </mat-radio-group>
-            <mat-radio-group [(ngModel)]="isCancelado">
-                <mat-radio-button [value]="true">Cancelado</mat-radio-button>
-                <mat-radio-button [value]="false">No Cancelado</mat-radio-button>
-                <mat-radio-button [value]="undefined">Indistinto</mat-radio-button>
-            </mat-radio-group>
-            <mat-radio-group [(ngModel)]="isConfirmado">
-                <mat-radio-button [value]="true">Confirmado</mat-radio-button>
-                <mat-radio-button [value]="false">No Confirmado</mat-radio-button>
-                <mat-radio-button [value]="undefined">Indistinto</mat-radio-button>
-            </mat-radio-group>
+            <mat-form-field appearance="outline">
+                <mat-label>Cargado</mat-label>
+                <mat-select [(ngModel)]="isCargado">
+                    <mat-option [value]="undefined">--</mat-option>
+                    <mat-option [value]="true">Turno cargado</mat-option>
+                    <mat-option [value]="true">Turno por cargar</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Confirmado</mat-label>
+                <mat-select [(ngModel)]="isConfirmado">
+                    <mat-option [value]="undefined">--</mat-option>
+                    <mat-option [value]="true">Turno confirmado</mat-option>
+                    <mat-option [value]="true">Turno por confirmar</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Cancelado</mat-label>
+                <mat-select [(ngModel)]="isCancelado">
+                    <mat-option [value]="undefined">--</mat-option>
+                    <mat-option [value]="true">Turno cancelado</mat-option>
+                    <mat-option [value]="true">Turno por cancelar</mat-option>
+                </mat-select>
+            </mat-form-field>
             <mat-checkbox [(ngModel)]="allowPast">Turnos Pasados</mat-checkbox>
         </div>
     </mat-sidenav>
     <mat-sidenav-content class="sidenav-content">
-        <div class="header">
-            <h2 mat-card-title>Turnos</h2>
-            <div class="spacer"></div>
-            <button mat-mini-fab routerLink="/turnos/create" color="primary"><mat-icon>add</mat-icon></button>
-            <button mat-mini-fab color="primary" (click)="drawer.toggle()"><mat-icon>search</mat-icon></button>
-        </div>
-        <mat-card *ngFor="let turno of turnos | turno : medicoId : institutoId : estudioId : pacienteId : obraSocialId : planId : isCargado : isCancelado : isConfirmado : allowPast :filterDate" (click)="turnoDetail(turno)">
-            <mat-card-header>
-                <mat-card-title-group>
-                    <h2 mat-card-title>{{turno.fecha | date : 'EEEE dd \'de\' MMM HH:mm' :undefined: 'es' | titlecase }}</h2>
-                    <img class="turno-img" mat-card-sm-image src="https://i.imgur.com/g5VZxMf.png" alt="appointment">
-                    <p mat-card-subtitle>Pac : {{turno.paciente.nombre}}</p>
-                    <p mat-card-subtitle>Med : {{turno.medico.nombre}}</p>
-                </mat-card-title-group>
-            </mat-card-header>
-            <mat-card-content></mat-card-content>
-        </mat-card>
+            <div class="header">
+                <h2 mat-card-title>Turnos</h2>
+                <div class="spacer"></div>
+                <button mat-mini-fab routerLink="/turnos/create" color="primary"><mat-icon>add</mat-icon></button>
+                <button mat-mini-fab color="primary" (click)="drawer.toggle()"><mat-icon>search</mat-icon></button>
+            </div>
+            <div class="not-found" *ngIf="turnos.length == 0">No tienes turnos creados aún</div>
+            <mat-card *ngFor="let turno of turnos | turno : medicoId : institutoId : estudioId : pacienteId : obraSocialId : planId : isCargado : isCancelado : isConfirmado : allowPast :filterDate" (click)="turnoDetail(turno)">
+                <mat-card-header>
+                    <mat-card-title-group>
+                        <h2 mat-card-title>{{turno.fecha | date : 'EEEE dd \'de\' MMM HH:mm' :undefined: 'es' | titlecase }}</h2>
+                        <img class="turno-img" mat-card-sm-image src="https://i.imgur.com/g5VZxMf.png" alt="appointment">
+                        <p mat-card-subtitle>Pac : {{turno.paciente.nombre}}</p>
+                        <p mat-card-subtitle>Med : {{turno.medico.nombre}}</p>
+                    </mat-card-title-group>
+                </mat-card-header>
+                <mat-card-content></mat-card-content>
+            </mat-card>
     </mat-sidenav-content>
 </mat-sidenav-container>
 

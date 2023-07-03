@@ -14,6 +14,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { AnimationsModule } from '../animations/animations.module';
 
 @NgModule({
   declarations: [
@@ -32,7 +33,8 @@ import { MatInputModule } from '@angular/material/input';
     MatFormFieldModule,
     MatDividerModule,
     MatButtonModule,
-    MatInputModule
+    MatInputModule,
+    AnimationsModule
   ]
 })
 export class ObrasSocialesModule { }

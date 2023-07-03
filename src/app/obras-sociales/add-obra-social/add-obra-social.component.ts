@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { NotificationService } from 'src/app/services/notification.service';
 import { ObraSocialService } from 'src/app/services/obra-social.service';
 
 @Component({
@@ -9,6 +10,8 @@ import { ObraSocialService } from 'src/app/services/obra-social.service';
   styleUrls: ['./add-obra-social.component.scss']
 })
 export class AddObraSocialComponent implements OnInit {
+
+  sendAnimation : boolean = false;
 
   planes! : FormArray
 
@@ -25,7 +28,8 @@ export class AddObraSocialComponent implements OnInit {
   constructor(
     private fb : FormBuilder,
     private router : Router,
-    private obraSocialService : ObraSocialService
+    private obraSocialService : ObraSocialService,
+    private notiService : NotificationService
   ){}
 
   ngOnInit(): void {
@@ -46,8 +50,17 @@ export class AddObraSocialComponent implements OnInit {
   }
 
   createObraSocial(){    
-    this.obraSocialService.createObraSocial( this.obraForm.value ).subscribe( response => console.log(response) )      
-    this.router.navigate(['home'])
+    this.obraSocialService.createObraSocial( this.obraForm.value ).subscribe(
+      response => {
+        this.sendAnimation = false;
+        this.notiService.OkNotification("Obra Social creada con éxito!!")
+        this.router.navigate([`obras-sociales`])
+      }, error => {
+        this.sendAnimation = false;
+        this.notiService.ErrorNotification("Ups algo salió mal")
+        this.router.navigate([`obras-sociales`])
+      }
+    )      
   }
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EstudioService } from 'src/app/services/estudio.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-add-estudio',
@@ -9,6 +10,8 @@ import { EstudioService } from 'src/app/services/estudio.service';
   styleUrls: ['./add-estudio.component.scss']
 })
 export class AddEstudioComponent implements OnInit{
+
+  sendAnimation: boolean = false;
 
   estForm : FormGroup = this.fb.group({
     userId : [localStorage.getItem('user'), Validators.required],
@@ -20,7 +23,8 @@ export class AddEstudioComponent implements OnInit{
   constructor(
     private router : Router,
     private fb : FormBuilder,
-    private estudioService : EstudioService
+    private estudioService : EstudioService,
+    private notiService : NotificationService
   ){}
 
   ngOnInit(): void {
@@ -28,8 +32,17 @@ export class AddEstudioComponent implements OnInit{
   }
 
   createEstudio(){
-    this.estudioService.createEstudio(this.estForm.value).subscribe( response => console.log(response) )
-    this.router.navigate(['home'])
+    this.estudioService.createEstudio(this.estForm.value).subscribe(
+      response => {
+        this.sendAnimation = false;
+        this.notiService.OkNotification("Estudio creado con éxito!!")
+        this.router.navigate([`estudios`])
+      }, error => {
+        this.sendAnimation = false;
+        this.notiService.ErrorNotification("Ups algo salió mal")
+        this.router.navigate([`estudios`])
+      }
+    )
   }
 
 }

@@ -1,32 +1,34 @@
-<div class="week-nav">
-    <button mat-raised-button (click)="previousWeek()" color="accent"><<</button>
-    <div class="week-nav-text">
-        <p>Semana del</p>
-        <p>{{ firstDayOfWeek | date : "dd - MMM" }} al {{ lastDayOfWeek | date : "d - MMM" }}</p>
+<div class="container">
+    <div class="week-nav">
+        <button mat-raised-button (click)="previousWeek()" color="accent"><<</button>
+        <div class="week-nav-text">
+            <p>Semana del</p>
+            <span class="day">{{ firstDayOfWeek | date : "dd  MMM" }}</span><span> al </span><span class="day">{{ lastDayOfWeek | date : "dd  MMM" }}</span>
+        </div>
+        <button mat-raised-button (click)="nextWeek()" color="accent">>></button>
     </div>
-    <button mat-raised-button (click)="nextWeek()" color="accent">>></button>
+    <div class="table-container">
+        <table >
+            <thead [style.grid-template-columns]="tableColumns">
+                <tr *ngFor="let day of weekDays, let i = index">
+                    <th>
+                        <p>{{ day }}</p>
+                        <p>{{ weekSelect[i].name }}</p>
+                    </th>
+                </tr>
+            </thead>
+            <tbody [style.grid-template-columns]="tableColumns">
+                <tr *ngFor="let day of weekSelect; let i = index">
+                    <td *ngFor="let turno of day.horarios; let j = index">
+                    <button mat-raised-button
+                            [color]="buttonColors[i][j] ? 'accent' : 'primary'"
+                            [disabled]="turno.pasado || turno.dado"
+                            (click)="loadToHorarioDTO(turno.horario, i, j)">
+                        {{ turno.horario | date : 'HH:mm' }}
+                    </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>  
 </div>
-<div class="table-container">
-    <table >
-        <thead [style.grid-template-columns]="tableColumns">
-            <tr *ngFor="let day of weekDays, let i = index">
-                <th>
-                    <p>{{ day }}</p>
-                    <p>{{ weekSelect[i].name }}</p>
-                </th>
-            </tr>
-        </thead>
-        <tbody [style.grid-template-columns]="tableColumns">
-            <tr *ngFor="let day of weekSelect; let i = index">
-                <td *ngFor="let turno of day.horarios; let j = index">
-                  <button mat-raised-button
-                          [color]="buttonColors[i][j] ? 'accent' : 'primary'"
-                          [disabled]="turno.pasado || turno.dado"
-                          (click)="loadToHorarioDTO(turno.horario, i, j)">
-                    {{ turno.horario | date : 'HH:mm' }}
-                  </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>  

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { GetObraSocialDTO } from 'src/app/model/ObraSocial';
+import { NotificationService } from 'src/app/services/notification.service';
 import { ObraSocialService } from 'src/app/services/obra-social.service';
 
 @Component({
@@ -11,6 +12,8 @@ import { ObraSocialService } from 'src/app/services/obra-social.service';
 })
 export class ObraSocialDetailsComponent implements OnInit {
 
+  animation : boolean = false;
+  sendAnimation : boolean = false;
   showForm : boolean = false;
   showButtons : boolean = true;
 
@@ -24,11 +27,12 @@ export class ObraSocialDetailsComponent implements OnInit {
     private fb : FormBuilder,
     private route : ActivatedRoute,
     private router : Router,
-    private obraSocialService : ObraSocialService
+    private obraSocialService : ObraSocialService,
+    private notiService : NotificationService
   ){}
 
   ngOnInit(): void {
-
+    this.animation = true;
     this.obraForm = this.fb.group({
       userId: [localStorage.getItem('user'), Validators.required],
       id: ['', Validators.required],
@@ -41,7 +45,6 @@ export class ObraSocialDetailsComponent implements OnInit {
       const { params } = paramMap;
       this.loadObraSocial(params.id);
     });
-    
   }
 
   loadObraSocial( id : any ){
@@ -60,8 +63,18 @@ export class ObraSocialDetailsComponent implements OnInit {
   }
 
   updateObraSocial(){
-    this.obraSocialService.createObraSocial( this.obraForm.value ).subscribe( response => console.log(response) )      
-    this.router.navigate(['obra-social'])
+    this.sendAnimation = true;
+    this.obraSocialService.createObraSocial( this.obraForm.value ).subscribe(
+      response => {
+        this.sendAnimation = false;
+        this.notiService.OkNotification("Obra Social actualizada con éxito!!")
+        this.router.navigate([`obras-sociales`])
+      }, error => {
+        this.sendAnimation = false;
+        this.notiService.ErrorNotification("Ups algo salió mal")
+        this.router.navigate([`obras-sociales`])
+      }
+    )      
   }
 
   removePlan( index : number ){
@@ -84,6 +97,7 @@ export class ObraSocialDetailsComponent implements OnInit {
       });
       this.planes.push(newPlan);
     }
+    this.animation = false;
   }
 
   toggleForm(){

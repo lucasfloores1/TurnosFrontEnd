@@ -15,6 +15,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDividerModule } from '@angular/material/divider';
+import { AnimationsModule } from '../animations/animations.module';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { MatDividerModule } from '@angular/material/divider';
     MatButtonModule,
     MatInputModule,
     MatTabsModule,
-    MatDividerModule
+    MatDividerModule,
+    AnimationsModule
   ]
 })
 export class InstitutosModule { }

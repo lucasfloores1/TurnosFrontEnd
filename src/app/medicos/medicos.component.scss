@@ -1,6 +1,7 @@
 mat-card {
     border-radius: 15px;
     max-width: 600px;
+    min-width: 300px;
     margin-top: 15px;
     background-color: #EBEBFF;
     width: 100%;
@@ -12,6 +13,9 @@ mat-card:hover{
 
 .container{
     display: flex;
+    width: 100%;
+    max-width: 600px;
+    min-width: 300px;
     align-items: center;
     margin-left: auto;
     margin-right: auto;

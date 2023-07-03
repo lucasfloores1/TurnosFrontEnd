@@ -10,6 +10,8 @@
 }
 .week-nav-text{
     text-align: center;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 table{
     width: 100%;
@@ -34,4 +36,8 @@ button {
 
 .selected {
     background-color: accent !important;
+}
+
+.container{
+    width: 100%;
 }

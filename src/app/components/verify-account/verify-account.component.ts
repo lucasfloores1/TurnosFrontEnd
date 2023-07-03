@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { User } from 'src/app/model/User';
 import { LoginService } from 'src/app/services/login.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-verify-account',
@@ -21,7 +22,8 @@ export class VerifyAccountComponent implements OnInit {
     private router : Router,
     private route : ActivatedRoute,
     private loginService : LoginService,
-    private fb : FormBuilder
+    private fb : FormBuilder,
+    private notiService : NotificationService
   ){}
 
   ngOnInit(): void {
@@ -46,6 +48,7 @@ export class VerifyAccountComponent implements OnInit {
 
   verifyAccount(){
     this.loginService.verifyAccount( this.user.id, this.codeForm.get('code')?.value ).subscribe( (response) => {
+      this.notiService.OkNotification('Tu cuenta fue verificada')
       this.router.navigate(['login'])      
     },(error) => {
       this.showError = true;            

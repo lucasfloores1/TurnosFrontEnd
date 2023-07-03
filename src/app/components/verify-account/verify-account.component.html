@@ -1,5 +1,6 @@
 <div class="verify" *ngIf="user">
     <h2 class="title" mat-card-title>Verifica tu cuenta</h2>
+    <div class="info">Revisa tu bandeja de entrada</div>
     <form class="form-container" [formGroup]="codeForm" (submit)="verifyAccount()">
         <mat-form-field appearance="outline">
             <mat-label>Código</mat-label>

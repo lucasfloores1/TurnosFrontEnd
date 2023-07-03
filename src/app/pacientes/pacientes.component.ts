@@ -10,6 +10,8 @@ import { PacienteService } from 'src/app/services/paciente.service';
 })
 export class PacientesComponent implements OnInit{
 
+  animation : boolean = false;
+
   pacientes! : Paciente[]
 
   searchText : string = ''
@@ -17,17 +19,15 @@ export class PacientesComponent implements OnInit{
   constructor( private router : Router, private pacienteService : PacienteService ){}
 
   ngOnInit(){
-
+    this.animation = true;
     this.pacienteService.getPacientes( localStorage.getItem('user') ).subscribe( response =>{
       this.pacientes = response;
-      console.log(this.pacientes);      
+      this.animation = false;     
     })
-
   }
 
   pacienteDetail( paciente : Paciente ){
     this.router.navigate([`pacientes/details/${paciente.id}`])
   }
-
 
 }

@@ -21,7 +21,7 @@ export class NavigationComponent implements OnInit {
 
   @ViewChild('drawer') drawer!: MatSidenav;
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe('(max-width: 900px)')
+  isHandset$: Observable<boolean> = this.breakpointObserver.observe('(max-width: 1000px)')
     .pipe(
       map(result => result.matches),
       shareReplay()

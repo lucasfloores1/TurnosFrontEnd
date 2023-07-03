@@ -1,0 +1,15 @@
+:host{
+    display: flex;
+}
+.spacer{
+    flex: 1 1 auto;
+}
+.message{
+    align-self: center;
+    font-size: 1.2em;
+    color: #83E886 ;
+}
+
+mat-icon {
+    color : #83E886;
+}

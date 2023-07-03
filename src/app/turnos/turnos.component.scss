@@ -3,6 +3,7 @@ $primary:#4569ec;
 mat-card {
     border-radius: 15px;
     max-width: 600px;
+    min-width: 300px;
     margin-top: 15px;
     background-color: #EBEBFF;
     width: 100%;
@@ -20,6 +21,11 @@ mat-card:hover{
     align-items: center;
     margin-left: auto;
     margin-right: auto;
+
+    mat-form-field, mat-radio-group, mat-checkbox {
+        margin : auto;
+        width : 80%
+    }
 }
 .sidenav{
     width: 300px;
@@ -27,9 +33,11 @@ mat-card:hover{
 
 .sidenav-container{
     height: 100%;
+
 }
 
 .sidenav-content{
+
     display: flex;
     align-items: center;
     margin-left: auto;
@@ -47,9 +55,17 @@ mat-card:hover{
         margin-left: 15px;
     }
     margin-top: 15px;
+    max-width: 600px;
+    min-width: 300px;
     display: flex;
     width: 100%;
 }
 .spacer{
     flex: 1 1 auto;
+}
+
+@media (min-width : 600px){
+
+
+
 }

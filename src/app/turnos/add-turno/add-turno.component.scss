@@ -3,8 +3,8 @@ $primary:#4569ec;
 mat-card {
     border-radius: 15px;
     max-width: 600px;
+    min-width: 280px;
     margin-top: 15px;
-    //border: 2px solid $primary;
     background-color: #EBEBFF;
 }
 
@@ -27,6 +27,8 @@ mat-card:hover{
 
 .next-btn {
     width: 100%;
+    max-width: 600px;
+    min-width: 280px;
     margin-top: 15px;
     margin-left: 10px;
 }
@@ -47,6 +49,8 @@ mat-card:hover{
 
 .search {
     width: 100%;
+    max-width: 600px;
+    min-width: 280px;
     display: flex;
     flex-direction: column;
     margin-top: 20px;
@@ -59,4 +63,19 @@ mat-card:hover{
 
 .obraSocial-img{
     margin-top: 10px;
+}
+
+.stepper{
+    width: 100%;
+}
+
+.stepper-container{
+    width: 100%;
+    max-width: 600px;
+    min-width: 280px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-left: auto;
+    margin-right: auto;
 }

@@ -11,6 +11,8 @@ import { EstudioService } from 'src/app/services/estudio.service';
 })
 export class EstudiosComponent implements OnInit{
 
+  animation : boolean = false;
+
   searchText : string = ''
 
   estudios! : Estudio[]
@@ -21,7 +23,11 @@ export class EstudiosComponent implements OnInit{
   ){}
 
   ngOnInit(): void {
-    this.estudioService.getEstudios( localStorage.getItem('user') ).subscribe( response => this.estudios = response )
+    this.animation = true;
+    this.estudioService.getEstudios( localStorage.getItem('user') ).subscribe( response => {
+      this.estudios = response
+      this.animation = false;
+    })
   }
   
   estudioDetail( estudio : Estudio ){

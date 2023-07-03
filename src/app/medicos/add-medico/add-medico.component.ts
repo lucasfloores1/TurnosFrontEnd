@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Instituto } from 'src/app/model/Instituto';
 import { InstitutoService } from 'src/app/services/instituto.service';
 import { MedicoService } from 'src/app/services/medico.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-add-medico',
@@ -11,6 +12,8 @@ import { MedicoService } from 'src/app/services/medico.service';
   styleUrls: ['./add-medico.component.scss']
 })
 export class AddMedicoComponent implements OnInit{
+
+  sendAnimation : boolean = false;
 
   isHorariosSelected : boolean = true;
   showBtn : boolean = false;
@@ -45,17 +48,23 @@ export class AddMedicoComponent implements OnInit{
     private fb : FormBuilder,
     private router : Router,
     private medicoService : MedicoService,
-    private institutoService : InstitutoService
+    private institutoService : InstitutoService,
+    private notiService : NotificationService
   ){}
 
   ngOnInit(): void {
-
-    this.institutoService.getInstitutos(this.userId).subscribe( response => this.institutos = response )
-
+    this.sendAnimation = true;
+    this.institutoService.getInstitutos(this.userId).subscribe( response => {
+      this.institutos = response
+      if(this.institutos.length == 0){
+        this.notiService.ErrorNotification("Debes crear un Instituto primero")
+        this.router.navigate(['home'])
+        this.sendAnimation = false;
+      }
+      this.sendAnimation = false;
+    })
     this.horarios = this.medForm.get('horarios') as FormArray 
-
-    this.setNuevosHorarios();    
-    
+    this.setNuevosHorarios();
   }
 
   getErrorMessage(){
@@ -66,8 +75,17 @@ export class AddMedicoComponent implements OnInit{
   }
 
   createMedico(){
-    this.medicoService.createMedico(this.medForm.value).subscribe( response => console.log(response) )
-    this.router.navigate(['home'])
+    this.medicoService.createMedico(this.medForm.value).subscribe( 
+      response => {
+        this.sendAnimation = false;
+        this.notiService.OkNotification("Médico creado con éxito!!")
+        this.router.navigate([`medicos`])
+      }, error => {
+        this.sendAnimation = false;
+        this.notiService.ErrorNotification("Ups algo salió mal")
+        this.router.navigate([`medicos`])
+      }
+    )
   }
 
   formatLabel( value : number ): string {
@@ -81,7 +99,7 @@ export class AddMedicoComponent implements OnInit{
         dia : i+1,
         inicio : Math.floor( Math.random()* ( 17 - 0 + 1 ) ) + 0,
         fin : Math.floor( Math.random()* ( 37 - 18 + 1 ) ) + 18,
-        intervalo : this.intervalos[0],
+        intervalo : this.intervalos[1],
         trabaja : false,
       }
       this.nuevosHorarios.push(horario)

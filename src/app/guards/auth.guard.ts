@@ -4,13 +4,18 @@ import { Observable } from 'rxjs';
 import { LoginService } from '../services/login.service';
 import { map, catchError } from 'rxjs/operators'
 import { of } from 'rxjs'
+import { NotificationService } from '../services/notification.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivateChild {
 
-  constructor( private loginService : LoginService, private router : Router ){}
+  constructor( 
+    private loginService : LoginService,
+    private notiService : NotificationService,
+    private router : Router 
+  ){}
 
   canActivateChild(): Observable<boolean> | boolean {
     if ((localStorage.getItem('user') != null || localStorage.getItem('user') != undefined) && (localStorage.getItem('token') != null || localStorage.getItem('token') != undefined)) {
@@ -26,8 +31,7 @@ export class AuthGuard implements CanActivateChild {
           }
         }),
         catchError(error => {
-          console.log("tu sesion expiro");
-          
+          this.notiService.ErrorNotification("Tu sesión expiró")
           this.handleUnauthorizedAccess();
           return of(false);
         })

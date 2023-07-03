@@ -1,4 +1,5 @@
-<div *ngIf="estudio" class="details-container">
+<app-loading *ngIf="animation"></app-loading>
+<div *ngIf="estudio && !animation" class="details-container">
     <mat-card>
         <mat-card-header>
             <mat-card-title-group>
@@ -12,7 +13,8 @@
         <button mat-raised-button [color]="showButtons ? 'primary' : 'warn'" (click)="toggleForm()">{{showButtons ? 'Editar Estudio' : 'Cancelar'}}</button>
         <button mat-raised-button color="warn" routerLink="/estudios" *ngIf="showButtons">Volver</button>
     </div>
-    <div class="form" *ngIf="showForm">
+    <app-loading *ngIf="sendAnimation"></app-loading>
+    <div class="form" *ngIf="showForm && !sendAnimation">
         <h2 class="title" mat-card-title>Editar Estudio</h2>
         <form class="form-container" [formGroup]="estForm" (submit)="updateEstudio()">
             <mat-form-field appearance="outline">

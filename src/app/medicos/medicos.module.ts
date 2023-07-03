@@ -18,12 +18,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatTabsModule } from '@angular/material/tabs';
+import { AnimationsModule } from '../animations/animations.module';
 
 @NgModule({
   declarations: [
     MedicosComponent,
     AddMedicoComponent,
-    MedicoDetailsComponent
+    MedicoDetailsComponent,
   ],
   imports: [
     CommonModule,
@@ -40,7 +41,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatButtonModule,
     MatInputModule,
     MatCheckboxModule,
-    MatTabsModule
+    MatTabsModule,
+    AnimationsModule
   ]
 })
 export class MedicosModule { }

@@ -7,6 +7,7 @@ import { HorarioDTO } from 'src/app/model/Horario';
 import { InstitutoService } from 'src/app/services/instituto.service';
 import { MedicoService } from 'src/app/services/medico.service';
 import { InstitutoDTO } from 'src/app/model/Instituto';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-medico-details',
@@ -14,6 +15,9 @@ import { InstitutoDTO } from 'src/app/model/Instituto';
   styleUrls: ['./medico-details.component.scss']
 })
 export class MedicoDetailsComponent implements OnInit{
+
+  sendAnimation : boolean = false;
+  animation : boolean = false;
 
   showForm : boolean = false;
   showButtons : boolean = true;
@@ -46,10 +50,12 @@ export class MedicoDetailsComponent implements OnInit{
     private route : ActivatedRoute,
     private router : Router,
     private medicoService : MedicoService,
-    private institutoService : InstitutoService
+    private institutoService : InstitutoService,
+    private notiService : NotificationService
   ){}
 
   ngOnInit(): void {
+    this.animation = true;
     this.route.paramMap.subscribe( (paramMap : any) => {
       const {params} = paramMap;
       this.loadMedico(params.id)
@@ -80,8 +86,9 @@ export class MedicoDetailsComponent implements OnInit{
         const idsToRemove = this.medico.institutos.map( instituto => instituto.id )
         this.institutos = response.filter( instituto => !idsToRemove.includes( instituto.id ) )
       })
-      this.horarios = this.medForm.get('horarios') as FormArray 
-    } )
+      this.horarios = this.medForm.get('horarios') as FormArray
+      this.animation = false;
+    })
   }
 
   setNuevosHorarios( horarios : HorarioDTO[] , isNew : boolean ){
@@ -162,10 +169,17 @@ export class MedicoDetailsComponent implements OnInit{
     const idInstituto = institutoValue.id;
     this.medForm.patchValue({ idInstituto });
     console.log(this.medForm.value);    
-    this.medicoService.updateMedico( this.medForm.value ).subscribe( response => {
-      console.log(response);
-      this.router.navigate(['home'])
-    }) 
+    this.medicoService.updateMedico( this.medForm.value ).subscribe( 
+      response => {
+        this.sendAnimation = false;
+        this.notiService.OkNotification("Médico actualizado con éxito!!")
+        this.router.navigate([`medicos`])
+      }, error => {
+        this.sendAnimation = false;
+        this.notiService.ErrorNotification("Ups algo salió mal")
+        this.router.navigate([`medicos`])
+      }
+    ) 
   }
 
   getErrorMessage(){

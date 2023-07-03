@@ -1,4 +1,5 @@
-<div class="container">
+<app-loading *ngIf="animation"></app-loading>
+<div class="container" *ngIf="!animation">
     <div class="header">
         <div class="title">
             <h2 mat-card-title>Institutos</h2>
@@ -13,6 +14,7 @@
             </mat-form-field>
         </div>
     </div>
+    <div class="not-found" *ngIf="institutos.length == 0">No tienes institutos creados aún</div>
     <mat-card *ngFor="let instituto of institutos | search : searchText" (click)="institutoDetail(instituto)">
         <mat-card-header>
             <mat-card-title-group>

@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './components/login/login.component';
 import { authInterceptorProviders } from './services/auth.interceptor';
 import { ConfirmTurnoComponent } from './turnos/confirm-turno/confirm-turno.component';
@@ -15,6 +15,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { LOCATION_INITIALIZED, registerLocaleData } from '@angular/common';
 import { RegisterComponent } from './components/register/register.component';
 import { VerifyAccountComponent } from './components/verify-account/verify-account.component';
+import { AnimationsModule } from './animations/animations.module';
 //Material
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
@@ -26,10 +27,11 @@ import { MatListModule } from '@angular/material/list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatButtonModule } from '@angular/material/button';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 //Date import
 import LocaleAR from '@angular/common/locales/es-AR';
-import { AboutComponent } from './components/about/about.component'
+import { AboutComponent } from './components/about/about.component';
 registerLocaleData( LocaleAR, 'es' );
 
 @NgModule({
@@ -42,12 +44,13 @@ registerLocaleData( LocaleAR, 'es' );
     DashboardComponent,
     RegisterComponent,
     VerifyAccountComponent,
-    AboutComponent
+    AboutComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     MatCardModule,
@@ -59,8 +62,9 @@ registerLocaleData( LocaleAR, 'es' );
     MatListModule,
     MatMenuModule,
     MatGridListModule,
-    MatButtonModule
-
+    MatButtonModule,
+    AnimationsModule,
+    MatSnackBarModule
   ],
   providers: [authInterceptorProviders,{ provide : LOCATION_INITIALIZED, useValue : 'es' }],
   bootstrap: [AppComponent]

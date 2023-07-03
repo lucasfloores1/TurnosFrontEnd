@@ -1,4 +1,5 @@
-<div *ngIf="turno" class="details-container">
+<app-loading *ngIf="animation"></app-loading>
+<div *ngIf="turno && !animation" class="details-container">
     <mat-card>
         <mat-card-header>
             <mat-card-title-group>
@@ -17,22 +18,24 @@
         </mat-card-header>
         <mat-card-content></mat-card-content>
     </mat-card>
-    <div class="buttons" *ngIf="!showCalendar && !showInforme">
+    <app-loading *ngIf="sendAnimation"></app-loading>
+    <div class="buttons" *ngIf="!showCalendar && !showInforme && !sendAnimation && !turno.cargado">
         <button mat-raised-button color="primary" (click)="reprogramarTurno()">Reprogramar Turno</button>
         <button mat-raised-button color="accent" (click)="toggleInforme()">Enviar Informe</button>
         <button mat-raised-button color="warn" (click)="cancelTurno(turno)">Cancelar Turno</button>
     </div>
-    <div class="buttons" *ngIf="showCalendar != showInforme">
+    <div class="buttons" *ngIf="(showCalendar != showInforme) && !sendAnimation">
         <button mat-raised-button color="warn" (click)="toggleButtons()">Volver</button>
     </div>
-    <div class="calendar-container" *ngIf="showCalendar">
+    <app-loading *ngIf="schedAnimation"></app-loading>
+    <div class="calendar-container" *ngIf="showCalendar && !schedAnimation && !sendAnimation">
         <app-calendar-form *ngIf="horarios && turnos" [turnos]="turnos" [horarios]="horarios" (fecha)="SetNewDate($event)"></app-calendar-form>
     </div>
-    <div class="new-date" *ngIf="newDate">
+    <div class="new-date" *ngIf="newDate && !sendAnimation">
         <p mat-card-title align="center">{{newDate | date : 'EEEE dd \'de\' MMM HH:mm' :undefined: 'es' | titlecase }}</p>
         <button mat-raised-button class="buttons" color="accent" (click)="updateTurno( newDate, turno )">Reprogramar Turno</button>
     </div>
-    <div class="informe-container" *ngIf="showInforme">
+    <div class="informe-container" *ngIf="showInforme && !sendAnimation">
         <button mat-raised-button color="primary" (click)="onClick()"><mat-icon>add</mat-icon> Agregar Informe</button>
         <p class="Message-hint" [style.color]="maxSizeExceded ? '#ec4569' : 'black'" >{{maxSizeExceded ? "El archivo seleccionado es muy grande" : "El tamaño máximo del archivo es de 1MB"}}</p>
         <mat-card class="file-preview" *ngFor="let file of files">

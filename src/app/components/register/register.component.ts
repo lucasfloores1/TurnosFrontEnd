@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginService } from 'src/app/services/login.service';
+import { NotificationService } from 'src/app/services/notification.service';
 
 @Component({
   selector: 'app-register',
@@ -9,6 +10,8 @@ import { LoginService } from 'src/app/services/login.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent {
+
+  sendAnimation : boolean = false;
 
   isSubmitted : boolean = false;
   showErrorMessage : boolean = false;
@@ -24,15 +27,23 @@ export class RegisterComponent {
   constructor(
     private fb : FormBuilder,
     private loginService : LoginService,
-    private router : Router
+    private router : Router,
+    private notiService : NotificationService
   ){}
 
   signUp(){
-    console.log(this.signupForm.value);
-    
-    this.loginService.registerUser( this.signupForm.value ).subscribe( response => {
-      this.router.navigate([`verify-account/${response.id}`])
-    })    
+    this.sendAnimation = true;
+    this.loginService.registerUser( this.signupForm.value ).subscribe(
+      response => {
+        this.sendAnimation = false;
+        this.notiService.OkNotification("Enviamos un código a tu email")
+        this.router.navigate([`verify-account/${response.id}`])
+      }, error => {
+        this.sendAnimation = false;
+        this.notiService.ErrorNotification("El usuario o email ya está en uso")
+        this.toggleShowErrorMessage()
+      }
+    )    
   }
 
   toggleShowErrorMessage(){
