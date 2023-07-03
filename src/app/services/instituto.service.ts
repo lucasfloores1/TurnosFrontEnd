@@ -13,8 +13,8 @@ const httpOptions = {
 })
 export class InstitutoService {
 
-  private apiUrl : string = 'http://localhost:8080/instituto'
-  //private apiUrl : string = 'https://turnosapi.up.railway.app/instituto'
+  //private apiUrl : string = 'http://localhost:8080/instituto'
+  private apiUrl : string = 'https://turnomedapi.up.railway.app/instituto'
 
   constructor( private http : HttpClient ) { }
 

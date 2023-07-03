@@ -15,8 +15,8 @@ const httpOptions = {
 })
 export class ObraSocialService {
 
-  private apiUrl : string = 'http://localhost:8080/obraSocial'
-  //private apiUrl : string = 'https://turnosapi.up.railway.app/obraSocial'
+  //private apiUrl : string = 'http://localhost:8080/obraSocial'
+  private apiUrl : string = 'https://turnomedapi.up.railway.app/obraSocial'
 
   constructor( private http : HttpClient ) { }
 

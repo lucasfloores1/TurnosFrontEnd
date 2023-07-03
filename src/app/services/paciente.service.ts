@@ -15,8 +15,8 @@ const httpOptions = {
 })
 export class PacienteService {
 
-  private apiUrl : string = 'http://localhost:8080/paciente'
-  //private apiUrl : string = 'https://turnosapi.up.railway.app/paciente'
+  //private apiUrl : string = 'http://localhost:8080/paciente'
+  private apiUrl : string = 'https://turnomedapi.up.railway.app/paciente'
 
   constructor( private http : HttpClient ) { }
 
